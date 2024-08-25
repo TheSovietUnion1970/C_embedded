@@ -1,7 +1,7 @@
 .PHONY: all clean
 
 all:
-	gcc SEEK_MSG_app.c -o a
+	gcc main.c SEEK_MSG_app.c -o main
 
 clean:
-	rm -rf a
+	rm -rf main
