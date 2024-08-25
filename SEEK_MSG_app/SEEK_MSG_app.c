@@ -202,14 +202,14 @@ void Replace(char* msg, char* seek, int s1, int s2, char signal, char* replace, 
 }
 
 void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* replace, int s3){
-    char msg_display[2000];
-    char msg_display_complete[2000];
-    /* num detected */
-    int num_detected = 0;
-    int i_captured[100];
+    /* detect how many cases detected */
+    int num_detected = 0; 
+    int i_captured[100]; /* capture index of cases detected */
+
     int msg_display_index = 0;
     int msg_display_complete_index = 0;
-    int msg_part_s[100];
+
+    int msg_part_s[100]; /* size of each meg separate */
     int msg_complete_part_s[100];
 
     int first_signal, last_signal;
@@ -230,7 +230,6 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
         if (j == s2 - 1){
             i_captured[num_detected] = i - (s2 - 2);
             num_detected++;
-            // printf("detected at index: %d\n", i - (s2 - 2));
         }
         i_captured[num_detected] = s1;
 
@@ -242,7 +241,8 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
         i++;
     }
 
-    // printf("num_detected = %d\n", num_detected);
+    char* msg_display = (char*)malloc(s1 + num_detected*2 + 5); // size of origin msg + size of all signals + size of some paddings
+    char* msg_display_complete = (char*)malloc(s1 + 5); // size of origin msg + size of some paddings
 
     /* Add the firsst msg to msg_display */
     for (int i = 0; i < i_captured[0]; i++){
@@ -270,9 +270,11 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
         msg_ptr[i] = msg_part;
         msg_complete_ptr[i] = msg_complete_part;
 
+        /* Add first signal */
         msg_part[0] = signal;
         first_signal = 0;
 
+        /* Add msg found and msg replaced */
         int j = 1;
         int i_replace = 0;
         for (int k = i_captured[i]; k < i_captured[i]+s3-1; k++){
@@ -282,16 +284,19 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
             j++;
         }
 
+        /* Add second signal */
         msg_part[j] = signal;
         last_signal = j;
         j++;
 
+        /* Add the rest string of each msg */
         for (int k = i_captured[i]+s2-1; k < i_captured[i+1]; k++){
             msg_part[j] = msg[k];
             msg_complete_part[j-2] = msg_part[j];
             j++;
         }
 
+        /* Add null terminator */
         msg_part[s_part - 1] = '\0';
         msg_complete_part[s_part - 3] = '\0';
 
@@ -316,11 +321,11 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
 
     printf(" ========== %d string is replaced =========\n", num_detected);
     printf("origin msg: '%s'\n", msg);
-    printf("replaced msg = '%s'\n", msg_display);
-    printf("replaced complete msg = '%s'\n", msg_display_complete);
+    printf("replaced msg: '%s'\n", msg_display);
+    printf("replaced complete msg: '%s'\n", msg_display_complete);
 
 
-
+    /* Free resources */
     for (int i = 0; i < num_detected; i++){
         free(msg_ptr[i]);
     }
@@ -330,6 +335,8 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
         free(msg_complete_ptr[i]);
     }
     free(msg_complete_ptr);
+    free(msg_display);
+    free(msg_display_complete);
 }
 
 int main(){
