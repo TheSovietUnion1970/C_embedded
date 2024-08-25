@@ -7,12 +7,11 @@ char seek[] = "anl";
 char replace[] = "xxxx";
 
 void Find(char* msg, char* seek, int s1, int s2, char signal){
-    char msg_display[2000];
     /* num detected */
     int num_detected = 0;
-    int i_captured[100];
+    int i_captured[100]; /* capture index of cases detected */
     int msg_display_index = 0;
-    int msg_part_s[100];
+    int msg_part_s[100]; /* size of each meg separate */
 
     int i = 0;
     int j = 0;
@@ -30,7 +29,7 @@ void Find(char* msg, char* seek, int s1, int s2, char signal){
         if (j == s2 - 1){
             i_captured[num_detected] = i - (s2 - 2);
             num_detected++;
-            printf("detected at index: %d\n", i - (s2 - 2));
+            //printf("detected at index: %d\n", i - (s2 - 2));
         }
         i_captured[num_detected] = s1;
 
@@ -42,7 +41,7 @@ void Find(char* msg, char* seek, int s1, int s2, char signal){
         i++;
     }
 
-    printf("num_detected = %d\n", num_detected);
+    char* msg_display = (char*)malloc(s1 + num_detected*2 + 5); // size of origin msg + size of all signals + size of some paddings
 
     /* Add the firsst msg to msg_display */
     for (int i = 0; i < i_captured[0]; i++){
@@ -60,22 +59,30 @@ void Find(char* msg, char* seek, int s1, int s2, char signal){
         char* msg_part = (char*)malloc(s_part); /* 3 = 2*'|' + '\0' */
         msg_ptr[i] = msg_part;
 
+        /* Add the first msg to msg_display */
         msg_part[0] = signal;
 
+        /* Add msg found */
         int j = 1;
         for (int k = i_captured[i]; k < i_captured[i]+s2-1; k++){
             msg_part[j] = msg[k];
             j++;
         }
+
+        /* Add second signal */
         msg_part[j] = signal;
         j++;
+
+        /* Add the rest string of each msg */
         for (int k = i_captured[i]+s2-1; k < i_captured[i+1]; k++){
             msg_part[j] = msg[k];
             j++;
         }
+
+        /* Add null terminator */
         msg_part[s_part - 1] = '\0';
 
-        printf("msg = %s\n", msg_part);
+        //printf("msg = %s\n", msg_part);
     }
 
     /* Combine all strings above */
@@ -86,122 +93,21 @@ void Find(char* msg, char* seek, int s1, int s2, char signal){
         }
     }
 
-    printf("===========\n");
-    printf("msg = %s\n", msg);
-    printf("msg_display = %s\n", msg_display);
+    printf(" ========== %d '%s' is found ========================\n", num_detected, seek);
+    printf("Origin msg: '%s'\n", msg);
+    printf("Msg found: '%s'\n", msg_display);
 
 
-
+    /* Free resources */
     for (int i = 0; i < num_detected; i++){
         free(msg_ptr[i]);
     }
     free(msg_ptr);
+
+    free(msg_display);
 }
 
 void Replace(char* msg, char* seek, int s1, int s2, char signal, char* replace, int s3){
-    char msg_display[2000];
-    /* num detected */
-    int num_detected = 0;
-    int i_captured[100];
-    int msg_display_index = 0;
-    int msg_part_s[100];
-
-    int first_signal, last_signal;
-
-    int i = 0;
-    int j = 0;
-    /* Detect how many cases and get index of these cases */
-    while(1){
-        if (msg[i] == seek[j]){
-            j++;
-        }
-
-        else {
-            j = 0; // index seek (to begin a new comparison)
-        }
-
-        /* check full seek, sub sizeof '\0' */
-        if (j == s2 - 1){
-            i_captured[num_detected] = i - (s2 - 2);
-            num_detected++;
-            // printf("detected at index: %d\n", i - (s2 - 2));
-        }
-        i_captured[num_detected] = s1;
-
-        /* check if scan all msg */
-        if (i == s1 - 1){
-            break;
-        }
-
-        i++;
-    }
-
-    // printf("num_detected = %d\n", num_detected);
-
-    /* Add the firsst msg to msg_display */
-    for (int i = 0; i < i_captured[0]; i++){
-        msg_display[i] = msg[i];
-    }
-    msg_display_index = i_captured[0];
-
-    /* Create a msg_ptr handling all strings separated */
-    char** msg_ptr = (char**)malloc(sizeof(char**)*(num_detected + 1));
-
-    /* new replacing string */
-
-    /* Separate each string with '|' */
-    for (int i = 0; i < num_detected; i++){
-        int s_part = i_captured[i+1] - i_captured[i] + 3 - s2 + s3; /* remove size of string found and replace string replaced */
-        msg_part_s[i] = s_part;
-        char* msg_part = (char*)malloc(s_part); /* 3 = 2*'|' + '\0' */
-        msg_ptr[i] = msg_part;
-
-        msg_part[0] = signal;
-        first_signal = 0;
-
-        int j = 1;
-        int i_replace = 0;
-        for (int k = i_captured[i]; k < i_captured[i]+s3-1; k++){
-            msg_part[j] = replace[i_replace];
-            i_replace++;
-            j++;
-        }
-
-        msg_part[j] = signal;
-        last_signal = j;
-        j++;
-
-        for (int k = i_captured[i]+s2-1; k < i_captured[i+1]; k++){
-            msg_part[j] = msg[k];
-            j++;
-        }
-
-        msg_part[s_part - 1] = '\0';
-
-        // printf("msg = %s\n", msg_part);
-    }
-
-    /* Combine all strings above */
-    for (int i = 0; i < num_detected; i++){
-        for (int j = 0; j < msg_part_s[i]-1; j++){
-            msg_display[msg_display_index] = msg_ptr[i][j];
-            msg_display_index++;
-        }
-    }
-
-    printf(" ========== %d string is replaced =========\n", num_detected);
-    printf("origin msg: '%s'\n", msg);
-    printf("replaced msg = '%s'\n", msg_display);
-
-
-
-    for (int i = 0; i < num_detected; i++){
-        free(msg_ptr[i]);
-    }
-    free(msg_ptr);
-}
-
-void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* replace, int s3){
     /* detect how many cases detected */
     int num_detected = 0; 
     int i_captured[100]; /* capture index of cases detected */
@@ -244,7 +150,7 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
     char* msg_display = (char*)malloc(s1 + num_detected*2 + 5); // size of origin msg + size of all signals + size of some paddings
     char* msg_display_complete = (char*)malloc(s1 + 5); // size of origin msg + size of some paddings
 
-    /* Add the firsst msg to msg_display */
+    /* Add the first msg to msg_display */
     for (int i = 0; i < i_captured[0]; i++){
         msg_display[i] = msg[i];
         msg_display_complete[i] = msg[i];
@@ -257,9 +163,8 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
     char** msg_ptr = (char**)malloc(sizeof(char**)*(num_detected + 1));
     char** msg_complete_ptr = (char**)malloc(sizeof(char**)*(num_detected + 1));
 
-    /* new replacing string */
 
-    /* Separate each string with '|' */
+    /* Separate each string with signal */
     for (int i = 0; i < num_detected; i++){
         int s_part = i_captured[i+1] - i_captured[i] + 3 - s2 + s3; /* remove size of string found and replace string replaced */
         msg_part_s[i] = s_part;
@@ -300,7 +205,7 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
         msg_part[s_part - 1] = '\0';
         msg_complete_part[s_part - 3] = '\0';
 
-        printf("msg = %s\n", msg_complete_part);
+        //printf("msg = %s\n", msg_complete_part);
     }
 
     /* Combine all strings above */
@@ -319,10 +224,10 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
         }
     }
 
-    printf(" ========== %d string is replaced =========\n", num_detected);
-    printf("origin msg: '%s'\n", msg);
-    printf("replaced msg: '%s'\n", msg_display);
-    printf("replaced complete msg: '%s'\n", msg_display_complete);
+    printf(" ========== %d '%s' is replaced with '%s' =========\n", num_detected, seek, replace);
+    // printf("origin msg: '%s'\n", msg);
+    printf("Replaced msg: '%s'\n", msg_display);
+    printf("Replaced complete msg: '%s'\n", msg_display_complete);
 
 
     /* Free resources */
@@ -340,7 +245,8 @@ void Replace_complete(char* msg, char* seek, int s1, int s2, char signal, char* 
 }
 
 int main(){
-    Replace_complete(msg2, seek, sizeof(msg2), sizeof(seek), '|', replace, sizeof(replace));
+    Find(msg2, seek, sizeof(msg2), sizeof(seek), '|');
+    Replace(msg2, seek, sizeof(msg2), sizeof(seek), '|', replace, sizeof(replace));
 
     return 0;
 }
