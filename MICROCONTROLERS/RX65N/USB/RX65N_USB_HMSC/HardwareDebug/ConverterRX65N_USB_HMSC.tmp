@@ -1,0 +1,8 @@
+-MAKEUD="C:\WS2\RX65N_USB_HMSC\HardwareDebug\\RX65N_USB_HMSC_c.ud" 
+-input="RX65N_USB_HMSC.abs" 
+-form=stype 
+-output="RX65N_USB_HMSC.mot" 
+-byte_count=10 
+-nologo 
+-nomessage 
+-exit

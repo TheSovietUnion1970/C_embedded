@@ -1,0 +1,22 @@
+-isa=rxv2
+-fpu
+-MAKEUD="C:\WS2\RX65N_USB_HMSC\HardwareDebug\src"
+-include="C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RX\V3.06.00\/include"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_pincfg"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\general"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_bsp"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_config"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_usb_basic"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_usb_basic\src\hw\inc"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_usb_hmsc\src\inc"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_usb_hmsc"
+-include="C:\WS2\RX65N_USB_HMSC\src\smc_gen\r_usb_basic\src\driver\inc"
+-lang=c99
+-utf8
+-nomessage
+-output=obj
+-obj_path="src"
+-debug
+-outcode=utf8
+-nologo

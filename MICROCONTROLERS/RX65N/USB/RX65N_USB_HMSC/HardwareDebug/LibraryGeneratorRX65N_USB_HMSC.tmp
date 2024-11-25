@@ -1,0 +1,7 @@
+-MAKEUD_LBG="C:\WS2\RX65N_USB_HMSC\HardwareDebug\\RX65N_USB_HMSC_lbg.ud" 
+-isa=rxv2 
+-fpu 
+-lang=c99 
+-head=runtime,stdio,stdlib,string,new 
+-output="RX65N_USB_HMSC.lib" 
+-nologo
