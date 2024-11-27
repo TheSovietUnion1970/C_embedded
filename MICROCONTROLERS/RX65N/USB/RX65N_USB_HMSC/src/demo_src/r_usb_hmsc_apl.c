@@ -119,9 +119,6 @@ void usb_main (void)
     while (1)
     {
     	a++;
-    	if (a == 512){
-    		printf("stuck here\n");
-    	}
         event = R_USB_GetEvent(&ctrl); /* Get event code */
 
         switch (event)
@@ -136,46 +133,46 @@ void usb_main (void)
                 msc_file_write();
                 tree(drv0, SCAN_TREE);
 
-                FIL file;
-                FRESULT res;
-                DIR dir;
+                // FIL file;
+                // FRESULT res;
+                // DIR dir;
 
-                // Step 1: Check if the folder exists
-                res = f_opendir(&dir, "0:dir");  // Check if "dir" exists
-                if (res == FR_NO_PATH) {
-                    // Step 2: Create the folder
-                    res = f_mkdir("0:dir");
-                    if (res != FR_OK) {
-                        printf("Error creating directory: %d\n", res);
-                        return;
-                    }
-                }
+                // // Step 1: Check if the folder exists
+                // res = f_opendir(&dir, "0:dir");  // Check if "dir" exists
+                // if (res == FR_NO_PATH) {
+                //     // Step 2: Create the folder
+                //     res = f_mkdir("0:dir");
+                //     if (res != FR_OK) {
+                //         printf("Error creating directory: %d\n", res);
+                //         return;
+                //     }
+                // }
 
-                // Step 3: Open or create the file
-                res = f_open(&file, "0:dir/hmscdemo.txt", FA_CREATE_ALWAYS | FA_WRITE);
-                if (res == FR_OK) {
-                    // File created successfully
-                    printf("File created successfully.\n");
-                    f_close(&file);  // Close the file
-                } else {
-                    // Handle error
-                    printf("Error creating file: %d\n", res);
-                }
+                // // Step 3: Open or create the file
+                // res = f_open(&file, "0:dir/hmscdemo.txt", FA_CREATE_ALWAYS | FA_WRITE);
+                // if (res == FR_OK) {
+                //     // File created successfully
+                //     printf("File created successfully.\n");
+                //     f_close(&file);  // Close the file
+                // } else {
+                //     // Handle error
+                //     printf("Error creating file: %d\n", res);
+                // }
 
-                UINT file_size;
+                // UINT file_size;
 
-                f_open(&file, "0:dir/hmscdemo.txt", (FA_CREATE_ALWAYS | FA_WRITE));
-                f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
-                f_close(&file); /* Close the file object. */
+                // f_open(&file, "0:dir/hmscdemo.txt", (FA_CREATE_ALWAYS | FA_WRITE));
+                // f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
+                // f_close(&file); /* Close the file object. */
 
-                printf(" ================== Second time =================== \n");
-                tree(drv0, SCAN_TREE);
+                // printf(" ================== Second time =================== \n");
+                // tree(drv0, SCAN_TREE);
 
-                f_unlink("0:dir/hmscdemo.txt");
-                printf(" ================== Third time =================== \n");
-                tree(drv0, SCAN_TREE);
+                // f_unlink("0:dir/hmscdemo.txt");
+                // printf(" ================== Third time =================== \n");
+                // tree(drv0, SCAN_TREE);
 
-                g_state = STATE_FILE_READ; /* Set Application status  */
+                // g_state = STATE_FILE_READ; /* Set Application status  */
             break;
 
             case USB_STS_DETACH :

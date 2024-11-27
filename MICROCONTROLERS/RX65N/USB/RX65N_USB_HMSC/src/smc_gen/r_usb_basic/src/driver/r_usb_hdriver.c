@@ -820,6 +820,7 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
             usb_hstd_brdy_pipe(ptr);
         break;
         case USB_INT_BEMP :
+        	printf("--> USB_INT_BEMP\n");
             usb_hstd_bemp_pipe(ptr);
         break;
         case USB_INT_NRDY :
@@ -917,7 +918,7 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
             /* User program */
         break;
         case USB_INT_ATTCH0 :
-
+        	printf("--> USB_INT_ATTCH0\n");
             /* Port0 ATCH interrupt function */
             usb_hstd_attach_process(ptr);
         break;
@@ -1930,6 +1931,7 @@ void usb_hstd_return_enu_mgr (usb_utr_t *ptr, uint16_t cls_result)
  ******************************************************************************/
 usb_er_t usb_hstd_change_device_state (usb_utr_t *ptr, usb_cb_t complete, uint16_t msginfo, uint16_t member)
 {
+    printf("Change device state\n");
 #if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
     usb_mh_t p_blf;
     usb_er_t err;
