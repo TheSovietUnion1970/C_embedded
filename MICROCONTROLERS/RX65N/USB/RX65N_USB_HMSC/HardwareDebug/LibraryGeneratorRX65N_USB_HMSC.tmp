@@ -1,4 +1,4 @@
--MAKEUD_LBG="C:\WS2\RX65N_USB_HMSC\HardwareDebug\\RX65N_USB_HMSC_lbg.ud" 
+-MAKEUD_LBG="D:\CAREER_VINH\Git\SovietUnion1970\C_embedded\MICROCONTROLERS\RX65N\USB\RX65N_USB_HMSC\HardwareDebug\\RX65N_USB_HMSC_lbg.ud" 
 -isa=rxv2 
 -fpu 
 -lang=c99 

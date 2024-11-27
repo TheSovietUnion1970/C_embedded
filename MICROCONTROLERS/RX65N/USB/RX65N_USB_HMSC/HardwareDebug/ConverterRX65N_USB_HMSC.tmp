@@ -1,4 +1,4 @@
--MAKEUD="C:\WS2\RX65N_USB_HMSC\HardwareDebug\\RX65N_USB_HMSC_c.ud" 
+-MAKEUD="D:\CAREER_VINH\Git\SovietUnion1970\C_embedded\MICROCONTROLERS\RX65N\USB\RX65N_USB_HMSC\HardwareDebug\\RX65N_USB_HMSC_c.ud" 
 -input="RX65N_USB_HMSC.abs" 
 -form=stype 
 -output="RX65N_USB_HMSC.mot" 
