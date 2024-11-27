@@ -31,8 +31,6 @@
 #include "r_usb_hmsc_apl.h"
 #include "r_usb_hmsc_apl_config.h"
 
-extern st_usb0_t* USBB;
-
 #define MAX_PATH_LEN 256
 /**********************************************************************************************************************
  Global Typedef definitions
@@ -47,6 +45,8 @@ typedef enum
 {
     SCAN_TREE = 0, SCAN_LIST
 } SCAN_MODE;
+
+UINT fd_temp[5];
 
 
 /**********************************************************************************************************************
@@ -73,8 +73,8 @@ static  uint8_t     g_file_data[FILE_SIZE];
 static  FATFS       g_file_object;  /* File system object structure */
 
 const   static FATFS *g_pfat = &g_file_object;
-const   static uint8_t g_msc_file[15] = "0:hmscdemP.txt";
-static uint8_t g_msc_file_sub[25] = "0:kkkkkkkkkdemo.txt";
+const   static uint8_t g_msc_file[15] = "0:hmscdemo.txt";
+// const   static uint8_t g_msc_file_sub[15] = "0:dir/hmscdemo.txt";
 
 static  void msc_file_write(void);
 static  void msc_file_read(void);
@@ -84,7 +84,7 @@ static  void apl_init(void);
 /******************************************************************************
  Renesas Host MSC Sample Code functions
  ******************************************************************************/
-
+int a = 0;
 /******************************************************************************
  Function Name   : usb_main
  Description     : Host MSC application main process
@@ -115,21 +115,66 @@ void usb_main (void)
     cfg.usb_mode    = USB_HOST;
     R_USB_Open(&ctrl, &cfg);
 #endif
-    int a = 0;
 
     while (1)
     {
+    	a++;
+    	if (a == 512){
+    		printf("stuck here\n");
+    	}
         event = R_USB_GetEvent(&ctrl); /* Get event code */
-        a++;
 
         switch (event)
         {
             case USB_STS_CONFIGURED :
-            	printf("Run here hahahaha, a = %d\n", a);
+            	printf("a = %d\n", a);
                 /* Create a file object. */
+
+                printf(" ================== First time =================== \n");
+
                 f_mount((FATFS *) g_pfat,(const TCHAR*)"0:", 1);
                 msc_file_write();
                 tree(drv0, SCAN_TREE);
+
+                FIL file;
+                FRESULT res;
+                DIR dir;
+
+                // Step 1: Check if the folder exists
+                res = f_opendir(&dir, "0:dir");  // Check if "dir" exists
+                if (res == FR_NO_PATH) {
+                    // Step 2: Create the folder
+                    res = f_mkdir("0:dir");
+                    if (res != FR_OK) {
+                        printf("Error creating directory: %d\n", res);
+                        return;
+                    }
+                }
+
+                // Step 3: Open or create the file
+                res = f_open(&file, "0:dir/hmscdemo.txt", FA_CREATE_ALWAYS | FA_WRITE);
+                if (res == FR_OK) {
+                    // File created successfully
+                    printf("File created successfully.\n");
+                    f_close(&file);  // Close the file
+                } else {
+                    // Handle error
+                    printf("Error creating file: %d\n", res);
+                }
+
+                UINT file_size;
+
+                f_open(&file, "0:dir/hmscdemo.txt", (FA_CREATE_ALWAYS | FA_WRITE));
+                f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
+                f_close(&file); /* Close the file object. */
+
+                printf(" ================== Second time =================== \n");
+                tree(drv0, SCAN_TREE);
+
+                f_unlink("0:dir/hmscdemo.txt");
+                printf(" ================== Third time =================== \n");
+                tree(drv0, SCAN_TREE);
+
                 g_state = STATE_FILE_READ; /* Set Application status  */
             break;
 
@@ -156,23 +201,15 @@ void usb_main (void)
  ******************************************************************************/
 static  void msc_file_write (void)
 {
-    FIL file, file1;
+    FIL file;
     UINT file_size;
-    FRESULT ret;
 
-    // f_open(&file, (const char *) g_msc_file, (FA_CREATE_ALWAYS | FA_WRITE));
-    // f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
-    // f_close(&file); /* Close the file object. */
+    f_open(&file, (const char *) g_msc_file, (FA_CREATE_ALWAYS | FA_WRITE));
+    f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
+    f_close(&file); /* Close the file object. */
 
-    ret = f_open(&file1, (const char *) g_msc_file_sub, (FA_CREATE_ALWAYS | FA_WRITE));
-    printf("ret = %d\n");
-    ret = f_write(&file1, g_file_data, sizeof(g_file_data), &file_size);
-    printf("ret = %d\n");
-    ret = f_close(&file1); /* Close the file object. */
-    printf("ret = %d\n");
-    
+    //fd_temp[0] = file;
 } /* End of function msc_file_write */
-
 
 /******************************************************************************
  Function Name   : msc_file_read
@@ -182,33 +219,15 @@ static  void msc_file_write (void)
  ******************************************************************************/
 static  void msc_file_read (void)
 {
-    FIL file, file1;
-    UINT file_size;
-
-    // f_open(&file, (const char *) g_msc_file, (FA_OPEN_ALWAYS | FA_READ));
-    // f_read(&file, g_file_data, sizeof(g_file_data), &file_size); /* Read data from file. */
-    // f_close(&file); /* Close the file object. */
-
-    f_open(&file1, (const char *) g_msc_file_sub, (FA_OPEN_ALWAYS | FA_READ));
-    f_read(&file1, g_file_data, sizeof(g_file_data), &file_size); /* Read data from file. */
-    f_close(&file1); /* Close the file object. */
-} /* End of function msc_file_read */
-
-/******************************************************************************
- Function Name   : msc_file_delete
- Description     : USB receive state process
- Arguments       : none
- Return value    : none
- ******************************************************************************/
-static  void msc_file_delete (void)
-{
     FIL file;
     UINT file_size;
 
-    f_open(&file, (const char *) g_msc_file, (FA_CREATE_ALWAYS | FA_WRITE));
-    f_unlink(&file, g_file_data, sizeof(g_file_data), &file_size);
+    f_open(&file, (const char *) g_msc_file, (FA_OPEN_ALWAYS | FA_READ));
+    f_read(&file, g_file_data, sizeof(g_file_data), &file_size); /* Read data from file. */
     f_close(&file); /* Close the file object. */
-} /* End of function msc_file_write */
+
+    //f_unlink();
+} /* End of function msc_file_read */
 
 /******************************************************************************
  Function Name   : usb_pin_setting
