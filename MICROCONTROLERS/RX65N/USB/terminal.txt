@@ -1,0 +1,441 @@
+--> USB_INT_ATTCH0
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+----->*, data2 = 0x0
+write_pointer = 0
+read_pointer = 0
+a = 20054
+ ================== First time =================== 
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(4)-> USB_send_data
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+*** Scan (Tree Mode) ***
+0:
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+|-hmscdemo.txt
+|-dir/
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+| |-
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+|-kkkkkkkkkdemo.txt
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+|-System Volume Information/
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+| |-WPSettings.dat
+| |-IndexerVolumeGuid
+| |-
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+[USB_SEQ_0]
+(3)-> USB_send_cbw
+Change device state
+--> Bemp
+--> USB_INT_BEMP
+-----usb_hstd_bemp_pipe_process-----
+[USB_SEQ_1]
+(1)-> USB_get_data
+Change device state
+[USB_SEQ_2]
+(2)-> USB_get_csw
+Change device state
+[USB_SEQ_4]
+|-Readme.txt
+|-
+*** End of Scan ***

@@ -964,6 +964,7 @@ usb_err_t    R_USB_Suspend(usb_ctrl_t *p_ctrl)
         return USB_ERR_BUSY;
     }
 
+    printf("-> USB_Suspend\n");
     err = usb_hstd_change_device_state(&utr, (usb_cb_t)&usb_hstd_suspend_complete,
                                        USB_DO_GLOBAL_SUSPEND, USB_DEVICEADDR);
 
@@ -1097,6 +1098,7 @@ usb_err_t    R_USB_Resume(usb_ctrl_t *p_ctrl)
             return USB_ERR_BUSY;
         }
 
+        printf("-> USB_Resume\n");
         err = usb_hstd_change_device_state(&utr, (usb_cb_t)&usb_hstd_resume_complete,
                                          USB_DO_GLOBAL_RESUME, p_ctrl->address);
         if (USB_OK == err)
