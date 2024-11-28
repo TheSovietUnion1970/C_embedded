@@ -616,6 +616,7 @@ uint16_t usb_hmsc_no_data (usb_utr_t *ptr, uint16_t side)
  ******************************************************************************/
 uint16_t usb_hmsc_data_in (usb_utr_t *ptr, uint16_t side, uint8_t *buff, uint32_t size)
 {
+    printf("usb_hmsc_data_in\n");
 #if (BSP_CFG_RTOS_USED)
     uint16_t hmsc_retval;
 
@@ -656,6 +657,7 @@ uint16_t usb_hmsc_data_in (usb_utr_t *ptr, uint16_t side, uint8_t *buff, uint32_
  ******************************************************************************/
 uint16_t usb_hmsc_data_out (usb_utr_t *ptr, uint16_t side, uint8_t *buff, uint32_t size)
 {
+    printf("usb_hmsc_data_out\n");
 #if (BSP_CFG_RTOS_USED)
     uint16_t hmsc_retval;
 
@@ -839,7 +841,7 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_2 : /* Check Data and Send CSW*/
-        printf("[USB_SEQ_2]\n");
+        printf("[USB_SEQ_2] - ");
             if ( USB_MSG_HMSC_DATA_OUT == usb_shmsc_process[mess->ip])
             {
                 hmsc_retval = usb_hmsc_send_data_check(mess, side, result);
@@ -856,6 +858,7 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
                 }
                 else /* Success */
                 {
+                    printf("DATA_OUT\n");
                     hmsc_retval = usb_hmsc_get_csw(mess, side);
                     usb_shmsc_data_seq[mess->ip] = USB_SEQ_4;
                 }
@@ -876,6 +879,7 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
                 }
                 else /* Success */
                 {
+                    printf("DATA_IN\n");
                     g_usb_hmsc_cmd_data_length[mess->ip] = mess->tranlen;
                     hmsc_retval = usb_hmsc_get_csw(mess, side);
                     usb_shmsc_data_seq[mess->ip] = USB_SEQ_4;

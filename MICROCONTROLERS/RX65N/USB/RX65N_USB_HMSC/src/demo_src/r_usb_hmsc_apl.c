@@ -127,10 +127,13 @@ void usb_main (void)
             	printf("a = %d\n", a);
                 /* Create a file object. */
 
-                printf(" ================== First time =================== \n");
-
+                printf(" ================== f_mount =================== \n");
                 f_mount((FATFS *) g_pfat,(const TCHAR*)"0:", 1);
+
+                printf(" ================== msc_file_write =================== \n");
                 msc_file_write();
+
+                printf(" ================== tree =================== \n");
                 tree(drv0, SCAN_TREE);
 
                 // FIL file;
