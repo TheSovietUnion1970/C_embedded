@@ -1,320 +1,997 @@
+X - attch
+[HDC] - INT
 --> USB_INT_ATTCH0
---> Bemp
+[MGR] - aordetach
+[HDC] - reset
+[MGR] - change state - default
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
---> Bemp
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPNDC
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
---> Bemp
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
---> Bemp
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
---> Bemp
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
---> Bemp
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
---> Bemp
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPNDC
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+[MGR] - submit result
+[HDC] - submit utr
+X - sack
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPRD
+ USB_SETUPRDCNT
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 ----->*, data2 = 0x0
 write_pointer = 0
 read_pointer = 0
-a = 17823
+a = 20066
  ================== f_mount =================== 
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
  ================== msc_file_write =================== 
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_out
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (4)-> USB_send_data
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_2] - DATA_OUT
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
  ================== tree =================== 
 *** Scan (Tree Mode) ***
@@ -323,15 +1000,49 @@ usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 |-hmscdemo.txt
 |-dir/
@@ -339,88 +1050,292 @@ usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 | |-
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 |-kkkkkkkkkdemo.txt
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 |-System Volume Information/
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 | |-WPSettings.dat
 | |-IndexerVolumeGuid
@@ -429,43 +1344,145 @@ usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - set sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - set sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 usb_hmsc_data_in
 [USB_SEQ_0]
 (3)-> USB_send_cbw
 Change device state
---> Bemp
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - bemp
+[HDC] - INT
 --> USB_INT_BEMP
 -----usb_hstd_bemp_pipe_process-----
 [USB_SEQ_1]
 (1)-> USB_get_data
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_2] - DATA_IN
 (2)-> USB_get_csw
 Change device state
+[HDC] - clr sqclr
+[HDC] - submit utr
+X - brdy
+[HDC] - INT
+--> USB_INT_BRDY
 [USB_SEQ_4]
 |-Readme.txt
 |-

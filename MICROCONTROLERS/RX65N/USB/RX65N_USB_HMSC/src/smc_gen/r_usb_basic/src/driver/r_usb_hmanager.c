@@ -1808,10 +1808,12 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
         {
             /* USB-bus control (change device state) */
             case USB_MSG_MGR_STATUSRESULT :
+                printf("[MGR] - change state - ");
                 switch (g_usb_hstd_mgr_mode[ptr->ip])
                 {
                     /* End of reset signal */
                     case USB_DEFAULT :
+                        printf("default\n");
                         g_usb_hstd_device_speed[ptr->ip] = p_usb_shstd_mgr_msg[ptr->ip]->result;
 
                         /* Set device speed */
@@ -1830,62 +1832,25 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
                             break;
                             case USB_LSCONNECT : /* Low Speed Device Connect */
                                 USB_PRINTF0(" Low-Speed Device\n");
-#if defined(BSP_MCU_RX64M) || defined(BSP_MCU_RX65N) || defined(BSP_MCU_RX71M) || defined(BSP_MCU_RX72T)\
-    || defined(BSP_MCU_RX72M) || defined (BSP_MCU_RX72N) || defined (BSP_MCU_RX66N) || defined(BSP_MCU_RX671)
                                 usb_hstd_ls_connect_function(ptr);
-#else   /* defined(BSP_MCU_RX64M) || defined(BSP_MCU_RX65N) || defined(BSP_MCU_RX71M) || defined(BSP_MCU_RX72T)\
-    || defined(BSP_MCU_RX72M) || defined (BSP_MCU_RX72N) || defined (BSP_MCU_RX66N) || defined(BSP_MCU_RX671) */
-                                g_usb_hstd_mgr_mode[ptr->ip] = USB_DETACHED;
 
-                                ctrl.address = 0;                               /* USB Device address */
-                                ctrl.module = ptr->ip;                          /* Module number setting */
-                                usb_set_event(USB_STS_NOT_SUPPORT, &ctrl);      /* Set Event()  */
-
-#endif  /* defined(BSP_MCU_RX64M) || defined(BSP_MCU_RX65N) || defined(BSP_MCU_RX71M) || defined(BSP_MCU_RX671) */
                             break;
                             default :
                                 USB_PRINTF0(" Device/Detached\n");
                                 g_usb_hstd_mgr_mode[ptr->ip] = USB_DETACHED;
                             break;
                         }
-#if (BSP_CFG_RTOS_USED == 5)
-                        if (USB_DETACHED != g_usb_hstd_mgr_mode[ptr->ip])
-                        {
-                            usb_host_usbx_attach_init(ptr->ip);
-                        }
-#endif                                /* BSP_CFG_RTOS_USED == 5 */
                     break;
 
                         /* End of resume signal */
                     case USB_CONFIGURED :
-
+                        printf("configured\n");
                         /* This Resume Sorce is moved to usb_hResuCont() by nonOS */
-#if (BSP_CFG_RTOS_USED != 0)    /* Use RTOS */
-                        /* WAIT_LOOP */
-                        for (md = 0; md < g_usb_hstd_device_num[ptr->ip]; md++)
-                        {
-                            driver = &g_usb_hstd_device_drv[ptr->ip][md];
-                            if ((rootport + USB_DEVICEADDR) == driver->devaddr)
-                            {
-                                (*driver->devresume)(ptr, driver->devaddr, (uint16_t) USB_NO_ARG);
-
-                                if (USB_DO_GLOBAL_RESUME == usb_shstd_mgr_msginfo[ptr->ip])
-                                {
-                                    usb_hstd_mgr_chgdevst_cb(ptr);
-                                }
-
-                                /* Device state */
-                                g_usb_hstd_device_info[ptr->ip][driver->devaddr][1] = USB_CONFIGURED;
-
-                                /* Device state */
-                                driver->devstate = USB_CONFIGURED;
-                            }
-                        }
-#endif /* (BSP_CFG_RTOS_USED != 0) */
                     break;
 
                         /* Start of suspended state */
                     case USB_SUSPENDED :
+                        printf("suspend\n");
                         /* WAIT_LOOP */
                         for (md = 0; md < g_usb_hstd_device_num[ptr->ip]; md++)
                         {
@@ -1910,13 +1875,13 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                         /* Continue of resume signal */
                     case USB_RESUME_PROCESS :
-#if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
+                        printf("resume\n");
                         /* Resume Sequence Number is 0 */
                         usb_hstd_resu_cont(ptr, USB_DEVICEADDR);
-#endif /* (BSP_CFG_RTOS_USED == 0) */
                     break;
 
                     case USB_DETACHED :
+                        printf("detached\n");
                         switch (usb_shstd_mgr_msginfo[ptr->ip])
                         {
                             case USB_PORT_DISABLE :
@@ -1934,6 +1899,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_MGR_SUBMITRESULT :
+                printf("[MGR] - submit result\n");
 
                 /* Agreement device address */
 #if (BSP_CFG_RTOS_USED != 0)        /* Use RTOS */
@@ -2014,15 +1980,10 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
                 usb_hstd_mgr_rel_mpl(ptr, msginfo);
             break;
             case USB_MSG_MGR_AORDETACH :
+                printf("[MGR] - aordetach\n");
                 switch (p_usb_shstd_mgr_msg[ptr->ip]->result)
                 {
                     case USB_DETACH :
-#if USB_CFG_COMPLIANCE == USB_CFG_ENABLE
-                        disp_param.status = USB_CT_DETACH;
-                        disp_param.pid    = USB_NULL;
-                        disp_param.vid    = USB_NULL;
-                        usb_compliance_disp ((void *)&disp_param);
-#endif /* USB_CFG_COMPLIANCE == USB_CFG_ENABLE */
                         g_usb_hstd_mgr_mode[ptr->ip] = USB_DETACHED;
                         g_usb_hstd_device_speed[ptr->ip] = USB_NOCONNECT;
 
@@ -2032,17 +1993,6 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
                             driver = &g_usb_hstd_device_drv[ptr->ip][md];
                             if (USB_DEVICEADDR == driver->devaddr)
                             {
-#if defined(USB_CFG_HHID_USE)
-
-#if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
-                                if (USB_DEVICEADDR == driver->devaddr)
-                                {
-                                    g_usb_change_device_state[ptr->ip] = USB_NULL;
-                                }
-#endif /* BSP_CFG_RTOS_USED == 0 */
-
-#endif  /* defined(USB_CFG_HHID_USE) */
-
                                 (*driver->devdetach)(ptr, driver->devaddr, (uint16_t) USB_NO_ARG);
 
                                 /* Root port */
@@ -2123,6 +2073,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
                 }
             break;
             case USB_MSG_MGR_OVERCURRENT :
+                printf("[MGR] - overcurrent\n");
                 ctrl.module = ptr->ip;                      /* Module number setting */
                 usb_set_event(USB_STS_OVERCURRENT, &ctrl);  /* Set Event()  */
 
@@ -2167,6 +2118,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_ATTACH */
             case USB_DO_RESET_AND_ENUMERATION :
+                printf("[MGR] - reset\n");
                 ptr->msginfo = USB_MSG_HCD_ATTACH_MGR;
 
                 if (USB_DEVICEADDR == devaddr)
@@ -2184,6 +2136,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_VBON */
             case USB_PORT_ENABLE :
+                printf("[MGR] - VBON\n");
                 ptr->msginfo = USB_MSG_HCD_VBON;
                 if (USB_DEVICEADDR == devaddr)
                 {
@@ -2199,6 +2152,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_VBOFF */
             case USB_PORT_DISABLE :
+                printf("[MGR] - VBOFF\n");
 
                 /* VBUS is off at the time of the abnormalities in a device */
                 ptr->msginfo = USB_MSG_HCD_VBOFF;
@@ -2216,6 +2170,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_SUSPEND */
             case USB_DO_GLOBAL_SUSPEND :
+                printf("[MGR] - suspend\n");
                 ptr->msginfo = USB_MSG_HCD_REMOTE;
                 usb_shstd_mgr_callback[ptr->ip] = hp->complete;
                 usb_shstd_mgr_msginfo[ptr->ip] = msginfo;
@@ -2224,6 +2179,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_SUSPEND */
             case USB_DO_SELECTIVE_SUSPEND :
+                printf("[MGR] - s suspend\n");
                 ptr->msginfo = USB_MSG_HCD_REMOTE;
                 usb_hstd_mgr_suspend(ptr, msginfo);
                 usb_hstd_device_state_ctrl2(ptr, hp->complete, devaddr, ptr->msginfo, msginfo);
@@ -2231,6 +2187,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_RESUME */
             case USB_DO_GLOBAL_RESUME :
+                printf("[MGR] - globsl resume\n");
                 ptr->msginfo = USB_MSG_HCD_RESUME;
                 usb_shstd_mgr_callback[ptr->ip] = hp->complete;
                 usb_shstd_mgr_msginfo[ptr->ip] = msginfo;
@@ -2239,18 +2196,21 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                 /* USB_MSG_HCD_RESUME */
             case USB_MSG_HCD_RESUME :
+                printf("[MGR] - hcd resume\n");
                 usb_shstd_mgr_msginfo[ptr->ip] = msginfo;
                 usb_hstd_mgr_resume(ptr, msginfo);
             break;
 
                 /* USB_MSG_HCD_RESUME */
             case USB_DO_SELECTIVE_RESUME :
+                printf("[MGR] - s resume\n");
                 ptr->msginfo = USB_MSG_HCD_RESUME;
                 usb_hstd_mgr_resume(ptr, msginfo);
                 usb_hstd_device_state_ctrl2(ptr, hp->complete, devaddr, ptr->msginfo, msginfo);
             break;
 
             default :
+                printf("[MGR] - default\n");
                 usb_hstd_mgr_rel_mpl(ptr, msginfo);
             break;
         }

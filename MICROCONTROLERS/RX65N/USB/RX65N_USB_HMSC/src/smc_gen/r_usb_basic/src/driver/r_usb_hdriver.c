@@ -817,6 +817,7 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
 
         /***** Processing PIPE0-MAX_PIPE_NO data *****/
         case USB_INT_BRDY :
+            printf("--> USB_INT_BRDY\n");
             usb_hstd_brdy_pipe(ptr);
         break;
         case USB_INT_BEMP :
@@ -824,18 +825,22 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
             usb_hstd_bemp_pipe(ptr);
         break;
         case USB_INT_NRDY :
+            printf("--> USB_INT_NRDY\n");
             usb_hstd_nrdy_pipe(ptr);
         break;
 
             /***** Processing Setup transaction *****/
         case USB_INT_SACK :
+            printf("--> USB_INT_SACK");
             switch (g_usb_hstd_ctsq[ptr->ip])
             {
                 case USB_SETUPRD :
+                    printf(" USB_SETUPRD\n");
 
                     /* Next stage to Control read data */
                     /* continue */
                 case USB_SETUPRDCNT :
+                    printf(" USB_SETUPRDCNT\n");
 
                     /* Next stage to Control read data */
                     pp = g_p_usb_hstd_pipe[ptr->ip][USB_PIPE0];
@@ -844,10 +849,12 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
                     usb_hstd_ctrl_read_start(ptr, pp->tranlen, (uint8_t*) pp->p_tranadr);
                 break;
                 case USB_SETUPWR :
+                    printf(" USB_SETUPWR\n");
 
                     /* Next stage to Control Write data */
                     /* continue */
                 case USB_SETUPWRCNT :
+                    printf(" USB_SETUPWRCNT\n");
 
                     /* Next stage to Control Write data */
                     pp = g_p_usb_hstd_pipe[ptr->ip][USB_PIPE0];
@@ -863,6 +870,7 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
                     }
                 break;
                 case USB_SETUPNDC :
+                    printf(" USB_SETUPNDC\n");
 
                     /* Next stage to Control write no data */
                     usb_hstd_status_start(ptr);
@@ -1207,6 +1215,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
         switch (msginfo)
         {
             case USB_MSG_HCD_INT :
+                printf("[HDC] - INT\n");
                 /* USB INT */
                 usb_hstd_interrupt(ptr);
 #if (BSP_CFG_RTOS_USED != 0)        /* Use RTOS */
@@ -1215,11 +1224,13 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_SUBMITUTR :
+                printf("[HDC] - submit utr\n");
                 /* USB Submit utr */
                 usb_hstd_set_submitutr(ptr);
             break;
 
             case USB_MSG_HCD_ATTACH :
+                printf("[HDC] - att/dth\n");
                 /* USB attach / detach */
                 usb_hstd_attach_process(ptr);
                 /* Callback */
@@ -1229,6 +1240,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_ATTACH_MGR :
+                printf("[HDC] - att/dth mgr\n");
                 /* USB attach / detach */
                 usb_hstd_attach_process(ptr);
                 connect_inf = usb_cstd_port_speed(ptr);
@@ -1239,6 +1251,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_DETACH :
+                printf("[HDC] - dth\n");
                 /* USB detach process */
                 usb_hstd_detach_process(ptr);
                 /* Callback */
@@ -1248,6 +1261,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_DETACH_MGR :
+                printf("[HDC] - dth mgr\n");
                 hw_usb_clear_dvstctr(ptr, (USB_RWUPE | USB_USBRST | USB_RESUME | USB_UACT));
                 usb_cpu_delay_xms(1);
                 /* interrupt disable */
@@ -1259,6 +1273,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_USBRESET :
+                printf("[HDC] - reset\n");
                 /* USB bus reset */
                 usb_hstd_bus_reset(ptr);
                 /* Check current port speed */
@@ -1270,6 +1285,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_REMOTE :
+                printf("[HDC] - remote\n");
                 /* Suspend device */
                 g_usb_hstd_remort_port[ptr->ip] = USB_SUSPENDED;
                 usb_hstd_suspend(ptr);
@@ -1281,18 +1297,21 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_SUSPEND :
+                printf("[HDC] - suspend\n");
                 usb_hstd_suspend(ptr); /* Suspend device */
                 (hp->complete)(ptr, rootport, USB_MSG_HCD_SUSPEND);
                 usb_hstd_hcd_rel_mpl(ptr, msginfo); /* Release Memory Block */
             break;
 
             case USB_MSG_HCD_RESUME :
+                printf("[HDC] - resumr\n");
                 usb_hstd_resume_process(ptr); /* USB resume */
                 (hp->complete)(ptr, rootport, USB_MSG_HCD_RESUME); /* Callback */
                 usb_hstd_hcd_rel_mpl(ptr, msginfo); /* Release Memory Block */
             break;
 
             case USB_MSG_HCD_VBON :
+                printf("[HDC] - VBON\n");
                 usb_hstd_ovrcr_enable(ptr); /* Interrupt Enable */
                 usb_hstd_vbus_control(ptr, (uint16_t) USB_VBON); /* USB VBUS control ON */
 #if USB_CFG_BC == USB_CFG_DISABLE
@@ -1305,6 +1324,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_VBOFF :
+                printf("[HDC] - VBOFF\n");
                 usb_hstd_vbus_control(ptr, (uint16_t) USB_VBOFF); /* USB VBUS control OFF */
                 usb_hstd_ovrcr_disable(ptr);
                 usb_cpu_delay_xms((uint16_t) 100u); /* 100ms wait */
@@ -1313,12 +1333,14 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_CLR_STALLBIT :
+                printf("[HDC] - clear stall bit\n");
                 usb_cstd_clr_stall(ptr, pipenum); /* STALL */
                 (hp->complete)(ptr, (uint16_t) USB_NO_ARG, (uint16_t) USB_MSG_HCD_CLR_STALLBIT); /* Callback */
                 usb_hstd_hcd_rel_mpl(ptr, msginfo); /* Release Memory Block */
             break;
 
             case USB_MSG_HCD_SQTGLBIT :
+                printf("[HDC] - sq toggle\n");
                 pipenum = ptr->keyword & USB_PIPENM;
                 usb_hstd_do_sqtgl(ptr, pipenum, ptr->keyword); /* SQ toggle */
                 (hp->complete)(ptr, (uint16_t) USB_NO_ARG, (uint16_t) USB_MSG_HCD_SQTGLBIT); /* Callback */
@@ -1326,6 +1348,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_CLR_STALL :
+                printf("[HDC] - clr stall\n");
 #if (BSP_CFG_RTOS_USED != 0) /* Use RTOS */
                 usb_shstd_clr_stall_pipe[ptr->ip] = pipenum;
                 err = usb_hstd_clr_stall(ptr, pipenum, (usb_cb_t) &class_trans_result);
@@ -1348,6 +1371,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
 #endif /* (BSP_CFG_RTOS_USED != 0) */
             break;
             case USB_MSG_HCD_CLR_STALL_RESULT :
+                printf("[HDC] - clr stall res\n");
 #if (BSP_CFG_RTOS_USED != 0) /* Use RTOS */
                 /** Do nothing when running in RTOS
                  * The result will be checked immediately after issuing a "USB_MSG_HCD_CLR_STALL" request. **/
@@ -1380,18 +1404,21 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_CLRSEQBIT :
+                printf("[HDC] - clr sqclr\n");
                 hw_usb_set_sqclr(ptr, pipenum); /* SQCLR */
                 (hp->complete)(ptr, (uint16_t) USB_NO_ARG, (uint16_t) USB_MSG_HCD_CLRSEQBIT); /* Callback */
                 usb_hstd_hcd_rel_mpl(ptr, msginfo);
             break;
 
             case USB_MSG_HCD_SETSEQBIT :
+                printf("[HDC] - set sqclr\n");
                 hw_usb_set_sqset(ptr, pipenum); /* SQSET */
                 (hp->complete)(ptr, (uint16_t) USB_NO_ARG, (uint16_t) USB_MSG_HCD_SETSEQBIT); /* Callback */
                 usb_hstd_hcd_rel_mpl(ptr, msginfo); /* Release Memory Block */
             break;
 
             case USB_MSG_HCD_TRANSEND1 :
+                printf("[HDC] - trasend1\n");
 
                 /* Pipe Transfer Process check */
                 if (USB_NULL != g_p_usb_hstd_pipe[ptr->ip][pipenum])
@@ -1418,6 +1445,7 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_TRANSEND2 :
+                printf("[HDC] - transend2\n");
 
                 /* Pipe Transfer Process check */
                 if (USB_NULL != g_p_usb_hstd_pipe[ptr->ip][pipenum])
@@ -1444,9 +1472,11 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_D1FIFO_INT :
+                printf("[HDC] - D1FIFO\n");
             break;
 
             case USB_MSG_HCD_RESM_INT :
+                printf("[HDC] - RESM INT\n");
             break;
 
             default :
