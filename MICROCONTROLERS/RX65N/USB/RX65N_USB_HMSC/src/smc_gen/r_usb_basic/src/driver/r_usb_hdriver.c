@@ -702,12 +702,14 @@ static void usb_hstd_set_submitutr (usb_utr_t *ptr)
         /* Control transfer idle stage ? */
         if (USB_IDLEST == g_usb_hstd_ctsq[ptr->ip])
         {
+            printf("START\n");
             usb_hstd_setup_start(ptr);
         }
 
         /* Control Read Data */
         else if (USB_DATARDCNT == g_usb_hstd_ctsq[ptr->ip])
         {
+            printf("RD_DATA\n");
             pp = g_p_usb_hstd_pipe[ptr->ip][USB_PIPE0];
             usb_hstd_ctrl_read_start(ptr, pp->tranlen, (uint8_t*) pp->p_tranadr); /* Control read start */
         }
@@ -715,6 +717,7 @@ static void usb_hstd_set_submitutr (usb_utr_t *ptr)
         /* Control Write Data */
         else if (USB_DATAWRCNT == g_usb_hstd_ctsq[ptr->ip])
         {
+            printf("WR_DATA\n");
             pp = g_p_usb_hstd_pipe[ptr->ip][USB_PIPE0];
 
             /* Control write start */
@@ -727,6 +730,7 @@ static void usb_hstd_set_submitutr (usb_utr_t *ptr)
         }
         else
         {
+            printf("ERR_END\n");
             USB_PRINTF0("### Control transfer sequence error \n");
 
             /* Control Read/Write End */
@@ -735,6 +739,7 @@ static void usb_hstd_set_submitutr (usb_utr_t *ptr)
     }
     else
     {
+        printf("RE_TRANS\n");
         usb_hstd_set_retransfer(ptr, pipenum); /* Data Transfer */
     }
 }
@@ -1182,27 +1187,13 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
 
     (void) stacd;
 
-#if (BSP_CFG_RTOS_USED != 0)        /* Use RTOS */
-    /* WAIT_LOOP */
-    while (1)
-    {
-
-    /* Receive message */
-    ret = rtos_receive_mailbox (&g_rtos_usb_hcd_mbx_id, (void **)&p_mess, 10000);
-    if (RTOS_SUCCESS != ret)
-    {
-
-        continue;
-
-    }
-#else /* (BSP_CFG_RTOS_USED != 0) */
     /* Receive message */
     err = USB_TRCV_MSG(USB_HCD_MBX, (usb_msg_t** )&p_mess, (usb_tm_t )10000);
     if (USB_OK != err)
         {
         return;
         }
-#endif /* (BSP_CFG_RTOS_USED != 0 */
+
     else
     {
         ptr = (usb_utr_t *) p_mess;

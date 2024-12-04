@@ -1019,6 +1019,7 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
     uint16_t useport;
     uint16_t i;
     uint16_t ip;
+    printf("---BRDY_process---\n");
 
 #if ((USB_CFG_DTC == USB_CFG_ENABLE) || (USB_CFG_DMA == USB_CFG_ENABLE))
     uint16_t buffer;
@@ -1128,6 +1129,7 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
  ******************************************************************************/
 void usb_hstd_nrdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
 {
+    printf("---NRDY_process---\n");
     uint16_t buffer;
     uint16_t i;
 
@@ -1178,7 +1180,7 @@ void usb_hstd_nrdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
  ******************************************************************************/
 void usb_hstd_bemp_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
 {
-    printf("-----usb_hstd_bemp_pipe_process-----\n");
+    printf("---BEMP_process---\n");
     uint16_t buffer;
     uint16_t i;
     uint16_t useport;

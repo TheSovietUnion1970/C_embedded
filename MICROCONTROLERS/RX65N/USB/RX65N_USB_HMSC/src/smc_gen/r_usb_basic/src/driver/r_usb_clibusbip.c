@@ -471,6 +471,7 @@ void usb_set_event (usb_status_t event, usb_ctrl_t *p_ctrl)
  Arguments       : none
  Return value    : none
  ******************************************************************************/
+int v = 1;
 void usb_cstd_usb_task (void)
 {
     if ( USB_HOST == g_usb_usbmode)
@@ -484,14 +485,26 @@ void usb_cstd_usb_task (void)
         if (USB_FLGSET == usb_cstd_check_schedule()) /* Check for any task processing requests flags. */
         {
             /** Use only in non-OS. In RTOS, the kernel will schedule these tasks, no polling. **/
+            printf("< ========== [HCD]\n");
             usb_hstd_hcd_task((rtos_task_arg_t) 0); /* HCD Task */
+            printf(" ================> \n");
+            printf("< ========== [MGR]\n");
             usb_hstd_mgr_task((rtos_task_arg_t) 0); /* MGR Task */
+            printf(" ================> \n");
   #if USB_CFG_HUB == USB_CFG_ENABLE
             usb_hstd_hub_task((rtos_task_arg_t) 0); /* HUB Task */
   #endif  /* USB_CFG_HUB == USB_CFG_ENABLE */
 #if defined(USB_CFG_HCDC_USE) || defined(USB_CFG_HHID_USE) || defined(USB_CFG_HMSC_USE) || defined(USB_CFG_HVND_USE)
-
+            printf("< ========== [USB]\n");
             usb_class_task();
+            printf(" ================> \n");
+
+            printf("Done loop %d\n", v);
+            v++;
+
+            if (v == 8){
+            	v = 8; // for debug
+            }
 
 #endif  /* defined(USB_CFG_HCDC_USE)||defined(USB_CFG_HHID_USE)||defined(USB_CFG_HMSC_USE)||defined(USB_CFG_HVND_USE) */
         }

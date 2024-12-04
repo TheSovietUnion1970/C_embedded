@@ -67,10 +67,12 @@ void usb_hstd_brdy_pipe (usb_utr_t *ptr)
         {
             /* Data stage of Control read transfer */
             case USB_DATARD :
+                printf("RD \n");
                 switch (usb_hstd_read_data(ptr, USB_PIPE0, USB_CUSE))
                 {
                     /* End of data read */
                     case USB_READEND :
+                        
 
                         /* continue */
                         /* End of data read */
@@ -95,6 +97,7 @@ void usb_hstd_brdy_pipe (usb_utr_t *ptr)
 
                 /* Data stage of Control read transfer */
             case USB_DATARDCNT :
+                printf("RD CNT\n ");
                 switch (usb_hstd_read_data(ptr, USB_PIPE0, USB_CUSE))
                 {
 
@@ -121,6 +124,7 @@ void usb_hstd_brdy_pipe (usb_utr_t *ptr)
 
                 /* Status stage of Control write (NoData control) transfer */
             case USB_STATUSWR :
+                printf("STS WR\n ");
                 usb_hstd_ctrl_end(ptr, (uint16_t) USB_CTRL_END); /* Control Read/Write End */
             break;
             default :
