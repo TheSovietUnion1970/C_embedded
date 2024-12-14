@@ -110,6 +110,8 @@
 #ifndef __RX65NIODEFINE_HEADER__
 #define __RX65NIODEFINE_HEADER__
 
+#define caseeeee 0
+
 #define	IEN_BSC_BUSERR		IEN0
 #define	IEN_RAM_RAMERR		IEN2
 #define	IEN_FCU_FIFERR		IEN5
@@ -976,6 +978,8 @@
 #define	 _CLR( x )		__CLR( x )
 #define	  CLR( x , y )	_CLR( _ ## x ## _ ## y )
 
+// typedef struct track IDDD;
+
 #define	BSC			(*(volatile struct st_bsc     __evenaccess *)0x81300)
 #define	CAC			(*(volatile struct st_cac     __evenaccess *)0x8B000)
 #define	CAN0		(*(volatile struct st_can     __evenaccess *)0x90200)
@@ -1405,6 +1409,13 @@ IPR_OST_=125
 
 #pragma bit_order left
 #pragma unpack
+
+// char Debug_case;
+// #define case 0
+
+typedef struct track{
+	unsigned char id;
+} track_t;
 
 typedef struct st_bsc {
 	union {

@@ -94,7 +94,7 @@
 #define USB_EP_PIPE_NUM     (9)
 #define USB_EP_TBL_WSIZE    ((USB_EPL * USB_EP_PIPE_NUM) + 1)
 #endif /* defined(USB_CFG_HVND_USE) */
-
+extern uint8_t track_id;
 /******************************************************************************
  Private global variables and functions
  ******************************************************************************/

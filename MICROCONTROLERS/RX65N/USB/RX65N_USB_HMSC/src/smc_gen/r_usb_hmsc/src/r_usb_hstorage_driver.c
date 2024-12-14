@@ -49,6 +49,8 @@
 
 #if defined(USB_CFG_HMSC_USE)
 
+extern uint8_t track_id;
+
 /******************************************************************************
 Macro definitions
 ******************************************************************************/
@@ -99,6 +101,7 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
     switch (g_usb_hmsc_drive_search_seq[mess->ip])
     {
         case USB_SEQ_0 : /* Get MAX_LUN */
+            printf(" *******>ACT SEQ 0\n");
             USB_PRINTF0("\n*** Drive search !\n");
             g_usb_hmsc_strg_process[mess->ip] = USB_MSG_HMSC_STRG_DRIVE_SEARCH;
             addr = mess->keyword;
@@ -131,6 +134,7 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_1 : /* Check result */
+            printf(" *******>ACT SEQ 1\n");
             if ( USB_CTRL_END != mess->result)
             {
                 USB_PRINTF0("### GetMaxLUN error\n");
@@ -145,11 +149,13 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_2 : /* Check result */
+            printf(" *******>ACT SEQ 2\n");
             usb_hmsc_read_capacity(mess, side, (uint8_t*) &g_usb_hmsc_data[mess->ip]);
             g_usb_hmsc_drive_search_seq[mess->ip]++;
         break;
 
         case USB_SEQ_3 : /* Read Capacity */
+            printf(" *******>ACT SEQ 3\n");
             if (mess->result != USB_HMSC_OK)
             {
                 /* TestUnitReady */
@@ -166,6 +172,7 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_4 :
+            printf(" *******>ACT SEQ 4\n");
             if (mess->result != USB_HMSC_OK)
             {
                 /* TestUnitReady (Retry) */
@@ -181,6 +188,7 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_5 :
+            printf(" *******>ACT SEQ 5\n");
             /* Don't delete the following processing!! */
             /* (This is necessary for the specific USB memory.) */
             /* Read10 secno = 0, seccnt = 1 */
@@ -189,6 +197,7 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_6 :
+            printf(" *******>ACT SEQ 6\n");
             if (USB_HMSC_OK == mess->result)
             {
                 g_usb_hmsc_drive_search_seq[mess->ip] = USB_SEQ_0;
@@ -213,6 +222,7 @@ void usb_hmsc_strg_drive_search_act (usb_utr_t *mess)
         break;
 
         default :
+            printf("ACT SEQ Default\n");
             g_usb_hmsc_drive_search_seq[mess->ip] = USB_SEQ_0;
             g_usb_hmsc_strg_process[mess->ip] = USB_MSG_HMSC_STRG_DRIVE_SEARCH_END;
             usb_hmsc_strg_specified_path(mess);

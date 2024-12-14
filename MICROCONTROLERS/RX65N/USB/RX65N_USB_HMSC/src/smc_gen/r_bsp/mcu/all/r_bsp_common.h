@@ -152,6 +152,8 @@ typedef enum
 /* Easy to use typedef for FIT module callback functions. */
 typedef void (*fit_callback_t)(void *p_args);
 
+// #define case 0
+
 /***********************************************************************************************************************
 Exported global variables
 ***********************************************************************************************************************/

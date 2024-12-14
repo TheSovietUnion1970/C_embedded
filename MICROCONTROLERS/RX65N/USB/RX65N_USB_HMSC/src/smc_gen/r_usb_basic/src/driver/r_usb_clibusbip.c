@@ -77,7 +77,7 @@
 #if ((USB_CFG_DTC == USB_CFG_ENABLE) || (USB_CFG_DMA == USB_CFG_ENABLE))
 #include "r_usb_dmac.h"
 #endif  /* ((USB_CFG_DTC == USB_CFG_ENABLE) || (USB_CFG_DMA == USB_CFG_ENABLE)) */
-
+extern uint8_t track_id;
 /******************************************************************************
  Macro definitions
  *****************************************************************************/
@@ -369,7 +369,9 @@ uint16_t usb_cstd_port_speed (usb_utr_t *ptr)
  ******************************************************************************/
 void usb_set_event (usb_status_t event, usb_ctrl_t *p_ctrl)
 {
+if (caseeeee == track_id){
     printf("write_pointer = %d\n", g_usb_cstd_event.write_pointer);
+}
 #if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
     g_usb_cstd_event.code[g_usb_cstd_event.write_pointer] = event;
     g_usb_cstd_event.ctrl[g_usb_cstd_event.write_pointer] = *p_ctrl;
@@ -472,6 +474,7 @@ void usb_set_event (usb_status_t event, usb_ctrl_t *p_ctrl)
  Return value    : none
  ******************************************************************************/
 int v = 1;
+
 void usb_cstd_usb_task (void)
 {
     if ( USB_HOST == g_usb_usbmode)
@@ -485,25 +488,32 @@ void usb_cstd_usb_task (void)
         if (USB_FLGSET == usb_cstd_check_schedule()) /* Check for any task processing requests flags. */
         {
             /** Use only in non-OS. In RTOS, the kernel will schedule these tasks, no polling. **/
+if (caseeeee == track_id){
             printf("< ========== [HCD]\n");
+}
             usb_hstd_hcd_task((rtos_task_arg_t) 0); /* HCD Task */
+if (caseeeee == track_id){
             printf(" ================> \n");
             printf("< ========== [MGR]\n");
+}
             usb_hstd_mgr_task((rtos_task_arg_t) 0); /* MGR Task */
+if (caseeeee == track_id){
             printf(" ================> \n");
+}
   #if USB_CFG_HUB == USB_CFG_ENABLE
             usb_hstd_hub_task((rtos_task_arg_t) 0); /* HUB Task */
   #endif  /* USB_CFG_HUB == USB_CFG_ENABLE */
 #if defined(USB_CFG_HCDC_USE) || defined(USB_CFG_HHID_USE) || defined(USB_CFG_HMSC_USE) || defined(USB_CFG_HVND_USE)
-            printf("< ========== [USB]\n");
+            //printf("< ========== [USB]\n");
             usb_class_task();
-            printf(" ================> \n");
-
-            printf("Done loop %d\n", v);
+            //printf(" ================> \n");
+if (caseeeee == track_id){
+            printf(" >>>>>>>>>>>>> Done loop %d <<<<<<<<<<<<< \n", v);
+}
             v++;
 
-            if (v == 8){
-            	v = 8; // for debug
+            if (v == 9){
+            	v = 9; // for debug
             }
 
 #endif  /* defined(USB_CFG_HCDC_USE)||defined(USB_CFG_HHID_USE)||defined(USB_CFG_HMSC_USE)||defined(USB_CFG_HVND_USE) */
@@ -542,8 +552,12 @@ void usb_class_task (void)
     usb_utr_t utr;
     uint16_t addr;
 
+    printf("< ========== [HMS]\n");
     usb_hmsc_task();                /* USB Host MSC driver task */
+    printf(" ================> \n");
+    printf("< ========== [STR]\n");
     usb_hmsc_strg_drive_task();     /* HSTRG Task */
+    printf(" ================> \n");
 
     if (USB_FALSE == g_drive_search_lock)
     {

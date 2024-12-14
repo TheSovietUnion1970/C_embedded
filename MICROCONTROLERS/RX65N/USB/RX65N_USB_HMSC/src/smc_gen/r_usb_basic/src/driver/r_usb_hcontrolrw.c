@@ -251,6 +251,7 @@ void usb_hstd_status_start (usb_utr_t *ptr)
 
             /* Control read Status */
             g_usb_hstd_ctsq[ptr->ip] = USB_DATARD;
+            printf(">>>>> ACK RD <<<<<\n");
 
             /* Control write start */
             end_flag = usb_hstd_ctrl_write_start(ptr, (uint32_t) 0, (uint8_t*) &buf1);
@@ -273,6 +274,8 @@ void usb_hstd_status_start (usb_utr_t *ptr)
             /* continue */
             /* NoData Control */
         case USB_SETUPNDC :
+
+            printf(">>>>> ACK WR <<<<<\n");
 
             /* Control Read Status */
             usb_hstd_ctrl_read_start(ptr, (uint32_t) 0, (uint8_t*) &buf1);
@@ -311,6 +314,8 @@ void usb_hstd_ctrl_end (usb_utr_t *ptr, uint16_t status)
     hw_usb_clear_nrdyenb(ptr, (uint16_t) USB_PIPE0); /* NRDY0 Disable */
 
     usb_cstd_clr_stall(ptr, (uint16_t) USB_PIPE0); /* PID=NAK & clear STALL */
+
+    printf("USB_SQCLR\n");
     if (USB_IP0 == ptr->ip)
     {
         hw_usb_set_mbw(ptr, USB_CUSE, USB0_CFIFO_MBW);

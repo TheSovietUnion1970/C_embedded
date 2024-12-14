@@ -101,6 +101,7 @@ Includes   <System Includes> , "Project Includes"
 
 
 extern st_usb0_t* USBB;
+extern uint8_t track_id;
 /***********************************************************************************************************************
  Exported global variables (to be accessed by other files)
 ***********************************************************************************************************************/
@@ -131,6 +132,7 @@ extern fsp_err_t usb_peri_usbx_media_close(void);
 
 uint16_t        g_usb_usbmode;
 uint16_t        g_usb_open_class[USB_NUM_USBIP];
+extern uint8_t track_id;
 
 
 
@@ -212,7 +214,9 @@ usb_status_t R_USB_GetEvent(usb_ctrl_t *p_ctrl)
     usb_cstd_usb_task();
     if ( g_usb_cstd_event.write_pointer != g_usb_cstd_event.read_pointer )
     {
-        printf("read_pointer = %d\n", g_usb_cstd_event.read_pointer);
+        if (caseeeee == track_id){
+            printf("read_pointer = %d\n", g_usb_cstd_event.read_pointer);
+        }
         *p_ctrl = g_usb_cstd_event.ctrl[g_usb_cstd_event.read_pointer];
         event = g_usb_cstd_event.code[g_usb_cstd_event.read_pointer];
         g_usb_cstd_event.read_pointer++;

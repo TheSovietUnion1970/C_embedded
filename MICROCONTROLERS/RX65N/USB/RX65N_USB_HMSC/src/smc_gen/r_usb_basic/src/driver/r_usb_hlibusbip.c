@@ -1037,6 +1037,7 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
     {
         if (0 != (bitsts & USB_BITSET(i)))
         {
+            printf("->brdy bitsts - %d\n", i);
             /* Interrupt check */
             hw_usb_clear_status_bemp(ptr, i);
 
@@ -1105,16 +1106,20 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
                 {
                     if (USB_BUF2FIFO == usb_cstd_get_pipe_dir(ptr, i))
                     {
+                    	printf("W > 0");
                         /* Buffer to FIFO data write */
                         usb_hstd_buf_to_fifo(ptr, i, useport);
                     }
                     else
                     {
+                    	printf("R > 0");
                         /* FIFO to Buffer data read */
                         usb_hstd_fifo_to_buf(ptr, i, useport);
                     }
                 }
             }
+
+            printf("\n");
         }
     }
 }/* End of function usb_hstd_brdy_pipe_process() */
@@ -1190,6 +1195,7 @@ void usb_hstd_bemp_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
     {
         if (0 != (bitsts & USB_BITSET(i)))
         {
+            printf("->bemp bitsts - %d\n", i);
             /* Interrupt check */
             if ((USB_NULL != g_p_usb_hstd_pipe[ptr->ip][i]) && (USB_ON != g_usb_cstd_bemp_skip[ptr->ip][i]))
             {
@@ -1230,6 +1236,7 @@ void usb_hstd_bemp_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
         /* Interrupt check */
         if (0 != (bitsts & USB_BITSET(i)))
         {
+            printf("->bemp bitsts - %d\n", i);
             if (USB_NULL != g_p_usb_hstd_pipe[ptr->ip][i])
             {
                 buffer = usb_cstd_get_pid(ptr, i);

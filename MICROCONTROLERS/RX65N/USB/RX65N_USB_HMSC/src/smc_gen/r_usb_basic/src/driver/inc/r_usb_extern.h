@@ -102,8 +102,8 @@ extern uint16_t g_usb_hstd_device_num[];                        /* Device driver
 
 /* r_usb_hmanager.c */
 extern uint16_t g_usb_hstd_enum_seq[];                          /* Enumeration request */
-extern uint16_t g_usb_hstd_device_descriptor[][USB_DEVICESIZE / 2u];
-extern uint16_t g_usb_hstd_config_descriptor[][USB_CONFIGSIZE / 2u];
+extern uint16_t g_usb_hstd_device_descriptor[USB_NUM_USBIP][USB_DEVICESIZE / 2u];
+extern uint16_t g_usb_hstd_config_descriptor[USB_NUM_USBIP][USB_CONFIGSIZE / 2u];
 extern uint16_t g_usb_hstd_suspend_pipe[][USB_MAX_PIPE_NO + 1u];
 extern uint16_t g_usb_hstd_check_enu_result[];                  /* Enumeration result check */
 extern uint8_t g_usb_hstd_class_data[USB_NUM_USBIP][CLSDATASIZE];

@@ -2,6 +2,8 @@
 <Configs>
     <History>
         <Keyword>USB0</Keyword>
+        <Keyword>ÚB0</Keyword>
         <Keyword>USB</Keyword>
+        <Keyword>CFIFO</Keyword>
     </History>
 </Configs>

@@ -32,6 +32,7 @@
 #include "r_usb_hmsc_apl_config.h"
 
 #define MAX_PATH_LEN 256
+
 /**********************************************************************************************************************
  Global Typedef definitions
  *********************************************************************************************************************/
@@ -91,6 +92,7 @@ int a = 0;
  Arguments       : none
  Return value    : none
  ******************************************************************************/
+uint8_t track_id;
 void usb_main (void)
 {
     uint16_t    event;
@@ -116,6 +118,8 @@ void usb_main (void)
     R_USB_Open(&ctrl, &cfg);
 #endif
 
+    track_id = 0;
+
     while (1)
     {
     	a++;
@@ -124,16 +128,17 @@ void usb_main (void)
         switch (event)
         {
             case USB_STS_CONFIGURED :
+                track_id++;
             	printf("a = %d\n", a);
                 /* Create a file object. */
 
-                tree(drv0, SCAN_TREE);
+                //tree(drv0, SCAN_TREE);
 
                 // printf(" ================== f_mount =================== \n");
                 // f_mount((FATFS *) g_pfat,(const TCHAR*)"0:", 1);
 
-                // printf(" ================== msc_file_write =================== \n");
-                // msc_file_write();
+                // // printf(" ================== msc_file_write =================== \n");
+                // // msc_file_write();
 
                 // printf(" ================== tree =================== \n");
                 // tree(drv0, SCAN_TREE);

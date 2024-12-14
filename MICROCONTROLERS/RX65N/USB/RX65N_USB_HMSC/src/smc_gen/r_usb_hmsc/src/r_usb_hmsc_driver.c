@@ -56,7 +56,7 @@
 /******************************************************************************
  Private global variables and functions
  ******************************************************************************/
-
+extern uint8_t track_id;
 /* functions */
 #if (BSP_CFG_RTOS_USED)
 static uint16_t usb_hmsc_data_act (usb_utr_t *mess);
@@ -126,6 +126,8 @@ const uint16_t g_usb_hmsc_devicetpl[] =
     0,                  /* Reserved */
     USB_CFG_TPL             /* Vendor ID, Product ID */
 };
+
+
 
 usb_pipe_table_reg_t    g_usb_hmsc_pipe_table[USB_MAXSTRAGE][USB_PIPE_DIR_MAX];
 

@@ -304,8 +304,6 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                         }
                     }
 
-
-#if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
                     if (1 != flg)
                     {
 
@@ -316,12 +314,11 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                         g_usb_hstd_enum_seq[ptr->ip]++;
 
                     }
-#endif /* (BSP_CFG_RTOS_USED == 0) */
                 break;
 
                     /* Class Check Result */
                 case 5 :
-#if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
+
                     switch (g_usb_hstd_check_enu_result[ptr->ip])
                     {
                         case USB_OK :
@@ -336,7 +333,6 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                             enume_mode = USB_NONDEVICE;
                         break;
                     }
-#endif /* (BSP_CFG_RTOS_USED == 0) */
                 break;
 
                     /* Set Configuration */
@@ -371,6 +367,8 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
             }
             g_usb_hstd_enum_seq[ptr->ip]++;
 
+            printf("g_usb_hstd_enum_seq = %d\n", g_usb_hstd_enum_seq[ptr->ip]);
+
             /* Device Enumeration */
             if (USB_DEVICEENUMERATION == enume_mode)
             {
@@ -385,6 +383,8 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                     break;
                     case 6 :
 
+                        printf("Setting config\n");
+
                         descriptor_table = (uint8_t*) g_usb_hstd_config_descriptor[ptr->ip];
 
                         /* Device state */
@@ -395,6 +395,7 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                     break;
 
                     default :
+                        printf("Default enum - [%d]\n", g_usb_hstd_enum_seq[ptr->ip]);
                         (*g_usb_hstd_enumaration_process[g_usb_hstd_enum_seq[ptr->ip]])(ptr,
                                 g_usb_hstd_device_addr[ptr->ip], g_usb_hstd_enum_seq[ptr->ip]);
                     break;
@@ -708,23 +709,27 @@ void usb_hstd_enum_get_descriptor (usb_utr_t *ptr, uint16_t addr, uint16_t cnt_v
             usb_shstd_std_request[ptr->ip][0] = USB_GET_DESCRIPTOR | USB_DEV_TO_HOST | USB_STANDARD | USB_DEVICE;
             usb_shstd_std_request[ptr->ip][1] = (uint16_t) USB_DEV_DESCRIPTOR;
             usb_shstd_std_request[ptr->ip][2] = (uint16_t) 0x0000;
-            usb_shstd_std_request[ptr->ip][3] = (uint16_t) 0x0040;
-            if (usb_shstd_std_request[ptr->ip][3] > USB_DEVICESIZE)
-            {
-                usb_shstd_std_request[ptr->ip][3] = USB_DEVICESIZE;
-            }
-            usb_shstd_std_req_msg[ptr->ip].p_tranadr = g_usb_hstd_device_descriptor[ptr->ip];
-        break;
-        case 2 :
-            usb_shstd_std_request[ptr->ip][0] = USB_GET_DESCRIPTOR | USB_DEV_TO_HOST | USB_STANDARD | USB_DEVICE;
-            usb_shstd_std_request[ptr->ip][1] = (uint16_t) USB_DEV_DESCRIPTOR;
-            usb_shstd_std_request[ptr->ip][2] = (uint16_t) 0x0000;
             usb_shstd_std_request[ptr->ip][3] = (uint16_t) 0x0012;
             if (usb_shstd_std_request[ptr->ip][3] > USB_DEVICESIZE)
             {
                 usb_shstd_std_request[ptr->ip][3] = USB_DEVICESIZE;
             }
             usb_shstd_std_req_msg[ptr->ip].p_tranadr = g_usb_hstd_device_descriptor[ptr->ip];
+
+            printf("Get discriptor - 0x12\n");
+        break;
+        case 2 :
+            // usb_shstd_std_request[ptr->ip][0] = USB_GET_DESCRIPTOR | USB_DEV_TO_HOST | USB_STANDARD | USB_DEVICE;
+            // usb_shstd_std_request[ptr->ip][1] = (uint16_t) USB_DEV_DESCRIPTOR;
+            // usb_shstd_std_request[ptr->ip][2] = (uint16_t) 0x0000;
+            // usb_shstd_std_request[ptr->ip][3] = (uint16_t) 0x0012;
+            // if (usb_shstd_std_request[ptr->ip][3] > USB_DEVICESIZE)
+            // {
+            //     usb_shstd_std_request[ptr->ip][3] = USB_DEVICESIZE;
+            // }
+            // usb_shstd_std_req_msg[ptr->ip].p_tranadr = g_usb_hstd_device_descriptor[ptr->ip];
+
+            // printf("Get discriptor - 0x12\n");
         break;
         case 3 :
             usb_shstd_std_request[ptr->ip][0] = USB_GET_DESCRIPTOR | USB_DEV_TO_HOST | USB_STANDARD | USB_DEVICE;
@@ -732,6 +737,8 @@ void usb_hstd_enum_get_descriptor (usb_utr_t *ptr, uint16_t addr, uint16_t cnt_v
             usb_shstd_std_request[ptr->ip][2] = (uint16_t) 0x0000;
             usb_shstd_std_request[ptr->ip][3] = (uint16_t) 0x0009;
             usb_shstd_std_req_msg[ptr->ip].p_tranadr = g_usb_hstd_config_descriptor[ptr->ip];
+
+            printf("Get discriptor - 0x09\n");
         break;
         case 4 :
             data_table = (uint8_t*) g_usb_hstd_config_descriptor[ptr->ip];
@@ -745,6 +752,8 @@ void usb_hstd_enum_get_descriptor (usb_utr_t *ptr, uint16_t addr, uint16_t cnt_v
                 USB_PRINTF0("***WARNING Descriptor size over !\n");
             }
             usb_shstd_std_req_msg[ptr->ip].p_tranadr = g_usb_hstd_config_descriptor[ptr->ip];
+
+            printf("Get discriptor - table... = %d\n", usb_shstd_std_request[ptr->ip][3]);
         break;
         default :
             return;
@@ -794,6 +803,8 @@ void usb_hstd_enum_set_address (usb_utr_t *ptr, uint16_t addr, uint16_t setaddr)
     usb_shstd_std_req_msg[ptr->ip].ip = ptr->ip;
 
     usb_hstd_transfer_start_req(&usb_shstd_std_req_msg[ptr->ip]);
+
+    printf("Set addr = %d, %d\n", setaddr, addr);
 }
 /******************************************************************************
  End of function usb_hstd_enum_set_address
@@ -826,6 +837,8 @@ void usb_hstd_enum_set_configuration (usb_utr_t *ptr, uint16_t addr, uint16_t co
     usb_shstd_std_req_msg[ptr->ip].ip = ptr->ip;
 
     usb_hstd_transfer_start_req(&usb_shstd_std_req_msg[ptr->ip]);
+
+    printf("Set configuration = %d, %d\n", confnum, addr);
 }
 /******************************************************************************
  End of function usb_hstd_enum_set_configuration
@@ -1810,6 +1823,7 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 #if (BSP_CFG_RTOS_USED == 5)
                     case USB_CONFIGURED:
 #endif                                /* #if (BSP_CFG_RTOS_USED == 5) */
+                        printf("USB_DEFAULT - ");
                         /* Peripheral Device Speed support check */
                         connect_speed = usb_hstd_support_speed_check(ptr);
                         if (USB_NOCONNECT != connect_speed)
@@ -1853,11 +1867,17 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
                                     }
                                 break;
                                 default :
+                                    printf(" - enume_mode no\n");
                                 break;
                             }
                         }
+
+                        else {
+                            printf(" - no connected\n");
+                        }
                     break;
                     default :
+                        printf("Default\n");
                     break;
                 }
                 usb_hstd_mgr_rel_mpl(ptr, msginfo);

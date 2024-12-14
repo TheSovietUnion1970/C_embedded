@@ -2847,6 +2847,7 @@ void hw_usb_clear_aclrm (usb_utr_t *ptr, uint16_t pipeno)
 void hw_usb_set_sqclr (usb_utr_t *ptr, uint16_t pipeno)
 {
     R_BSP_VOLATILE_EVENACCESS uint16_t *p_reg;
+    printf(" ----> SQCLR <----\n");
 
     if (USB_NULL == ptr)
     {
@@ -2907,6 +2908,8 @@ void hw_usb_set_sqclr (usb_utr_t *ptr, uint16_t pipeno)
 void hw_usb_set_sqset (usb_utr_t *ptr, uint16_t pipeno)
 {
     R_BSP_VOLATILE_EVENACCESS uint16_t *p_reg;
+
+    printf(" ----> SQSET <----\n");
 
     if (USB_NULL == ptr)
     {

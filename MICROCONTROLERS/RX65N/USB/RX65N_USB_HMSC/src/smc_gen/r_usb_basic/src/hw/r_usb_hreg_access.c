@@ -537,6 +537,12 @@ void hw_usb_hset_usbleng (usb_utr_t *ptr, uint16_t data)
 void hw_usb_hwrite_dcpctr (usb_utr_t *ptr, uint16_t data)
 {
     ptr->ipp->DCPCTR.WORD = data;
+    if (data == USB_SQSET){
+        printf(" ----> SQSET <----\n");
+    }
+    else {
+        printf(" ----> SQCLR <----\n");
+    }
 }
 /******************************************************************************
  End of function hw_usb_hwrite_dcpctr
@@ -551,6 +557,7 @@ void hw_usb_hwrite_dcpctr (usb_utr_t *ptr, uint16_t data)
  ******************************************************************************/
 void hw_usb_hset_sureq (usb_utr_t *ptr)
 {
+    printf("Trans SetPack\n");
     ptr->ipp->DCPCTR.WORD |= USB_SUREQ;
 }
 /******************************************************************************

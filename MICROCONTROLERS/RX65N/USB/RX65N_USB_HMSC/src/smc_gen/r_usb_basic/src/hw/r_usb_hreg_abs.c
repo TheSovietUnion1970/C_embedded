@@ -79,6 +79,7 @@ void usb_hstd_set_hub_port (usb_utr_t *ptr, uint16_t addr, uint16_t upphub, uint
  Arguments       : usb_utr_t *ptr    : Pointer to usb_utr_t structure.
  Return          : none
  ******************************************************************************/
+extern uint8_t g_usb_hmsc_class_data[USB_NUM_USBIP][256];
 void usb_hstd_interrupt_handler (usb_utr_t *ptr)
 {
     uint16_t intsts0;
