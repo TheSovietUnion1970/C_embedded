@@ -226,9 +226,14 @@ DRESULT usb_disk_read (
         R_usb_hstd_DeviceInformation(&tfat_ptr, tfat_ptr.keyword, (uint16_t *)res); /* Get device connect state */
 #else
         res[1] = R_USB_HmscGetDevSts(pdrv);
+
 #endif
         R_usb_hmsc_WaitLoop(); /* Task Schedule */
         err = USB_TRCV_MSG(USB_HSTRG_MBX, (usb_msg_t** ) & mess, (uint16_t )0); /* Receive read complete msg */
+
+        if (err == USB_OK || res[1] == USB_FALSE){
+        	printf("Out LOOP\n");
+        }
     }
     while ((err != USB_OK) && (res[1] != USB_FALSE)); /* WAIT_LOOP */
 
@@ -520,10 +525,21 @@ void R_usb_hmsc_WaitLoop (void)
 {
     if (usb_cstd_check_schedule() == USB_FLGSET)
     {
+    	printf("< ========== [HCD]\n");
         usb_hstd_hcd_task((usb_vp_int_t) 0);
+        printf(" ================> \n");
+
+        printf("< ========== [MGR]\n");
         usb_hstd_mgr_task((usb_vp_int_t) 0);
-        usb_hhub_task((usb_vp_int_t) 0);
+        printf(" ================> \n");
+
+//        printf("< ========== [hhub]\n");
+//        usb_hhub_task((usb_vp_int_t) 0);
+//        printf(" ================> \n");
+
+        printf("< ========== [hmsc]\n");
         R_USB_HmscTask(); /* HMSC Task */
+        printf(" ================> \n");
     }
     usb_cstd_scheduler();
 }

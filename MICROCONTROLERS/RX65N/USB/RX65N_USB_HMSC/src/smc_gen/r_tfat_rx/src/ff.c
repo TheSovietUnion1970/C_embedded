@@ -3141,10 +3141,6 @@ static int get_ldnumber (	/* Returns logical drive number (-1:invalid drive numb
 	TCHAR tc;
 	int i;
 	int vol = -1;
-#if FF_STR_VOLUME_ID		/* Find string volume ID */
-	const char *sp;
-	char c;
-#endif
 
 	tt = tp = *path;
 	if (!tp) return vol;	/* Invalid path name? */
@@ -3157,50 +3153,14 @@ static int get_ldnumber (	/* Returns logical drive number (-1:invalid drive numb
 		if (IsDigit(*tp) && tp + 2 == tt) {	/* Is there a numeric volume ID + colon? */
 			i = (int)*tp - '0';	/* Get the LD number */
 		}
-#if FF_STR_VOLUME_ID == 1	/* Arbitrary string is enabled */
-		else {
-			i = 0;
-			do {
-				sp = VolumeStr[i]; tp = *path;	/* This string volume ID and path name */
-				do {	/* Compare the volume ID with path name */
-					c = *sp++; tc = *tp++;
-					if (IsLower(c)) c -= 0x20;
-					if (IsLower(tc)) tc -= 0x20;
-				} while (c && (TCHAR)c == tc);
-			} while ((c || tp != tt) && ++i < FF_VOLUMES);	/* Repeat for each id until pattern match */
-		}
-#endif
 		if (i < FF_VOLUMES) {	/* If a volume ID is found, get the drive number and strip it */
 			vol = i;		/* Drive number */
 			*path = tt;		/* Snip the drive prefix off */
 		}
 		return vol;
 	}
-#if FF_STR_VOLUME_ID == 2		/* Unix style volume ID is enabled */
-	if (*tp == '/') {			/* Is there a volume ID? */
-		while (*(tp + 1) == '/') tp++;	/* Skip duplicated separator */
-		i = 0;
-		do {
-			tt = tp; sp = VolumeStr[i]; /* Path name and this string volume ID */
-			do {	/* Compare the volume ID with path name */
-				c = *sp++; tc = *(++tt);
-				if (IsLower(c)) c -= 0x20;
-				if (IsLower(tc)) tc -= 0x20;
-			} while (c && (TCHAR)c == tc);
-		} while ((c || (tc != '/' && !IsTerminator(tc))) && ++i < FF_VOLUMES);	/* Repeat for each ID until pattern match */
-		if (i < FF_VOLUMES) {	/* If a volume ID is found, get the drive number and strip it */
-			vol = i;		/* Drive number */
-			*path = tt;		/* Snip the drive prefix off */
-		}
-		return vol;
-	}
-#endif
 	/* No drive prefix is found */
-#if FF_FS_RPATH != 0
-	vol = CurrVol;	/* Default drive is current drive */
-#else
 	vol = 0;		/* Default drive is 0 */
-#endif
 	return vol;		/* Return the default drive */
 }
 
@@ -3338,29 +3298,6 @@ static UINT find_volume (	/* Returns BS status found in the hosting drive */
 	if (fmt != 2 && (fmt >= 3 || part == 0)) return fmt;	/* Returns if it is an FAT VBR as auto scan, not a BS or disk error */
 
 	/* Sector 0 is not an FAT VBR or forced partition number wants a partition */
-
-#if FF_LBA64
-	if (fs->win[MBR_Table + PTE_System] == 0xEE) {	/* GPT protective MBR? */
-		DWORD n_ent, v_ent, ofs;
-		QWORD pt_lba;
-
-		if (move_window(fs, 1) != FR_OK) return 4;	/* Load GPT header sector (next to MBR) */
-		if (!test_gpt_header(fs->win)) return 3;	/* Check if GPT header is valid */
-		n_ent = ld_dword(fs->win + GPTH_PtNum);		/* Number of entries */
-		pt_lba = ld_qword(fs->win + GPTH_PtOfs);	/* Table location */
-		for (v_ent = i = 0; i < n_ent; i++) {		/* Find FAT partition */
-			if (move_window(fs, pt_lba + i * SZ_GPTE / SS(fs)) != FR_OK) return 4;	/* PT sector */
-			ofs = i * SZ_GPTE % SS(fs);												/* Offset in the sector */
-			if (!memcmp(fs->win + ofs + GPTE_PtGuid, GUID_MS_Basic, 16)) {	/* MS basic data partition? */
-				v_ent++;
-				fmt = check_fs(fs, ld_qword(fs->win + ofs + GPTE_FstLba));	/* Load VBR and check status */
-				if (part == 0 && fmt <= 1) return fmt;			/* Auto search (valid FAT volume found first) */
-				if (part != 0 && v_ent == part) return fmt;		/* Forced partition order (regardless of it is valid or not) */
-			}
-		}
-		return 3;	/* Not found */
-	}
-#endif
 	if (FF_MULTI_PARTITION && part > 4) return 3;	/* MBR has 4 partitions max */
 	for (i = 0; i < 4; i++) {		/* Load partition offset in the MBR */
 		mbr_pt[i] = ld_dword(fs->win + MBR_Table + i * SZ_PTE + PTE_StLba);
@@ -3396,20 +3333,22 @@ static FRESULT mount_volume (	/* FR_OK(0): successful, !=0: an error occurred */
 
 	/* Get logical drive number */
 	*rfs = 0;
+	printf(" =======> [get_ldnumber]\n");
 	vol = get_ldnumber(path);
+	printf(" <======================\n");
 	if (vol < 0) return FR_INVALID_DRIVE;
 
 	/* Check if the filesystem object is valid or not */
 	fs = FatFs[vol];					/* Get pointer to the filesystem object */
 	if (!fs) return FR_NOT_ENABLED;		/* Is the filesystem object available? */
-#if FF_FS_REENTRANT
-	if (!lock_volume(fs, 1)) return FR_TIMEOUT;	/* Lock the volume, and system if needed */
-#endif
+
 	*rfs = fs;							/* Return pointer to the filesystem object */
 
 	mode &= (BYTE)~FA_READ;				/* Desired access mode, write access or not */
 	if (fs->fs_type != 0) {				/* If the volume has been mounted */
+		printf(" =======> [disk_status]\n");
 		stat = disk_status(fs->pdrv);
+		printf(" <=====================\n");
 		if (!(stat & STA_NOINIT)) {		/* and the physical drive is kept initialized */
 			if (!FF_FS_READONLY && mode && (stat & STA_PROTECT)) {	/* Check write protection if needed */
 				return FR_WRITE_PROTECTED;
@@ -3422,90 +3361,26 @@ static FRESULT mount_volume (	/* FR_OK(0): successful, !=0: an error occurred */
 	/* Following code attempts to mount the volume. (find an FAT volume, analyze the BPB and initialize the filesystem object) */
 
 	fs->fs_type = 0;					/* Invalidate the filesystem object */
+	printf(" =======> [disk_initialize]\n");
 	stat = disk_initialize(fs->pdrv);	/* Initialize the volume hosting physical drive */
+	printf(" <=========================\n");
 	if (stat & STA_NOINIT) { 			/* Check if the initialization succeeded */
 		return FR_NOT_READY;			/* Failed to initialize due to no medium or hard error */
 	}
 	if (!FF_FS_READONLY && mode && (stat & STA_PROTECT)) { /* Check disk write protection if needed */
 		return FR_WRITE_PROTECTED;
 	}
-#if FF_MAX_SS != FF_MIN_SS				/* Get sector size (multiple sector size cfg only) */
-	if (disk_ioctl(fs->pdrv, GET_SECTOR_SIZE, &SS(fs)) != RES_OK) return FR_DISK_ERR;
-	if (SS(fs) > FF_MAX_SS || SS(fs) < FF_MIN_SS || (SS(fs) & (SS(fs) - 1))) return FR_DISK_ERR;
-#endif
 
 	/* Find an FAT volume on the hosting drive */
+	printf(" =======> [find_volume]\n");
 	fmt = find_volume(fs, LD2PT(vol));
+	printf(" <=====================\n");
 	if (fmt == 4) return FR_DISK_ERR;		/* An error occurred in the disk I/O layer */
 	if (fmt >= 2) return FR_NO_FILESYSTEM;	/* No FAT volume is found */
 	bsect = fs->winsect;					/* Volume offset in the hosting physical drive */
 
 	/* An FAT volume is found (bsect). Following code initializes the filesystem object */
-
-#if FF_FS_EXFAT
-	if (fmt == 1) {
-		QWORD maxlba;
-		DWORD so, cv, bcl, i;
-
-		for (i = BPB_ZeroedEx; i < BPB_ZeroedEx + 53 && fs->win[i] == 0; i++) ;	/* Check zero filler */
-		if (i < BPB_ZeroedEx + 53) return FR_NO_FILESYSTEM;
-
-		if (ld_word(fs->win + BPB_FSVerEx) != 0x100) return FR_NO_FILESYSTEM;	/* Check exFAT version (must be version 1.0) */
-
-		if (1 << fs->win[BPB_BytsPerSecEx] != SS(fs)) {	/* (BPB_BytsPerSecEx must be equal to the physical sector size) */
-			return FR_NO_FILESYSTEM;
-		}
-
-		maxlba = ld_qword(fs->win + BPB_TotSecEx) + bsect;	/* Last LBA of the volume + 1 */
-		if (!FF_LBA64 && maxlba >= 0x100000000) return FR_NO_FILESYSTEM;	/* (It cannot be accessed in 32-bit LBA) */
-
-		fs->fsize = ld_dword(fs->win + BPB_FatSzEx);	/* Number of sectors per FAT */
-
-		fs->n_fats = fs->win[BPB_NumFATsEx];			/* Number of FATs */
-		if (fs->n_fats != 1) return FR_NO_FILESYSTEM;	/* (Supports only 1 FAT) */
-
-		fs->csize = 1 << fs->win[BPB_SecPerClusEx];		/* Cluster size */
-		if (fs->csize == 0)	return FR_NO_FILESYSTEM;	/* (Must be 1..32768 sectors) */
-
-		nclst = ld_dword(fs->win + BPB_NumClusEx);		/* Number of clusters */
-		if (nclst > MAX_EXFAT) return FR_NO_FILESYSTEM;	/* (Too many clusters) */
-		fs->n_fatent = nclst + 2;
-
-		/* Boundaries and Limits */
-		fs->volbase = bsect;
-		fs->database = bsect + ld_dword(fs->win + BPB_DataOfsEx);
-		fs->fatbase = bsect + ld_dword(fs->win + BPB_FatOfsEx);
-		if (maxlba < (QWORD)fs->database + nclst * fs->csize) return FR_NO_FILESYSTEM;	/* (Volume size must not be smaller than the size required) */
-		fs->dirbase = ld_dword(fs->win + BPB_RootClusEx);
-
-		/* Get bitmap location and check if it is contiguous (implementation assumption) */
-		so = i = 0;
-		for (;;) {	/* Find the bitmap entry in the root directory (in only first cluster) */
-			if (i == 0) {
-				if (so >= fs->csize) return FR_NO_FILESYSTEM;	/* Not found? */
-				if (move_window(fs, clst2sect(fs, (DWORD)fs->dirbase) + so) != FR_OK) return FR_DISK_ERR;
-				so++;
-			}
-			if (fs->win[i] == ET_BITMAP) break;			/* Is it a bitmap entry? */
-			i = (i + SZDIRE) % SS(fs);	/* Next entry */
-		}
-		bcl = ld_dword(fs->win + i + 20);				/* Bitmap cluster */
-		if (bcl < 2 || bcl >= fs->n_fatent) return FR_NO_FILESYSTEM;	/* (Wrong cluster#) */
-		fs->bitbase = fs->database + fs->csize * (bcl - 2);	/* Bitmap sector */
-		for (;;) {	/* Check if bitmap is contiguous */
-			if (move_window(fs, fs->fatbase + bcl / (SS(fs) / 4)) != FR_OK) return FR_DISK_ERR;
-			cv = ld_dword(fs->win + bcl % (SS(fs) / 4) * 4);
-			if (cv == 0xFFFFFFFF) break;				/* Last link? */
-			if (cv != ++bcl) return FR_NO_FILESYSTEM;	/* Fragmented bitmap? */
-		}
-
-#if !FF_FS_READONLY
-		fs->last_clst = fs->free_clst = 0xFFFFFFFF;		/* Initialize cluster allocation information */
-#endif
-		fmt = FS_EXFAT;			/* FAT sub-type */
-	} else
-#endif	/* FF_FS_EXFAT */
-	{
+	
 		if (ld_word(fs->win + BPB_BytsPerSec) != SS(fs)) return FR_NO_FILESYSTEM;	/* (BPB_BytsPerSec must be equal to the physical sector size) */
 
 		fasize = ld_word(fs->win + BPB_FATSz16);		/* Number of sectors per FAT */
@@ -3581,22 +3456,11 @@ static FRESULT mount_volume (	/* FR_OK(0): successful, !=0: an error occurred */
 		}
 #endif	/* (FF_FS_NOFSINFO & 3) != 3 */
 #endif	/* !FF_FS_READONLY */
-	}
+	
 
 	fs->fs_type = (BYTE)fmt;/* FAT sub-type (the filesystem object gets valid) */
 	fs->id = ++Fsid;		/* Volume mount ID */
-#if FF_USE_LFN == 1
-	fs->lfnbuf = LfnBuf;	/* Static LFN working buffer */
-#if FF_FS_EXFAT
-	fs->dirbuf = DirBuf;	/* Static directory block scratchpad buuffer */
-#endif
-#endif
-#if FF_FS_RPATH != 0
-	fs->cdir = 0;			/* Initialize current directory */
-#endif
-#if FF_FS_LOCK				/* Clear file lock semaphores */
-	clear_share(fs);
-#endif
+
 	return FR_OK;
 }
 
@@ -3670,37 +3534,20 @@ FRESULT f_mount (
 
 	if (cfs) {					/* Unregister current filesystem object if regsitered */
 		FatFs[vol] = 0;
-#if FF_FS_LOCK
-		clear_share(cfs);
-#endif
-#if FF_FS_REENTRANT				/* Discard mutex of the current volume */
-		ff_mutex_delete(vol);
-#endif
 		cfs->fs_type = 0;		/* Invalidate the filesystem object to be unregistered */
 	}
 
 	if (fs) {					/* Register new filesystem object */
 		fs->pdrv = LD2PD(vol);	/* Volume hosting physical drive */
-#if FF_FS_REENTRANT				/* Create a volume mutex */
-		fs->ldrv = (BYTE)vol;	/* Owner volume ID */
-		if (!ff_mutex_create(vol)) return FR_INT_ERR;
-#if FF_FS_LOCK
-		if (SysLock == 0) {		/* Create a system mutex if needed */
-			if (!ff_mutex_create(FF_VOLUMES)) {
-				ff_mutex_delete(vol);
-				return FR_INT_ERR;
-			}
-			SysLock = 1;		/* System mutex is ready */
-		}
-#endif
-#endif
 		fs->fs_type = 0;		/* Invalidate the new filesystem object */
 		FatFs[vol] = fs;		/* Register new fs object */
 	}
 
 	if (opt == 0) return FR_OK;	/* Do not mount now, it will be mounted in subsequent file functions */
 
+	printf("< ========== [mount_volume]\n");
 	res = mount_volume(&path, &fs, 0);	/* Force mounted the volume */
+	printf(" ========================> \n");
 	LEAVE_FF(fs, res);
 }
 

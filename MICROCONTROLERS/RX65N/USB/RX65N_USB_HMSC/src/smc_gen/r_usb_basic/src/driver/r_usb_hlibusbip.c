@@ -67,6 +67,8 @@
 #include "r_usb_hhid_config.h"
 #endif /* defined(USB_CFG_HHID_USE) */
 
+extern uint8_t track_id;
+
 #if ((USB_CFG_MODE & USB_CFG_HOST) == USB_CFG_HOST)
 /******************************************************************************
  Macro definitions
@@ -1019,7 +1021,9 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
     uint16_t useport;
     uint16_t i;
     uint16_t ip;
+if (caseeeee == track_id){
     printf("---BRDY_process---\n");
+}
 
 #if ((USB_CFG_DTC == USB_CFG_ENABLE) || (USB_CFG_DMA == USB_CFG_ENABLE))
     uint16_t buffer;
@@ -1037,7 +1041,9 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
     {
         if (0 != (bitsts & USB_BITSET(i)))
         {
+if (caseeeee == track_id){
             printf("->brdy bitsts - %d\n", i);
+}
             /* Interrupt check */
             hw_usb_clear_status_bemp(ptr, i);
 
@@ -1106,13 +1112,17 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
                 {
                     if (USB_BUF2FIFO == usb_cstd_get_pipe_dir(ptr, i))
                     {
+if (caseeeee == track_id){
                     	printf("W > 0");
+}
                         /* Buffer to FIFO data write */
                         usb_hstd_buf_to_fifo(ptr, i, useport);
                     }
                     else
                     {
+if (caseeeee == track_id){
                     	printf("R > 0");
+}
                         /* FIFO to Buffer data read */
                         usb_hstd_fifo_to_buf(ptr, i, useport);
                     }
@@ -1134,7 +1144,9 @@ void usb_hstd_brdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
  ******************************************************************************/
 void usb_hstd_nrdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
 {
+if (caseeeee == track_id){
     printf("---NRDY_process---\n");
+}
     uint16_t buffer;
     uint16_t i;
 
@@ -1185,7 +1197,9 @@ void usb_hstd_nrdy_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
  ******************************************************************************/
 void usb_hstd_bemp_pipe_process (usb_utr_t *ptr, uint16_t bitsts)
 {
+if (caseeeee == track_id){
     printf("---BEMP_process---\n");
+}
     uint16_t buffer;
     uint16_t i;
     uint16_t useport;

@@ -76,7 +76,7 @@ extern uint8_t  *gp_usb_pstd_data[USB_MAX_PIPE_NO + 1u];        /* PIPEn Buffer 
 
 #if ((USB_CFG_MODE & USB_CFG_HOST) == USB_CFG_HOST)
 extern usb_utr_t *g_p_usb_hstd_pipe[][USB_MAX_PIPE_NO + 1u];    /* Message pipe */
-extern uint8_t  *gp_usb_hstd_data_ptr[][USB_MAX_PIPE_NO + 1u];  /* PIPEn Buffer pointer(8bit) */
+extern uint8_t  *gp_usb_hstd_data_ptr[USB_NUM_USBIP][USB_MAX_PIPE_NO + 1u];  /* PIPEn Buffer pointer(8bit) */
 extern uint32_t g_usb_hstd_data_cnt[][USB_MAX_PIPE_NO + 1u];    /* PIPEn Buffer counter */
 extern uint32_t g_usb_hstd_data_cnt_pipe0[];                    /* PIPE0 Control transfer data stage receive size */
 extern uint16_t g_usb_hstd_hs_enable[];                         /* Hi-speed enable */

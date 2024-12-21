@@ -1206,7 +1206,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
         switch (msginfo)
         {
             case USB_MSG_HCD_INT :
+if (caseeeee == track_id){
                 printf("[HDC] - INT\n");
+}
                 /* USB INT */
                 usb_hstd_interrupt(ptr);
 #if (BSP_CFG_RTOS_USED != 0)        /* Use RTOS */
@@ -1215,13 +1217,17 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_SUBMITUTR :
+if (caseeeee == track_id){
                 printf("[HDC] - submit utr\n");
+}
                 /* USB Submit utr */
                 usb_hstd_set_submitutr(ptr);
             break;
 
             case USB_MSG_HCD_ATTACH :
+if (caseeeee == track_id){
                 printf("[HDC] - att/dth\n");
+}
                 /* USB attach / detach */
                 usb_hstd_attach_process(ptr);
                 /* Callback */
@@ -1231,7 +1237,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_ATTACH_MGR :
+if (caseeeee == track_id){
                 printf("[HDC] - att/dth mgr\n");
+}
                 /* USB attach / detach */
                 usb_hstd_attach_process(ptr);
                 connect_inf = usb_cstd_port_speed(ptr);
@@ -1242,7 +1250,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_DETACH :
+if (caseeeee == track_id){
                 printf("[HDC] - dth\n");
+}
                 /* USB detach process */
                 usb_hstd_detach_process(ptr);
                 /* Callback */
@@ -1252,7 +1262,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_DETACH_MGR :
+if (caseeeee == track_id){
                 printf("[HDC] - dth mgr\n");
+}
                 hw_usb_clear_dvstctr(ptr, (USB_RWUPE | USB_USBRST | USB_RESUME | USB_UACT));
                 usb_cpu_delay_xms(1);
                 /* interrupt disable */
@@ -1264,7 +1276,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_USBRESET :
+if (caseeeee == track_id){
                 printf("[HDC] - reset\n");
+}
                 /* USB bus reset */
                 usb_hstd_bus_reset(ptr);
                 /* Check current port speed */
@@ -1276,7 +1290,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_REMOTE :
+if (caseeeee == track_id){
                 printf("[HDC] - remote\n");
+}
                 /* Suspend device */
                 g_usb_hstd_remort_port[ptr->ip] = USB_SUSPENDED;
                 usb_hstd_suspend(ptr);
@@ -1288,7 +1304,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_SUSPEND :
+if (caseeeee == track_id){
                 printf("[HDC] - suspend\n");
+}
                 usb_hstd_suspend(ptr); /* Suspend device */
                 (hp->complete)(ptr, rootport, USB_MSG_HCD_SUSPEND);
                 usb_hstd_hcd_rel_mpl(ptr, msginfo); /* Release Memory Block */
@@ -1339,7 +1357,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_CLR_STALL :
+if (caseeeee == track_id){
                 printf("[HDC] - clr stall\n");
+}
 #if (BSP_CFG_RTOS_USED != 0) /* Use RTOS */
                 usb_shstd_clr_stall_pipe[ptr->ip] = pipenum;
                 err = usb_hstd_clr_stall(ptr, pipenum, (usb_cb_t) &class_trans_result);
@@ -1362,7 +1382,9 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
 #endif /* (BSP_CFG_RTOS_USED != 0) */
             break;
             case USB_MSG_HCD_CLR_STALL_RESULT :
+if (caseeeee == track_id){
                 printf("[HDC] - clr stall res\n");
+}
 #if (BSP_CFG_RTOS_USED != 0) /* Use RTOS */
                 /** Do nothing when running in RTOS
                  * The result will be checked immediately after issuing a "USB_MSG_HCD_CLR_STALL" request. **/
@@ -1395,14 +1417,18 @@ void usb_hstd_hcd_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_HCD_CLRSEQBIT :
+if (caseeeee == track_id){
                 printf("[HDC] - clr sqclr\n");
+}
                 hw_usb_set_sqclr(ptr, pipenum); /* SQCLR */
                 (hp->complete)(ptr, (uint16_t) USB_NO_ARG, (uint16_t) USB_MSG_HCD_CLRSEQBIT); /* Callback */
                 usb_hstd_hcd_rel_mpl(ptr, msginfo);
             break;
 
             case USB_MSG_HCD_SETSEQBIT :
+if (caseeeee == track_id){
                 printf("[HDC] - set sqclr\n");
+}
                 hw_usb_set_sqset(ptr, pipenum); /* SQSET */
                 (hp->complete)(ptr, (uint16_t) USB_NO_ARG, (uint16_t) USB_MSG_HCD_SETSEQBIT); /* Callback */
                 usb_hstd_hcd_rel_mpl(ptr, msginfo); /* Release Memory Block */

@@ -52,6 +52,8 @@
 #include "r_usb_cstd_rtos.h"
 #endif /* (BSP_CFG_RTOS_USED != 0) */
 
+extern uint8_t track_id;
+
 #if defined(USB_CFG_HMSC_USE)
 /******************************************************************************
  Private global variables and functions
@@ -795,14 +797,18 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
     switch (usb_shmsc_data_seq[mess->ip])
     {
         case USB_SEQ_0 : /* CBW */
+if (caseeeee == track_id){
         printf("[USB_SEQ_0]\n");
+}
             side = mess->keyword;
             hmsc_retval = usb_hmsc_send_cbw(mess, side);
             usb_shmsc_data_seq[mess->ip]++;
         break;
 
         case USB_SEQ_1 : /* Check CBW and Send Data */
+if (caseeeee == track_id){
         printf("[USB_SEQ_1]\n");
+}
             hmsc_retval = usb_hmsc_send_cbw_check(mess, side, result);
             if (USB_HMSC_STALL == hmsc_retval)
             {
@@ -843,7 +849,9 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_2 : /* Check Data and Send CSW*/
+if (caseeeee == track_id){
         printf("[USB_SEQ_2] - ");
+}
             if ( USB_MSG_HMSC_DATA_OUT == usb_shmsc_process[mess->ip])
             {
                 hmsc_retval = usb_hmsc_send_data_check(mess, side, result);
@@ -860,7 +868,9 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
                 }
                 else /* Success */
                 {
+if (caseeeee == track_id){
                     printf("DATA_OUT\n");
+}
                     hmsc_retval = usb_hmsc_get_csw(mess, side);
                     usb_shmsc_data_seq[mess->ip] = USB_SEQ_4;
                 }
@@ -881,7 +891,9 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
                 }
                 else /* Success */
                 {
+if (caseeeee == track_id){
                     printf("DATA_IN\n");
+}
                     g_usb_hmsc_cmd_data_length[mess->ip] = mess->tranlen;
                     hmsc_retval = usb_hmsc_get_csw(mess, side);
                     usb_shmsc_data_seq[mess->ip] = USB_SEQ_4;
@@ -895,13 +907,17 @@ static uint16_t usb_hmsc_data_act (usb_utr_t *mess)
         break;
 
         case USB_SEQ_3 : /* Check ClearStall and Send CSW */
+if (caseeeee == track_id){
         printf("[USB_SEQ_3]\n");
+}
             hmsc_retval = usb_hmsc_get_csw(mess, side);
             usb_shmsc_data_seq[mess->ip]++;
         break;
 
         case USB_SEQ_4 : /* Check CSW */
+if (caseeeee == track_id){
         printf("[USB_SEQ_4]\n");
+}
             usb_shmsc_data_seq[mess->ip] = USB_SEQ_0;
             hmsc_retval = usb_hmsc_get_csw_check(mess, side, result);
             switch (hmsc_retval)
@@ -1327,8 +1343,9 @@ static uint16_t usb_hmsc_send_cbw (usb_utr_t *ptr, uint16_t side)
     {
         toggle = USB_DO_CLR_SQTGL;
     }
-
+if (caseeeee == track_id){
     printf("(3)-> USB_send_cbw\n");
+}
     usb_hstd_change_device_state(ptr, (usb_cb_t) &usb_hstd_dummy_function, toggle, pipe);
     err = usb_hstd_transfer_start(&usb_hmsc_trans_data[ptr->ip][side]);
     if (USB_OK != err)
@@ -1474,8 +1491,9 @@ static uint16_t usb_hmsc_get_data (usb_utr_t *ptr, uint16_t side, uint8_t *buff,
     {
         toggle = USB_DO_CLR_SQTGL;
     }
-
+if (caseeeee == track_id){
     printf("(1)-> USB_get_data\n");
+}
     usb_hstd_change_device_state(ptr, (usb_cb_t) &usb_hstd_dummy_function, toggle, pipe);
 
     err = usb_hstd_transfer_start(&usb_hmsc_receive_data[ptr->ip][side]);
@@ -1624,8 +1642,9 @@ static uint16_t usb_hmsc_send_data (usb_utr_t *ptr, uint16_t side, uint8_t *buff
     {
         toggle = USB_DO_CLR_SQTGL;
     }
-
+if (caseeeee == track_id){
     printf("(4)-> USB_send_data\n");
+}
     usb_hstd_change_device_state(ptr, (usb_cb_t) &usb_hstd_dummy_function, toggle, pipe);
     err = usb_hstd_transfer_start(&usb_hmsc_trans_data[ptr->ip][side]);
     if (USB_OK != err)
@@ -1761,8 +1780,9 @@ static uint16_t usb_hmsc_get_csw (usb_utr_t *ptr, uint16_t side)
     {
         toggle = USB_DO_CLR_SQTGL;
     }
-
+if (caseeeee == track_id){
     printf("(2)-> USB_get_csw\n");
+}
     usb_hstd_change_device_state(ptr, (usb_cb_t) &usb_hstd_dummy_function, toggle,pipe);
 
     err = usb_hstd_transfer_start(&usb_hmsc_receive_data[ptr->ip][side]);

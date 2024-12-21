@@ -134,13 +134,13 @@ void usb_main (void)
 
                 //tree(drv0, SCAN_TREE);
 
-                // printf(" ================== f_mount =================== \n");
-                // f_mount((FATFS *) g_pfat,(const TCHAR*)"0:", 1);
+                printf(" ================== f_mount =================== \n");
+                f_mount((FATFS *) g_pfat,(const TCHAR*)"0:", 1);
 
                 // // printf(" ================== msc_file_write =================== \n");
                 // // msc_file_write();
 
-                // printf(" ================== tree =================== \n");
+                printf(" ================== tree =================== \n");
                 // tree(drv0, SCAN_TREE);
 
                 // FIL file;
@@ -175,7 +175,7 @@ void usb_main (void)
                 // f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
                 // f_close(&file); /* Close the file object. */
 
-                // printf(" ================== Second time =================== \n");
+                 printf(" ================== Second time =================== \n");
                 // tree(drv0, SCAN_TREE);
 
                 // f_unlink("0:dir/hmscdemo.txt");

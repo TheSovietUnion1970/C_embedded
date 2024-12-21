@@ -552,13 +552,20 @@ void usb_class_task (void)
     usb_utr_t utr;
     uint16_t addr;
 
+if (caseeeee == track_id){
     printf("< ========== [HMS]\n");
+}
     usb_hmsc_task();                /* USB Host MSC driver task */
+
+if (caseeeee == track_id){
     printf(" ================> \n");
     printf("< ========== [STR]\n");
+}
     usb_hmsc_strg_drive_task();     /* HSTRG Task */
+    
+if (caseeeee == track_id){
     printf(" ================> \n");
-
+}
     if (USB_FALSE == g_drive_search_lock)
     {
         if (g_drive_search_que_cnt > 0)
