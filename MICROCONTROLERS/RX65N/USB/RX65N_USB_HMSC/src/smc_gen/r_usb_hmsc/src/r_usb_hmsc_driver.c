@@ -620,7 +620,9 @@ uint16_t usb_hmsc_no_data (usb_utr_t *ptr, uint16_t side)
  ******************************************************************************/
 uint16_t usb_hmsc_data_in (usb_utr_t *ptr, uint16_t side, uint8_t *buff, uint32_t size)
 {
+if (caseeeee == track_id){
     printf("usb_hmsc_data_in\n");
+}
 #if (BSP_CFG_RTOS_USED)
     uint16_t hmsc_retval;
 

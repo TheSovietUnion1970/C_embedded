@@ -2669,6 +2669,7 @@ static void get_fileinfo (
 		if (dp->blk_ofs != 0xFFFFFFFF) {	/* Get LFN if available */
 			si = di = 0;
 			hs = 0;
+
 			while (fs->lfnbuf[si] != 0) {
 				wc = fs->lfnbuf[si++];		/* Get an LFN character (UTF-16) */
 				if (hs == 0 && IsSurrogate(wc)) {	/* Is it a surrogate? */

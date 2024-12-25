@@ -47,7 +47,7 @@
 #if ((USB_CFG_DTC == USB_CFG_ENABLE) || (USB_CFG_DMA == USB_CFG_ENABLE))
 #include "r_usb_dmac.h"
 #endif /* ((USB_CFG_DTC == USB_CFG_ENABLE) || (USB_CFG_DMA == USB_CFG_ENABLE)) */
-
+extern uint8_t track_id;
 /******************************************************************************
 Private global variables and functions
 ******************************************************************************/
@@ -2847,8 +2847,9 @@ void hw_usb_clear_aclrm (usb_utr_t *ptr, uint16_t pipeno)
 void hw_usb_set_sqclr (usb_utr_t *ptr, uint16_t pipeno)
 {
     R_BSP_VOLATILE_EVENACCESS uint16_t *p_reg;
+if (caseeeee == track_id){
     printf(" ----> SQCLR <----\n");
-
+}
     if (USB_NULL == ptr)
     {
 #if ((USB_CFG_MODE & USB_CFG_PERI) == USB_CFG_PERI)
@@ -2909,7 +2910,9 @@ void hw_usb_set_sqset (usb_utr_t *ptr, uint16_t pipeno)
 {
     R_BSP_VOLATILE_EVENACCESS uint16_t *p_reg;
 
+if (caseeeee == track_id){
     printf(" ----> SQSET <----\n");
+}
 
     if (USB_NULL == ptr)
     {

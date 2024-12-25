@@ -132,6 +132,8 @@ typedef USB_VP_INT usb_vp_int_t;
 extern void usb_hmsc_smp_drive2_addr (uint16_t side, usb_utr_t *devadr);
 #endif
 
+extern uint8_t track_id;
+
 /*******************************************************************************
 Macro definitions
 *******************************************************************************/
@@ -525,12 +527,17 @@ void R_usb_hmsc_WaitLoop (void)
 {
     if (usb_cstd_check_schedule() == USB_FLGSET)
     {
+if (caseeeee == track_id){
     	printf("< ========== [HCD]\n");
+}
         usb_hstd_hcd_task((usb_vp_int_t) 0);
+if (caseeeee == track_id){
         printf(" ================> \n");
 
         printf("< ========== [MGR]\n");
+}
         usb_hstd_mgr_task((usb_vp_int_t) 0);
+if (caseeeee == track_id){
         printf(" ================> \n");
 
 //        printf("< ========== [hhub]\n");
@@ -538,8 +545,11 @@ void R_usb_hmsc_WaitLoop (void)
 //        printf(" ================> \n");
 
         printf("< ========== [hmsc]\n");
+}
         R_USB_HmscTask(); /* HMSC Task */
+if (caseeeee == track_id){
         printf(" ================> \n");
+}
     }
     usb_cstd_scheduler();
 }

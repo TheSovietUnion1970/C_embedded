@@ -1,0 +1,43 @@
+|-hmscdemo.txt
+|-dir/
+| |-
+|-kkkkkkkkkdemo.txt
+|-System Volume Information/
+| |-WPSettings.dat
+| |-IndexerVolumeGuid
+| |-
+|-Readme.txt
+|-
+
+
+=====================================
+
+res = f_opendir( &dir, path); /* Open the directory */
+	dp->obj.sclust = ld_clust(fs, dp->dir);	/* Get object allocation info */ --> Get the cluster ID when having new dir 
+	#define DIR_FstClusLO		26		/* Lower 16-bit of first cluster (WORD) */
+
+	res = dir_sdi(dp, 0);			/* Rewind directory */ --> To set new cluster 
+	dp->sect = clst2sect(fs, clst); --> After having new cluster -> want to know the sector based on the new cluster
+	
+res = f_readdir( &dir, &fno); /* Read a directory item */
+
+	dir_sdi(dp, 0);
+	
+
+	res = DIR_READ_FILE(dp);		/* Read an item */
+		b = dp->dir[DIR_Name];	/* Test for the entry type */
+			if b == 0 --> reach the end of directory
+			if b == 0x0F --> LFN -> need to read next until getting SFN (b == 'K' if file name starts with 'K')
+			
+			if b == first of character of a dir/file --> get the name + check attr <<<<>>>>>
+			
+			else (DDEM or '.') --> no meaning -> need to read next
+				*(#define DDEM				0xE5	/* Deleted directory entry mark set to DIR_Name[0] */)
+			
+		dp->obj.attr = attr = dp->dir[DIR_Attr] & AM_MASK;	/* Get attribute */
+			if attr = AM_LFN (0x0F) --> continure to read next
+			if attr = AM_DIR (0x10) --> directory -> recursion to scan the directory
+			if attr = AM_ARC (0x20) --> file
+			
+	dir_next(dp, 1);	/* Next entry with table stretch enabled */
+		ofs = dp->dptr + SZDIRE;	/* Next entry */ (SZDIRE = 32)

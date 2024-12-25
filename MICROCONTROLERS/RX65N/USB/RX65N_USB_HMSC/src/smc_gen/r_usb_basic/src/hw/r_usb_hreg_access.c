@@ -47,6 +47,8 @@
 
 #if ((USB_CFG_MODE & USB_CFG_HOST) == USB_CFG_HOST)
 
+extern uint8_t track_id;
+
 /******************************************************************************
  Function Name   : hw_usb_hset_rwupe
  Description     : Set the RWUPE-bit specified port's DVSTCTR0 reg-
@@ -538,10 +540,14 @@ void hw_usb_hwrite_dcpctr (usb_utr_t *ptr, uint16_t data)
 {
     ptr->ipp->DCPCTR.WORD = data;
     if (data == USB_SQSET){
+if (caseeeee == track_id){
         printf(" ----> SQSET <----\n");
+}
     }
     else {
+if (caseeeee == track_id){
         printf(" ----> SQCLR <----\n");
+}
     }
 }
 /******************************************************************************
@@ -557,7 +563,9 @@ void hw_usb_hwrite_dcpctr (usb_utr_t *ptr, uint16_t data)
  ******************************************************************************/
 void hw_usb_hset_sureq (usb_utr_t *ptr)
 {
+if (caseeeee == track_id){
     printf("Trans SetPack\n");
+}
     ptr->ipp->DCPCTR.WORD |= USB_SUREQ;
 }
 /******************************************************************************

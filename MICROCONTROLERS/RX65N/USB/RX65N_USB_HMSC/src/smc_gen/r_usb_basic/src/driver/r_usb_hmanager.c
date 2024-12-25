@@ -83,6 +83,8 @@
 static uint16_t usb_shstd_std_request[USB_NUM_USBIP][5];
 static usb_utr_t usb_shstd_std_req_msg[USB_NUM_USBIP];
 
+extern uint8_t track_id;
+
 /* Condition compilation by the difference of the operating system */
 #if (BSP_CFG_RTOS_USED == 0)        /* Non-OS */
 static uint16_t usb_shstd_reg_pointer[USB_NUM_USBIP];
@@ -366,9 +368,9 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                 break;
             }
             g_usb_hstd_enum_seq[ptr->ip]++;
-
+if (caseeeee == track_id){
             printf("g_usb_hstd_enum_seq = %d\n", g_usb_hstd_enum_seq[ptr->ip]);
-
+}
             /* Device Enumeration */
             if (USB_DEVICEENUMERATION == enume_mode)
             {
@@ -382,9 +384,9 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
 
                     break;
                     case 6 :
-
+if (caseeeee == track_id){
                         printf("Setting config\n");
-
+}
                         descriptor_table = (uint8_t*) g_usb_hstd_config_descriptor[ptr->ip];
 
                         /* Device state */
@@ -395,7 +397,9 @@ static uint16_t usb_hstd_enumeration (usb_utr_t *ptr)
                     break;
 
                     default :
+if (caseeeee == track_id){
                         printf("Default enum - [%d]\n", g_usb_hstd_enum_seq[ptr->ip]);
+}
                         (*g_usb_hstd_enumaration_process[g_usb_hstd_enum_seq[ptr->ip]])(ptr,
                                 g_usb_hstd_device_addr[ptr->ip], g_usb_hstd_enum_seq[ptr->ip]);
                     break;
@@ -1700,12 +1704,18 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
         {
             /* USB-bus control (change device state) */
             case USB_MSG_MGR_STATUSRESULT :
+
+if (caseeeee == track_id){
                 printf("[MGR] - change state - ");
+}
                 switch (g_usb_hstd_mgr_mode[ptr->ip])
                 {
                     /* End of reset signal */
                     case USB_DEFAULT :
+
+if (caseeeee == track_id){
                         printf("default\n");
+}
                         g_usb_hstd_device_speed[ptr->ip] = p_usb_shstd_mgr_msg[ptr->ip]->result;
 
                         /* Set device speed */
@@ -1736,13 +1746,17 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 
                         /* End of resume signal */
                     case USB_CONFIGURED :
+if (caseeeee == track_id){
                         printf("configured\n");
+}
                         /* This Resume Sorce is moved to usb_hResuCont() by nonOS */
                     break;
 
                         /* Start of suspended state */
                     case USB_SUSPENDED :
+if (caseeeee == track_id){
                         printf("suspend\n");
+}
                         /* WAIT_LOOP */
                         for (md = 0; md < g_usb_hstd_device_num[ptr->ip]; md++)
                         {
@@ -1791,8 +1805,9 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
             break;
 
             case USB_MSG_MGR_SUBMITRESULT :
+if (caseeeee == track_id){
                 printf("[MGR] - submit result");
-
+}
                 /* Agreement device address */
 #if (BSP_CFG_RTOS_USED != 0)        /* Use RTOS */
                 usb_hstd_get_devsel(ptr, pipenum);
@@ -1823,7 +1838,9 @@ void usb_hstd_mgr_task (rtos_task_arg_t stacd)
 #if (BSP_CFG_RTOS_USED == 5)
                     case USB_CONFIGURED:
 #endif                                /* #if (BSP_CFG_RTOS_USED == 5) */
+if (caseeeee == track_id){
                         printf("USB_DEFAULT - ");
+}
                         /* Peripheral Device Speed support check */
                         connect_speed = usb_hstd_support_speed_check(ptr);
                         if (USB_NOCONNECT != connect_speed)

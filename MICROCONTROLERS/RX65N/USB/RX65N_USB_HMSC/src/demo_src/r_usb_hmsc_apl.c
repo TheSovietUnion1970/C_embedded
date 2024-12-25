@@ -139,9 +139,9 @@ void usb_main (void)
 
                 // // printf(" ================== msc_file_write =================== \n");
                 // // msc_file_write();
-
+                track_id++;
                 printf(" ================== tree =================== \n");
-                // tree(drv0, SCAN_TREE);
+                tree(drv0, SCAN_TREE);
 
                 // FIL file;
                 // FRESULT res;
@@ -397,6 +397,8 @@ static FRESULT scan_directory (char *path, uint8_t hierarchyCnt, SCAN_MODE scan_
                     printf("%s/%s\n", path, fno.fname);
                 }
             }   /* if (fno.fattrib & AM_DIR) */
+
+            printf("");
         }   /* while (1) */
         f_closedir( &dir);
     }   /* if (res == FR_OK) */

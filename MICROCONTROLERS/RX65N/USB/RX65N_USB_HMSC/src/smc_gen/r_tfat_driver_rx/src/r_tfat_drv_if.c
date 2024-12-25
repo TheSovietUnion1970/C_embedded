@@ -50,7 +50,7 @@ Includes   <System Includes> , "Project Includes"
 #include "r_tfat_drv_if_dev.h"
 
 #include "r_sys_time_rx_if.h"
-
+extern uint8_t track_id;
 /*******************************************************************************
 Macro definitions
 *******************************************************************************/
@@ -637,6 +637,9 @@ DRESULT disk_read (
 #if (TFAT_USB_DRIVE_NUM > 0)
     if ( chk_use_usb(pdrv) )
     {
+if (caseeeee == track_id){
+        printf("sector = %d, count = %d\n", sector, count);
+}
         ret = usb_disk_read( drive_alloc_tbl[pdrv][1], buff, sector, count ); /* function for USB */
     }
 #endif

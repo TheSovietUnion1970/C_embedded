@@ -49,7 +49,7 @@
 #include "r_usb_cstd_rtos.h"
 #endif /* (BSP_CFG_RTOS_USED != 0) */
 
-
+extern uint8_t track_id;
 #if ((USB_CFG_MODE & USB_CFG_HOST) == USB_CFG_HOST)
 /******************************************************************************
  Function Name   : usb_hstd_set_hub_port
@@ -128,7 +128,9 @@ void usb_hstd_interrupt_handler (usb_utr_t *ptr)
     /***** Processing Setup transaction *****/
     if (USB_SACK == (ists1 & USB_SACK))
     {
+if (caseeeee == track_id){
         printf("X - sack\n");
+}
         /***** Setup ACK *****/
         /* SACK Clear */
         ptr->ipp->INTSTS1.WORD = (uint16_t) ((~USB_SACK) & INTSTS1_MASK);
@@ -139,7 +141,9 @@ void usb_hstd_interrupt_handler (usb_utr_t *ptr)
     }
     else if (USB_SIGN == (ists1 & USB_SIGN))
     {
+if (caseeeee == track_id){
         printf("X - sign\n");
+}
         /***** Setup Ignore *****/
         /* SIGN Clear */
         ptr->ipp->INTSTS1.WORD = (uint16_t) ((~USB_SIGN) & INTSTS1_MASK);
@@ -152,21 +156,27 @@ void usb_hstd_interrupt_handler (usb_utr_t *ptr)
     /***** Processing PIPE0-MAX_PIPE_NO data *****/
     else if (USB_BRDY == (ists0 & USB_BRDY)) /***** EP0-7 BRDY *****/
     {
+if (caseeeee == track_id){
         printf("X - brdy\n");
+}
         ptr->ipp->BRDYSTS.WORD = (uint16_t) ((~bsts) & BRDYSTS_MASK);
         ptr->keyword = USB_INT_BRDY;
         ptr->status = bsts;
     }
     else if (USB_BEMP == (ists0 & USB_BEMP)) /***** EP0-7 BEMP *****/
     {
+if (caseeeee == track_id){
         printf("X - bemp\n");
+}
         ptr->ipp->BEMPSTS.WORD = (uint16_t) ((~ests) & BEMPSTS_MASK);
         ptr->keyword = USB_INT_BEMP;
         ptr->status = ests;
     }
     else if (USB_NRDY == (ists0 & USB_NRDY)) /***** EP0-7 NRDY *****/
     {
+if (caseeeee == track_id){
         printf("X - nrdy\n");
+}
         ptr->ipp->NRDYSTS.WORD = (uint16_t) ((~nsts) & NRDYSTS_MASK);
         ptr->keyword = USB_INT_NRDY;
         ptr->status = nsts;
@@ -181,7 +191,9 @@ void usb_hstd_interrupt_handler (usb_utr_t *ptr)
     }
     else if (USB_ATTCH == (ists1 & USB_ATTCH)) /***** ATTCH INT *****/
     {
+if (caseeeee == track_id){
         printf("X - attch\n");
+}
         /* DTCH  interrupt disable */
         usb_hstd_bus_int_disable(ptr);
         ptr->keyword = USB_INT_ATTCH0;

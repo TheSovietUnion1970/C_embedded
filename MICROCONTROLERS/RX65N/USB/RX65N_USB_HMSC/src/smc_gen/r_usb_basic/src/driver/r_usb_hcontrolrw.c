@@ -45,7 +45,7 @@
 #include "r_usb_cstd_rtos.h"
 #endif /* (BSP_CFG_RTOS_USED != 0) */
 
-
+extern uint8_t track_id;
 #if ((USB_CFG_MODE & USB_CFG_HOST) == USB_CFG_HOST)
 /******************************************************************************
  Renesas USB FIFO Read/Write Host Driver API functions
@@ -251,8 +251,9 @@ void usb_hstd_status_start (usb_utr_t *ptr)
 
             /* Control read Status */
             g_usb_hstd_ctsq[ptr->ip] = USB_DATARD;
+if (caseeeee == track_id){
             printf(">>>>> ACK RD <<<<<\n");
-
+}
             /* Control write start */
             end_flag = usb_hstd_ctrl_write_start(ptr, (uint32_t) 0, (uint8_t*) &buf1);
             if (USB_FIFOERROR == end_flag)
@@ -274,9 +275,9 @@ void usb_hstd_status_start (usb_utr_t *ptr)
             /* continue */
             /* NoData Control */
         case USB_SETUPNDC :
-
+if (caseeeee == track_id){
             printf(">>>>> ACK WR <<<<<\n");
-
+}
             /* Control Read Status */
             usb_hstd_ctrl_read_start(ptr, (uint32_t) 0, (uint8_t*) &buf1);
 

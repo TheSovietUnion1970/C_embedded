@@ -702,14 +702,18 @@ static void usb_hstd_set_submitutr (usb_utr_t *ptr)
         /* Control transfer idle stage ? */
         if (USB_IDLEST == g_usb_hstd_ctsq[ptr->ip])
         {
+if (caseeeee == track_id){
             printf("START\n");
+}
             usb_hstd_setup_start(ptr);
         }
 
         /* Control Read Data */
         else if (USB_DATARDCNT == g_usb_hstd_ctsq[ptr->ip])
         {
+if (caseeeee == track_id){
             printf("RD_DATA\n");
+}
             pp = g_p_usb_hstd_pipe[ptr->ip][USB_PIPE0];
             usb_hstd_ctrl_read_start(ptr, pp->tranlen, (uint8_t*) pp->p_tranadr); /* Control read start */
         }
@@ -739,7 +743,9 @@ static void usb_hstd_set_submitutr (usb_utr_t *ptr)
     }
     else
     {
+if (caseeeee == track_id){
         printf("RE_TRANS\n");
+}
         usb_hstd_set_retransfer(ptr, pipenum); /* Data Transfer */
     }
 }
@@ -822,30 +828,42 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
 
         /***** Processing PIPE0-MAX_PIPE_NO data *****/
         case USB_INT_BRDY :
+if (caseeeee == track_id){
             printf("--> USB_INT_BRDY\n");
+}
             usb_hstd_brdy_pipe(ptr);
         break;
         case USB_INT_BEMP :
+if (caseeeee == track_id){
         	printf("--> USB_INT_BEMP\n");
+}
             usb_hstd_bemp_pipe(ptr);
         break;
         case USB_INT_NRDY :
+if (caseeeee == track_id){
             printf("--> USB_INT_NRDY\n");
+}
             usb_hstd_nrdy_pipe(ptr);
         break;
 
             /***** Processing Setup transaction *****/
         case USB_INT_SACK :
+if (caseeeee == track_id){
             printf("--> USB_INT_SACK");
+}
             switch (g_usb_hstd_ctsq[ptr->ip])
             {
                 case USB_SETUPRD :
+if (caseeeee == track_id){
                     printf(" USB_SETUPRD\n");
+}
 
                     /* Next stage to Control read data */
                     /* continue */
                 case USB_SETUPRDCNT :
+if (caseeeee == track_id){
                     printf(" USB_SETUPRDCNT\n");
+}
 
                     /* Next stage to Control read data */
                     pp = g_p_usb_hstd_pipe[ptr->ip][USB_PIPE0];
@@ -875,7 +893,9 @@ static void usb_hstd_interrupt (usb_utr_t *ptr)
                     }
                 break;
                 case USB_SETUPNDC :
+if (caseeeee == track_id){
                     printf(" USB_SETUPNDC\n");
+}
 
                     /* Next stage to Control write no data */
                     usb_hstd_status_start(ptr);
@@ -1978,7 +1998,9 @@ void usb_hstd_return_enu_mgr (usb_utr_t *ptr, uint16_t cls_result)
  ******************************************************************************/
 usb_er_t usb_hstd_change_device_state (usb_utr_t *ptr, usb_cb_t complete, uint16_t msginfo, uint16_t member)
 {
+if (caseeeee == track_id){
     printf("Change device state\n");
+}
 #if (BSP_CFG_RTOS_USED == 0)    /* Non-OS */
     usb_mh_t p_blf;
     usb_er_t err;
