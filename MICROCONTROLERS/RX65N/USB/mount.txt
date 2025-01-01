@@ -1,0 +1,72 @@
+static UINT find_volume (	/* Returns BS status found in the hosting drive */
+	FATFS* fs,		/* Filesystem object */
+	UINT part		/* Partition to fined = 0:find as SFD and partitions, >0:forced partition number */
+)
+{
+	UINT fmt, i;
+	DWORD mbr_pt[4];
+
+
+	fmt = check_fs(fs, 0);				/* Load sector 0 and check if it is an FAT VBR as SFD format */
+	if (fmt != 2 && (fmt >= 3 || part == 0)) return fmt;	/* Returns if it is an FAT VBR as auto scan, not a BS or disk error */
+
+	/* Sector 0 is not an FAT VBR or forced partition number wants a partition */
+	if (FF_MULTI_PARTITION && part > 4) return 3;	/* MBR has 4 partitions max */
+	for (i = 0; i < 4; i++) {		/* Load partition offset in the MBR */
+		mbr_pt[i] = ld_dword(fs->win + MBR_Table + i * SZ_PTE + PTE_StLba);
+	}
+	i = part ? part - 1 : 0;		/* Table index to find first */
+	do {							/* Find an FAT volume */
+		fmt = mbr_pt[i] ? check_fs(fs, mbr_pt[i]) : 3;	/* Check if the partition is FAT */
+	} while (part == 0 && fmt >= 2 && ++i < 4);
+	return fmt;
+}
+
+   >>>>>>>>>>>>>>>>  <<<<<<<<<<<<<<<<
+
+-> Load sector 0 to identify:
+	mbr_pt[i] = ld_dword(fs->win + MBR_Table + i * SZ_PTE + PTE_StLba); ==> Load oartition tabke to find out the sector of read data (at the sector 48960)
+	
+	do {							/* Find an FAT volume */
+		fmt = mbr_pt[i] ? check_fs(fs, mbr_pt[i]) : 3;	/* Check if the partition is FAT */
+	} while (part == 0 && fmt >= 2 && ++i < 4);
+	
+	==> Check FAT volumne at these paritions
+	
+=============================================================================================================================
+static FRESULT mount_volume (	/* FR_OK(0): successful, !=0: an error occurred */
+	const TCHAR** path,			/* Pointer to pointer to the path name (drive number) */
+	FATFS** rfs,				/* Pointer to pointer to the found filesystem object */
+	BYTE mode					/* Desiered access mode to check write protection */
+)
+
+vol = get_ldnumber(path);
+
+stat = disk_initialize(fs->pdrv);	/* Initialize the volume hosting physical drive */
+
+		==> return if already mounted
+
+fmt = find_volume(fs, LD2PT(vol));
+
+Get the basic info (In f_mount.docx)
+
+====================================
+res = dir_find(dp);				/* Find an object with the segment name */
+
+	==> It will find the string which is the same as dp->fn (if (!(dp->fn[NSFLAG] & NS_LOSS) && !memcmp(dp->dir, dp->fn, 11)) break;	/* SFN matched? */)
+		(dp->dptr, clust, sect where dp->fn is located)
+	
+		if dir is not created ==> it will find the free dir entry to insert
+		else ==> it will locate the dir entry
+
+===================================================================
+FRESULT f_opendir (
+	DIR* dp,			/* Pointer to directory object to create */
+	const TCHAR* path	/* Pointer to the directory path */
+)
+
+res = mount_volume(&path, &fs, 0);
+
+res = follow_path(dp, path);			/* Follow the path to the directory */ => res = dir_find(dp);				/* Find an object with the segment name */
+
+res = dir_sdi(dp, 0);			/* Rewind directory */

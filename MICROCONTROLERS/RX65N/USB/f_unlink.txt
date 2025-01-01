@@ -1,0 +1,14 @@
+res = create_name(dp, &path);	/* Get a segment name of the path */
+
+  ==> dp->fn = the name of directory
+	  path = Error ....    if no directory
+	  
+  ==> dp->fn = the name of directory
+	  path = the name of file   if already having directory
+
+==> seperate the string path. Ex: path = "dir/hmscdemo.txt" ==> dp->fn = "dir", path = "hmscdemo.txt"
+
+=============================================
+f_unlink("0:abc/hmscdemo.txt");
+
+==> fs->win[DIR_Name] = DDEM (Deleted directory entry mark) (0xE5)

@@ -1,0 +1,42 @@
+FRESULT f_mkdir (
+	const TCHAR* path		/* Pointer to the directory path */
+)
+
+res = follow_path(&dj, path);			/* Follow the file path */ ==> set dj->clust, sect, dptr where path is created or located
+
+dcl = create_chain(&sobj, 0);		/* Allocate a cluster for the new directory */ ==> load sector fatbase to find free cluster (FAT32 = 4 bytes on buffer, EOC -> mark the end of cluster chain) then mark it with EOC
+		==> scl = fs->last_clst;				/* Suggested cluster to start to find */ -> based on last_clst -> find the free cluster from then
+
+res = dir_clear(fs, dcl);		/* Clean up the new table */ ==> load cluster dcl into device (upto 32 sectors)
+
+						memset(fs->win + DIR_Name, ' ', 11);	/* Create "." entry */
+						fs->win[DIR_Name] = '.';
+						fs->win[DIR_Attr] = AM_DIR;
+						st_dword(fs->win + DIR_ModTime, tm);
+						st_clust(fs, fs->win, dcl);
+						memcpy(fs->win + SZDIRE, fs->win, SZDIRE);	/* Create ".." entry */
+						fs->win[SZDIRE + 1] = '.'; pcl = dj.obj.sclust;
+						st_clust(fs, fs->win + SZDIRE, pcl);
+						fs->wflag = 1;
+
+res = dir_register(&dj);	/* Register the object to the parent directoy */ ==> Add the directory characters into win 
+	==> res = dir_alloc(dp, n_ent);	==> allocate at the database or additional clusters and set the string name (48960)
+
+					st_dword(dj.dir + DIR_ModTime, tm);	/* Created time */
+					st_clust(fs, dj.dir, dcl);			/* Table start cluster */ ==> Set cluster number 11 (dcl = 11)
+					dj.dir[DIR_Attr] = AM_DIR;			/* Attribute */ ==> set attribute (0x10 = directory)
+					
+res = sync_fs(fs); ==> update FSInfo sector (8065)
+			memset(fs->win, 0, sizeof fs->win);
+			st_word(fs->win + BS_55AA, 0xAA55);					/* Boot signature */
+			st_dword(fs->win + FSI_LeadSig, 0x41615252);		/* Leading signature */
+			st_dword(fs->win + FSI_StrucSig, 0x61417272);		/* Structure signature */
+			st_dword(fs->win + FSI_Free_Count, fs->free_clst);	/* Number of free clusters */
+			st_dword(fs->win + FSI_Nxt_Free, fs->last_clst);	/* Last allocated culuster */
+			fs->winsect = fs->volbase + 1;						/* Write it into the FSInfo sector (Next to VBR) */
+			disk_write(fs->pdrv, fs->win, fs->winsect, 1);
+			fs->fsi_flag = 0;
+			
+=============================================================
+*Ex: dir1/file1 ==> chain of clusters: cluster6: 0x00000000 (dir1) -> cluster7: 0x0FFFFFFF (file1) on FAT32
+If a file is created -> cluster8 is used

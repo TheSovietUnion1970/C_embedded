@@ -16,7 +16,7 @@ res = f_opendir( &dir, path); /* Open the directory */
 	dp->obj.sclust = ld_clust(fs, dp->dir);	/* Get object allocation info */ --> Get the cluster ID when having new dir 
 	#define DIR_FstClusLO		26		/* Lower 16-bit of first cluster (WORD) */
 
-	res = dir_sdi(dp, 0);			/* Rewind directory */ --> To set new cluster 
+	res = dir_sdi(dp, 0);			/* Rewind directory */ --> To set new cluster (based on ->dirbase)
 	dp->sect = clst2sect(fs, clst); --> After having new cluster -> want to know the sector based on the new cluster
 	
 res = f_readdir( &dir, &fno); /* Read a directory item */
@@ -41,3 +41,4 @@ res = f_readdir( &dir, &fno); /* Read a directory item */
 			
 	dir_next(dp, 1);	/* Next entry with table stretch enabled */
 		ofs = dp->dptr + SZDIRE;	/* Next entry */ (SZDIRE = 32)
+		

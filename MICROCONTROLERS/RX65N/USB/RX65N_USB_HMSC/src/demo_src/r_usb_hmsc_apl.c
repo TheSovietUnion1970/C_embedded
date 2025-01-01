@@ -143,31 +143,35 @@ void usb_main (void)
                 printf(" ================== tree =================== \n");
                 tree(drv0, SCAN_TREE);
 
-                // FIL file;
-                // FRESULT res;
-                // DIR dir;
+                FIL file;
+                FRESULT res;
+                DIR dir;
 
-                // // Step 1: Check if the folder exists
-                // res = f_opendir(&dir, "0:dir");  // Check if "dir" exists
-                // if (res == FR_NO_PATH) {
-                //     // Step 2: Create the folder
-                //     res = f_mkdir("0:dir");
-                //     if (res != FR_OK) {
-                //         printf("Error creating directory: %d\n", res);
-                //         return;
-                //     }
-                // }
+                track_id++;
+                printf(" ================== f_opendir =================== \n");
+                 // Step 1: Check if the folder exists
+                 res = f_opendir(&dir, "0:abc");  // Check if "dir" exists
+                 if (res == FR_NO_PATH) {
+                     // Step 2: Create the folder
+                     res = f_mkdir("0:abc");
+                     if (res != FR_OK) {
+                         printf("Error creating directory: %d\n", res);
+                         return;
+                     }
+                 }
 
-                // // Step 3: Open or create the file
-                // res = f_open(&file, "0:dir/hmscdemo.txt", FA_CREATE_ALWAYS | FA_WRITE);
-                // if (res == FR_OK) {
-                //     // File created successfully
-                //     printf("File created successfully.\n");
-                //     f_close(&file);  // Close the file
-                // } else {
-                //     // Handle error
-                //     printf("Error creating file: %d\n", res);
-                // }
+                track_id++;
+                printf(" ================== f_open =================== \n");
+                // Step 3: Open or create the file
+                res = f_open(&file, "0:abc/hmscdemo.txt", FA_CREATE_ALWAYS | FA_WRITE);
+                if (res == FR_OK) {
+                    // File created successfully
+                    printf("File created successfully.\n");
+                    f_close(&file);  // Close the file
+                } else {
+                    // Handle error
+                    printf("Error creating file: %d\n", res);
+                }
 
                 // UINT file_size;
 
@@ -175,10 +179,13 @@ void usb_main (void)
                 // f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
                 // f_close(&file); /* Close the file object. */
 
-                 printf(" ================== Second time =================== \n");
-                // tree(drv0, SCAN_TREE);
+                 printf(" ================== tree Second time =================== \n");
+                 tree(drv0, SCAN_TREE);
 
-                // f_unlink("0:dir/hmscdemo.txt");
+                printf(" ================== f_unlink =================== \n");
+                f_unlink("0:abc/hmscdemo.txt");
+                f_unlink("0:abc");
+//                f_unlink("0:dir");
                 // printf(" ================== Third time =================== \n");
                 // tree(drv0, SCAN_TREE);
 

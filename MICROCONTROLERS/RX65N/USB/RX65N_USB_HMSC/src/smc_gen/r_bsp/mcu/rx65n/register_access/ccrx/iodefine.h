@@ -110,7 +110,7 @@
 #ifndef __RX65NIODEFINE_HEADER__
 #define __RX65NIODEFINE_HEADER__
 
-#define caseeeee 2
+#define caseeeee 0xFF
 
 #define	IEN_BSC_BUSERR		IEN0
 #define	IEN_RAM_RAMERR		IEN2

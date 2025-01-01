@@ -1,0 +1,3 @@
+res = follow_path(dp, path);			/* Follow the path to the directory */
+	==> if existed ==> the location is found (clust, sect, dptr)
+		else ==> Find until reaching [DIR_name] = DDEM

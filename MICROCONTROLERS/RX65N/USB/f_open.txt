@@ -1,0 +1,53 @@
+res = dir_alloc(dp, n_ent);		/* Allocate entries */
+
+==> Find the free entry (located in cluster 6, sector 49088) by the fs->dir[DIR_name] == DDEM
+
+		do {
+			res = move_window(fs, dp->sect);
+			if (res != FR_OK) break;
+
+
+			if (dp->dir[DIR_Name] == DDEM || dp->dir[DIR_Name] == 0) {	/* Is the entry free? */
+				if (++n == n_ent) break;	/* Is a block of contiguous free entries found? */ ==> break because find out free entry
+			} else {
+				n = 0;				/* Not a free entry, restart to search */
+			}
+			
+			
+			res = dir_next(dp, 1);	/* Next entry with table stretch enabled */
+		} while (res == FR_OK);
+	}
+	
+=================================================================
+static FRESULT dir_register (	/* FR_OK:succeeded, FR_DENIED:no free entry or too many SFN collision, FR_DISK_ERR:disk error */
+	DIR* dp						/* Target directory with object name to be created */
+)
+
+res = dir_alloc(dp, n_ent);		/* Allocate entries */
+
+			memset(dp->dir, 0, SZDIRE);	/* Clean the entry */ ==> clean that entry before setting
+			memcpy(dp->dir + DIR_Name, dp->fn, 11);	/* Put SFN */ ==> Load fine or dir name into free dir entry which is found before
+
+=================================================================
+res = create_name(dp, &path);	/* Get a segment name of the path */ 
+  ==> dp->fn = the name of directory
+	  path = Error ....    if no directory
+	  
+  ==> dp->fn = the name of directory
+	  path = the name of directory   if already having directory
+	  
+=============================================================
+F_OPEN()
+res = follow_path(&dj, path);	/* Follow the file path */
+
+res = dir_register(&dj);
+
+					/* Set directory entry initial state */
+					tm = GET_FATTIME();					/* Set created time */
+					st_dword(dj.dir + DIR_CrtTime, tm);
+					st_dword(dj.dir + DIR_ModTime, tm);
+					cl = ld_clust(fs, dj.dir);			/* Get current cluster chain */
+					dj.dir[DIR_Attr] = AM_ARC;			/* Reset attribute */
+					st_clust(fs, dj.dir, 0);			/* Reset file allocation info */
+					st_dword(dj.dir + DIR_FileSize, 0);
+					fs->wflag = 1;

@@ -4945,23 +4945,12 @@ FRESULT f_mkdir (
 				}
 			}
 			if (res == FR_OK) {
-#if FF_FS_EXFAT
-				if (fs->fs_type == FS_EXFAT) {	/* Initialize directory entry block */
-					st_dword(fs->dirbuf + XDIR_ModTime, tm);	/* Created time */
-					st_dword(fs->dirbuf + XDIR_FstClus, dcl);	/* Table start cluster */
-					st_dword(fs->dirbuf + XDIR_FileSize, (DWORD)fs->csize * SS(fs));	/* Directory size needs to be valid */
-					st_dword(fs->dirbuf + XDIR_ValidFileSize, (DWORD)fs->csize * SS(fs));
-					fs->dirbuf[XDIR_GenFlags] = 3;				/* Initialize the object flag */
-					fs->dirbuf[XDIR_Attr] = AM_DIR;				/* Attribute */
-					res = store_xdir(&dj);
-				} else
-#endif
-				{
-					st_dword(dj.dir + DIR_ModTime, tm);	/* Created time */
-					st_clust(fs, dj.dir, dcl);			/* Table start cluster */
-					dj.dir[DIR_Attr] = AM_DIR;			/* Attribute */
-					fs->wflag = 1;
-				}
+
+				st_dword(dj.dir + DIR_ModTime, tm);	/* Created time */
+				st_clust(fs, dj.dir, dcl);			/* Table start cluster */
+				dj.dir[DIR_Attr] = AM_DIR;			/* Attribute */
+				fs->wflag = 1;
+				
 				if (res == FR_OK) {
 					res = sync_fs(fs);
 				}
