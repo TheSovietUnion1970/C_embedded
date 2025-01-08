@@ -173,11 +173,13 @@ void usb_main (void)
                     printf("Error creating file: %d\n", res);
                 }
 
-                // UINT file_size;
+                 UINT file_size;
 
-                // f_open(&file, "0:dir/hmscdemo.txt", (FA_CREATE_ALWAYS | FA_WRITE));
-                // f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
-                // f_close(&file); /* Close the file object. */
+
+                 f_open(&file, "0:abc/hmscdemo.txt", (FA_CREATE_ALWAYS | FA_WRITE));
+                 printf(" ***** WRITE *****\n");
+                 f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
+                 f_close(&file); /* Close the file object. */
 
                  printf(" ================== tree Second time =================== \n");
                  tree(drv0, SCAN_TREE);
@@ -189,7 +191,7 @@ void usb_main (void)
                 // printf(" ================== Third time =================== \n");
                 // tree(drv0, SCAN_TREE);
 
-                // g_state = STATE_FILE_READ; /* Set Application status  */
+                g_state = STATE_FILE_READ; /* Set Application status  */
             break;
 
             case USB_STS_DETACH :
@@ -203,6 +205,8 @@ void usb_main (void)
         if (STATE_FILE_READ == g_state)
         {
             msc_file_read();
+
+            printf("Done ALL\n");
         }
     } /* while(1) */
 } /* End of function usb_main */
@@ -217,6 +221,8 @@ static  void msc_file_write (void)
 {
     FIL file;
     UINT file_size;
+
+//    memset((void *)&g_file_data, 0, sizeof(g_file_data));
 
     f_open(&file, (const char *) g_msc_file, (FA_CREATE_ALWAYS | FA_WRITE));
     f_write(&file, g_file_data, sizeof(g_file_data), &file_size);
@@ -236,7 +242,10 @@ static  void msc_file_read (void)
     FIL file;
     UINT file_size;
 
+    memset((void *)&g_file_data, 0, sizeof(g_file_data));
+
     f_open(&file, (const char *) g_msc_file, (FA_OPEN_ALWAYS | FA_READ));
+    printf(" ***** READ *****\n");
     f_read(&file, g_file_data, sizeof(g_file_data), &file_size); /* Read data from file. */
     f_close(&file); /* Close the file object. */
 
