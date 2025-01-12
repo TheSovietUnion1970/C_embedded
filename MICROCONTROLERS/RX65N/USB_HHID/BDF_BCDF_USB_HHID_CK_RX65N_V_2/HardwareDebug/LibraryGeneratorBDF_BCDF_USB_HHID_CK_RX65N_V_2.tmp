@@ -1,0 +1,7 @@
+-MAKEUD_LBG="D:\CAREER_VINH\Git\SovietUnion1970\C_embedded\MICROCONTROLERS\RX65N\USB_HHID\BDF_BCDF_USB_HHID_CK_RX65N_V_2\HardwareDebug\\BDF_BCDF_USB_HHID_CK_RX65N_V_2_lbg.ud" 
+-isa=rxv2 
+-fpu 
+-lang=c99 
+-head=runtime,stdio,stdlib,string,new 
+-output="BDF_BCDF_USB_HHID_CK_RX65N_V_2.lib" 
+-nologo

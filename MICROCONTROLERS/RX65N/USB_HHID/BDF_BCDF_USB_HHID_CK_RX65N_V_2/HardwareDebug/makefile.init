@@ -1,0 +1,8 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+PATH := $(PATH)
+export INC_RX=D:\E2_PACK\RX\3_6_0\include
+export RXC_LIB=D:\E2_PACK\RX\3_6_0\bin
+export BIN_RX=D:\E2_PACK\RX\3_6_0\bin
