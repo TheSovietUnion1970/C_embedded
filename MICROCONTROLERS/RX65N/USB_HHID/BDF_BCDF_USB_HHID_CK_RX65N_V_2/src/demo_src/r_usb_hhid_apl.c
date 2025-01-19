@@ -415,6 +415,7 @@ void usb_main (void)
         switch (event)
         {
             case USB_STS_CONFIGURED :
+                track_id++;
             	printf("USB_STS_CONFIGURED\n");
 
                 set_size(&ctrl);
@@ -500,6 +501,11 @@ static void set_protocol (usb_ctrl_t *p_ctrl, uint8_t protocol)
     p_ctrl->setup.value     = protocol;     /* wValue: Protocol Type */
     p_ctrl->setup.index     = 0x0000;       /* wIndex:Interface */
     p_ctrl->setup.length    = 0x0000;       /* wLength:Zero */
+
+if (caseeeee == track_id){
+    printf("set_protocol\n");
+}
+
     R_USB_Write(p_ctrl, (uint8_t *) USB_NULL, USB_NULL); /* Request Control transfer */
 } /* End of function set_protocol */
 

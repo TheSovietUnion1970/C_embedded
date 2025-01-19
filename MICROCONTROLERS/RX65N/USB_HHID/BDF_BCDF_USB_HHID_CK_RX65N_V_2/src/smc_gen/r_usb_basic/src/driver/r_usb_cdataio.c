@@ -57,7 +57,7 @@
 #include "r_usb_extern.h"
 #include "r_usb_bitdefine.h"
 #include "r_usb_reg_access.h"
-
+extern uint8_t track_id;
 #if (BSP_CFG_RTOS_USED != 0)        /* Use RTOS */
 #include "r_rtos_abstract.h"
 #endif /* (BSP_CFG_RTOS_USED != 0) */
@@ -305,6 +305,11 @@ void usb_cstd_debug_hook (uint16_t error_code)
  ******************************************************************************/
 usb_er_t usb_ctrl_read (usb_ctrl_t *p_ctrl, uint8_t *buf, uint32_t size)
 {
+
+if (caseeeee == track_id){
+    printf(" >>>>> usb_ctrl_read\n");
+}
+
 #if ((USB_CFG_MODE & USB_CFG_HOST) == USB_CFG_HOST)
     usb_er_t err;
     usb_utr_t   *p_tran_data;
@@ -491,6 +496,9 @@ usb_er_t usb_ctrl_stop (usb_ctrl_t *p_ctrl)
  ******************************************************************************/
 usb_er_t usb_data_read (usb_ctrl_t *p_ctrl, uint8_t *buf, uint32_t size)
 {
+if (caseeeee == track_id){
+    printf(" >>>>> usb_ctrl_read\n");
+}
     uint8_t pipe;
     usb_er_t err;
     usb_utr_t   *p_tran_data;
