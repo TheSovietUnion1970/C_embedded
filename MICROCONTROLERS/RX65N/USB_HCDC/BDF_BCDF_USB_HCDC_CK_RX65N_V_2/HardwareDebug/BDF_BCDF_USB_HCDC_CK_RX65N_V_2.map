@@ -1,0 +1,1905 @@
+Renesas Optimizing Linker (W3.06.00 )             23-Jan-2025 11:25:47
+
+*** Options ***
+
+-subcommand=LinkerBDF_BCDF_USB_HCDC_CK_RX65N_V_2.tmp
+-MAKEUD="D:\CAREER_VINH\Git\SovietUnion1970\C_embedded\MICROCONTROLERS\RX65N\USB_HCDC\BDF_BCDF_USB_HCDC_CK_RX65N_V_2\HardwareDebug/BDF_BCDF_USB_HCDC_CK_RX65N_V_2_l.ud" 
+-noprelink 
+-input=".\src/demo_src\main.obj"
+-input=".\src/demo_src\r_usb_hcdc_apl.obj"
+-input=".\src/smc_gen/general\r_cg_hardware_setup.obj"
+-input=".\src/smc_gen/general\r_smc_cgc.obj"
+-input=".\src/smc_gen/general\r_smc_cgc_user.obj"
+-input=".\src/smc_gen/general\r_smc_interrupt.obj"
+-input=".\src/smc_gen/r_bsp/board/generic_rx65n\hwsetup.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\dbsct.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\lowlvl.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\lowsrc.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\mcu_locks.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_bsp_common.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_bsp_cpu.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_bsp_interrupts.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_bsp_locking.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_bsp_mcu_startup.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_bsp_software_interrupt.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\r_rx_intrinsic_functions.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\resetprg.obj"
+-input=".\src/smc_gen/r_bsp/mcu/all\sbrk.obj"
+-input=".\src/smc_gen/r_bsp/mcu/rx65n\mcu_clocks.obj"
+-input=".\src/smc_gen/r_bsp/mcu/rx65n\mcu_init.obj"
+-input=".\src/smc_gen/r_bsp/mcu/rx65n\mcu_interrupts.obj"
+-input=".\src/smc_gen/r_bsp/mcu/rx65n\mcu_mapped_interrupts.obj"
+-input=".\src/smc_gen/r_bsp/mcu/rx65n\vecttbl.obj"
+-input=".\src/smc_gen/r_pincfg\Pin.obj"
+-input=".\src/smc_gen/r_pincfg\r_usb_basic_pinset.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_rtos_abstract.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_cdataio.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_clibusbip.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_cstd_rtos.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hbc.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hcontrolrw.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hdriver.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hhubsys.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hintfifo.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hinthandler_usbip0.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hinthandler_usbip1.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hlibusbip.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hmanager.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hscheduler.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hsignal.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_hstdfunction.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pbc.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pcontrolrw.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pdriver.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pintfifo.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pinthandler_usbip0.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_plibusbip.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_psignal.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pstdfunction.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_pstdrequest.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_usbif_api.obj"
+-input=".\src/smc_gen/r_usb_basic/src/driver\r_usb_usbx_port.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_creg_abs.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_creg_access.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_dma.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_hostelectrical.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_hreg_abs.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_hreg_access.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_preg_abs.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_preg_access.obj"
+-input=".\src/smc_gen/r_usb_basic/src/hw\r_usb_rx_mcu.obj"
+-input=".\src/smc_gen/r_usb_hcdc/src\r_usb_hcdc_driver.obj"
+-library=".\BDF_BCDF_USB_HCDC_CK_RX65N_V_2.lib"
+-start=SU,SI,B_1,R_1,B_2,R_2,B,R/04,PResetPRG,C_1,C_2,C,C$*,D*,W*,L,P/0FFE00000,EXCEPTVECT/0FFFFFF80,RESETVECT/0FFFFFFFC,BEXRAM_1,REXRAM_1,BEXRAM_2,REXRAM_2,BEXRAM,REXRAM/00800000
+-output="BDF_BCDF_USB_HCDC_CK_RX65N_V_2.abs" 
+-form=absolute 
+-nomessage 
+-vect=_undefined_interrupt_source_isr 
+-list 
+-show=symbol 
+-nooptimize 
+-rom=D=R,D_1=R_1,D_2=R_2,DEXRAM=REXRAM,DEXRAM_1=REXRAM_1,DEXRAM_2=REXRAM_2 
+-cpu=RAM=00000000-0003ffff,FIX=00080000-00083fff,FIX=00086000-00087fff,FIX=00088000-0009ffff,FIX=000a0000-000a3fff,RAM=000a4000-000a5fff,FIX=000a6000-000bffff,FIX=000c0000-000dffff,FIX=000e0000-000fffff,ROM=00100000-00107fff,FIX=007fc000-007fcfff,FIX=007fe000-007fffff,RAM=00800000-0085ffff,RAM=fe7f5d00-fe7f5d7f,RAM=fe7f7d70-fe7f7d9f,ROM=ffe00000-ffffffff 
+-nologo
+
+*** Error information ***
+
+*** Mapping List ***
+
+SECTION                            START      END         SIZE   ALIGN
+SU
+                                  00000004  00001003      1000   4
+SI
+                                  00001004  00001403       400   4
+B_1
+                                  00001404  00001781       37e   1
+R_1
+                                  00001782  00001817        96   1
+B_2
+                                  00001818  00001b3d       326   2
+R_2
+                                  00001b3e  00001b3f         2   2
+B
+                                  00001b40  000031b3      1674   4
+R
+                                  000031b4  000034ab       2f8   4
+BEXRAM_1
+                                  00800000  00800000         0   1
+REXRAM_1
+                                  00800000  00800000         0   1
+BEXRAM_2
+                                  00800000  00800000         0   1
+REXRAM_2
+                                  00800000  00800000         0   1
+BEXRAM
+                                  00800000  00800000         0   1
+REXRAM
+                                  00800000  00800000         0   1
+$ADDR_C_FE7F5D00
+                                  fe7f5d00  fe7f5d0b         c   1
+$ADDR_C_FE7F5D10
+                                  fe7f5d10  fe7f5d13         4   1
+$ADDR_C_FE7F5D20
+                                  fe7f5d20  fe7f5d23         4   1
+$ADDR_C_FE7F5D40
+                                  fe7f5d40  fe7f5d43         4   1
+$ADDR_C_FE7F5D48
+                                  fe7f5d48  fe7f5d4b         4   1
+$ADDR_C_FE7F5D50
+                                  fe7f5d50  fe7f5d5f        10   1
+$ADDR_C_FE7F5D64
+                                  fe7f5d64  fe7f5d67         4   1
+$ADDR_C_FE7F5D70
+                                  fe7f5d70  fe7f5d73         4   1
+PResetPRG
+                                  ffe00000  ffe00055        56   1
+C_1
+                                  ffe00056  ffe0013f        ea   1
+C_2
+                                  ffe00140  ffe0034f       210   2
+C
+                                  ffe00350  ffe003f7        a8   4
+C$DSEC
+                                  ffe003f8  ffe0043f        48   4
+C$BSEC
+                                  ffe00440  ffe0046f        30   4
+C$VECT
+                                  ffe00470  ffe0086f       400   4
+D_1
+                                  ffe00870  ffe00905        96   1
+D
+                                  ffe00908  ffe00bff       2f8   4
+DEXRAM
+                                  ffe00c00  ffe00c00         0   1
+DEXRAM_1
+                                  ffe00c00  ffe00c00         0   1
+DEXRAM_2
+                                  ffe00c00  ffe00c00         0   1
+D_2
+                                  ffe00c00  ffe00c01         2   2
+W
+                                  ffe00c04  ffe00c04         0   4
+W_1
+                                  ffe00c04  ffe00c13        10   1
+W_2
+                                  ffe00c14  ffe00c41        2e   2
+L
+                                  ffe00c44  ffe01294       651   4
+P
+                                  ffe01295  ffe0e2ab      d017   1
+EXCEPTVECT
+                                  ffffff80  fffffffb        7c   4
+RESETVECT
+                                  fffffffc  ffffffff         4   4
+
+*** Symbol List ***
+
+SECTION=
+FILE=                               START        END    SIZE
+  SYMBOL                            ADDR        SIZE    INFO      COUNTS  OPT
+
+SECTION=SU
+FILE=.\src\smc_gen\r_bsp\mcu\all\resetprg.obj
+                                  00000004  00001003      1000
+
+SECTION=SI
+FILE=.\src\smc_gen\r_bsp\mcu\all\resetprg.obj
+                                  00001004  00001403       400
+
+SECTION=B_1
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  00001404  00001488        85
+  _g_data
+                                  00001404        44   data ,l         * 
+  _rx_buffer
+                                  00001448        40   data ,g         * 
+  _track_id
+                                  00001488         1   data ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowsrc.obj
+                                  00001489  000014b0        28
+  _flmod
+                                  00001489        14   data ,g         * 
+  _sml_buf
+                                  0000149d        14   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  000014b1  000016b0       200
+  _g_usb_hstd_class_data
+                                  000014b1       200   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hscheduler.obj
+                                  000016b1  00001781        d1
+  _usb_scheduler_table_id
+                                  000016b1        a0   data ,l         * 
+  _usb_scheduler_pri_r
+                                  00001751         8   data ,l         * 
+  _usb_scheduler_pri_w
+                                  00001759         8   data ,l         * 
+  _usb_scheduler_pri
+                                  00001761         b   data ,l         * 
+  _usb_scheduler_schedule_flag
+                                  0000176c         1   data ,l         * 
+  _usb_scheduler_blk_flg
+                                  0000176d        14   data ,l         * 
+  _usb_scheduler_id_use
+                                  00001781         1   data ,l         * 
+
+SECTION=R_1
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  00001782  000017c1        40
+  _tx_buffer
+                                  00001782        40   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  000017c2  000017c2         1
+  _is_init$1
+                                  000017c2         1   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  000017c3  000017c3         1
+  _is_init$1
+                                  000017c3         1   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_usbif_api.obj
+                                  000017c4  000017c4         1
+  _is_init
+                                  000017c4         1   data ,l         * 
+FILE=.\src\smc_gen\r_usb_hcdc\src\r_usb_hcdc_driver.obj
+                                  000017c5  000017c6         2
+  _init$1
+                                  000017c5         1   data ,l         * 
+  _is_init$2
+                                  000017c6         1   data ,l         * 
+FILE=xfiles
+                                  000017c7  00001816        50
+  _ebuf
+                                  000017c7        50   data ,l         * 
+FILE=xstate
+                                  00001817  00001817         1
+  __Mbcurmax
+                                  00001817         1   data ,g         * 
+
+SECTION=B_2
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  00001818  00001821         a
+  _g_serial_state
+                                  00001818         a   data ,l         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_cpu.obj
+                                  00001822  00001829         8
+  _s_protect_counters
+                                  00001822         8   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_cdataio.obj
+                                  0000182a  0000188d        64
+  _g_usb_pipe_table
+                                  0000182a        50   data ,g         * 
+  _g_usb_cstd_bemp_skip
+                                  0000187a        14   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  0000188e  00001977        ea
+  _usb_shstd_clr_stall_pipe
+                                  0000188e         2   data ,l         * 
+  _usb_shstd_clr_stall_request
+                                  00001890         a   data ,l         * 
+  _g_usb_hstd_device_info
+                                  0000189a        60   data ,g         * 
+  _g_usb_hstd_remort_port
+                                  000018fa         2   data ,g         * 
+  _g_usb_hstd_ctsq
+                                  000018fc         2   data ,g         * 
+  _g_usb_hstd_mgr_mode
+                                  000018fe         2   data ,g         * 
+  _g_usb_hstd_dcp_register
+                                  00001900         c   data ,g         * 
+  _g_usb_hstd_device_addr
+                                  0000190c         2   data ,g         * 
+  _g_usb_hstd_device_speed
+                                  0000190e         2   data ,g         * 
+  _g_usb_hstd_device_num
+                                  00001910         2   data ,g         * 
+  _g_usb_hstd_ignore_cnt
+                                  00001912        14   data ,g         * 
+  _g_usb_hstd_hs_enable
+                                  00001926         2   data ,g         * 
+  _g_usb_ctrl_request
+                                  00001928        3c   data ,g         * 
+  _g_usb_hstd_pipe_request
+                                  00001964        14   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hinthandler_usbip0.obj
+                                  00001978  00001979         2
+  _g_usb_cstd_int_msg_cnt
+                                  00001978         2   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  0000197a  00001ac1       148
+  _usb_shstd_std_request
+                                  0000197a         a   data ,l         * 
+  _usb_shstd_reg_pointer
+                                  00001984         2   data ,l         * 
+  _usb_shstd_mgr_msginfo
+                                  00001986         2   data ,l         * 
+  _usb_shstd_suspend_seq
+                                  00001988         2   data ,l         * 
+  _usb_shstd_resume_seq
+                                  0000198a         2   data ,l         * 
+  _g_usb_hstd_enum_seq
+                                  0000198c         2   data ,g         * 
+  _g_usb_hstd_device_descriptor
+                                  0000198e        14   data ,g         * 
+  _g_usb_hstd_config_descriptor
+                                  000019a2       100   data ,g         * 
+  _g_usb_hstd_suspend_pipe
+                                  00001aa2        14   data ,g         * 
+  _g_usb_hstd_check_enu_result
+                                  00001ab6         2   data ,g         * 
+  _g_usb_hstd_class_request
+                                  00001ab8         a   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hscheduler.obj
+                                  00001ac2  00001b2f        6e
+  _usb_scheduler_wait_counter
+                                  00001ac2        6e   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_usbif_api.obj
+                                  00001b30  00001b35         6
+  _g_usb_change_device_state
+                                  00001b30         2   data ,g         * 
+  _g_usb_usbmode
+                                  00001b32         2   data ,g         * 
+  _g_usb_open_class
+                                  00001b34         2   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_creg_abs.obj
+                                  00001b36  00001b37         2
+  _g_usb_hstd_use_pipe
+                                  00001b36         2   data ,g         * 
+FILE=.\src\smc_gen\r_usb_hcdc\src\r_usb_hcdc_driver.obj
+                                  00001b38  00001b3d         6
+  _g_usb_hcdc_smpl_class_seq
+                                  00001b38         2   data ,g         * 
+  _g_usb_hcdc_speed
+                                  00001b3a         2   data ,g         * 
+  _g_usb_hcdc_devaddr
+                                  00001b3c         2   data ,g         * 
+
+SECTION=R_2
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hstdfunction.obj
+                                  00001b3e  00001b3f         2
+  _g_usb_cstd_driver_open
+                                  00001b3e         2   data ,l         * 
+
+SECTION=B
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  00001b40  00001b47         8
+  _g_com_parm
+                                  00001b40         8   data ,l         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowsrc.obj
+                                  00001b48  00001b97        50
+  __Files
+                                  00001b48        50   data ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\mcu_locks.obj
+                                  00001b98  00001d67       1d0
+  _g_bsp_Locks
+                                  00001b98       1d0   data ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_interrupts.obj
+                                  00001d68  00001eeb       184
+  _g_bsp_vectors
+                                  00001d68       184   data ,l         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\sbrk.obj
+                                  00001eec  000022ef       404
+  __s1ptr
+                                  00001eec         4   data ,g         * 
+  _s_heap_area
+                                  00001ef0       400   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  000022f0  00002477       188
+  _usb_shstd_clr_stall_ctrl
+                                  000022f0        30   data ,l         * 
+  _usb_shstd_clr_stall_call
+                                  00002320         4   data ,l         * 
+  _g_usb_hstd_device_drv
+                                  00002324        d8   data ,g         * 
+  _g_usb_hstd_data_cnt
+                                  000023fc        28   data ,g         * 
+  _g_usb_hstd_data_cnt_pipe0
+                                  00002424         4   data ,g         * 
+  _gp_usb_hstd_data_ptr
+                                  00002428        28   data ,g         * 
+  _g_p_usb_hstd_pipe
+                                  00002450        28   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hinthandler_usbip0.obj
+                                  00002478  00002747       2d0
+  _g_usb_cstd_int_msg
+                                  00002478       2d0   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  00002748  000027af        68
+  _usb_shstd_std_req_msg
+                                  00002748        30   data ,l         * 
+  _p_usb_shstd_mgr_msg
+                                  00002778         4   data ,l         * 
+  _usb_shstd_mgr_callback
+                                  0000277c         4   data ,l         * 
+  _g_usb_hstd_class_ctrl
+                                  00002780        30   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hscheduler.obj
+                                  000027b0  00002ecf       720
+  _p_usb_scheduler_table_add
+                                  000027b0       280   data ,l         * 
+  _usb_scheduler_block
+                                  00002a30       3c0   data ,l         * 
+  _p_usb_scheduler_add_use
+                                  00002df0         4   data ,l         * 
+  _p_usb_scheduler_wait_add
+                                  00002df4        dc   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_usbif_api.obj
+                                  00002ed0  000031a3       2d4
+  _g_usb_cstd_event
+                                  00002ed0        f4   data ,g         * 
+  _g_usb_hdata
+                                  00002fc4       1e0   data ,g         * 
+FILE=.\src\smc_gen\r_usb_hcdc\src\r_usb_hcdc_driver.obj
+                                  000031a4  000031af         c
+  _g_p_usb_hcdc_device_table
+                                  000031a4         4   data ,g         * 
+  _g_p_usb_hcdc_config_table
+                                  000031a8         4   data ,g         * 
+  _g_p_usb_hcdc_interface_table
+                                  000031ac         4   data ,g         * 
+FILE=_errno
+                                  000031b0  000031b3         4
+  __errno
+                                  000031b0         4   data ,g         * 
+
+SECTION=R
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowsrc.obj
+                                  000031b4  000031c7        14
+  _env_list
+                                  000031b4        10   data ,g         * 
+  _environ
+                                  000031c4         4   data ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\sbrk.obj
+                                  000031c8  000031cb         4
+  _sp_brk
+                                  000031c8         4   data ,l         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_cdataio.obj
+                                  000031cc  00003243        78
+  _g_usb_callback
+                                  000031cc        78   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_clibusbip.obj
+                                  00003244  00003247         4
+  _v
+                                  00003244         4   data ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  00003248  00003267        20
+  _g_usb_hstd_enumaration_process
+                                  00003248        20   data ,g         * 
+FILE=xfiles
+                                  00003268  0000333f        d8
+  __Stdin
+                                  00003268        48   data ,g         * 
+  __Stdout
+                                  000032b0        48   data ,g         * 
+  __Stderr
+                                  000032f8        48   data ,g         * 
+FILE=xprintf
+                                  00003340  00003343         4
+  _stderr
+                                  00003340         4   data ,g         * 
+FILE=xctype
+                                  00003344  0000334b         8
+  __Ctype
+                                  00003344         4   data ,g         * 
+  __Tls_setup__Ctype
+                                  00003348         4   data ,g         * 
+FILE=malloc
+                                  0000334c  00003353         8
+  __Aldata
+                                  0000334c         8   data ,g         * 
+FILE=xstate
+                                  00003354  0000339b        48
+  __Tls_setup__Mbcurmax
+                                  00003354         4   data ,g         * 
+  __Mbstate
+                                  00003358        40   data ,g         * 
+  __Tls_setup__Mbstate
+                                  00003398         4   data ,g         * 
+FILE=localeco
+                                  0000339c  000033ef        54
+  __Locale
+                                  0000339c        50   data ,g         * 
+  __Tls_setup__Locale
+                                  000033ec         4   data ,g         * 
+FILE=xwcstate
+                                  000033f0  00003433        44
+  __Wcstate
+                                  000033f0        40   data ,g         * 
+  __Tls_setup__Wcstate
+                                  00003430         4   data ,g         * 
+FILE=xfvalues
+                                  00003434  000034ab        78
+  __FDenorm
+                                  00003434        10   data ,g         * 
+  __FEps
+                                  00003444        10   data ,g         * 
+  __FHugeval
+                                  00003454        10   data ,g         * 
+  __FInf
+                                  00003464        10   data ,g         * 
+  __FNan
+                                  00003474        10   data ,g         * 
+  __FSnan
+                                  00003484        10   data ,g         * 
+  __FRteps
+                                  00003494        10   data ,g         * 
+  __FXbig
+                                  000034a4         4   data ,g         * 
+  __FZero
+                                  000034a8         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D00
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d00  fe7f5d0b         c
+  ___MDEreg
+                                  fe7f5d00         4   data ,g         * 
+  ___OFS0reg
+                                  fe7f5d04         4   data ,g         * 
+  ___OFS1reg
+                                  fe7f5d08         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D10
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d10  fe7f5d13         4
+  ___TMINFreg
+                                  fe7f5d10         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D20
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d20  fe7f5d23         4
+  ___BANKSELreg
+                                  fe7f5d20         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D40
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d40  fe7f5d43         4
+  ___SPCCreg
+                                  fe7f5d40         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D48
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d48  fe7f5d4b         4
+  ___TMEFreg
+                                  fe7f5d48         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D50
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d50  fe7f5d5f        10
+  ___OSIS1reg
+                                  fe7f5d50         4   data ,g         * 
+  ___OSIS2reg
+                                  fe7f5d54         4   data ,g         * 
+  ___OSIS3reg
+                                  fe7f5d58         4   data ,g         * 
+  ___OSIS4reg
+                                  fe7f5d5c         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D64
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d64  fe7f5d67         4
+  ___FAWreg
+                                  fe7f5d64         4   data ,g         * 
+
+SECTION=$ADDR_C_FE7F5D70
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fe7f5d70  fe7f5d73         4
+  ___ROMCODEreg
+                                  fe7f5d70         4   data ,g         * 
+
+SECTION=PResetPRG
+FILE=.\src\smc_gen\r_bsp\mcu\all\resetprg.obj
+                                  ffe00000  ffe00055        56
+  _PowerON_Reset_PC
+                                  ffe00000        56   entry,g         * 
+
+SECTION=C_1
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_cdataio.obj
+                                  ffe00056  ffe0006d        18
+  _g_usb_pipe_host
+                                  ffe00056        18   data ,l         * 
+FILE=xprintf
+                                  ffe0006e  ffe00077         a
+  _fchar$1
+                                  ffe0006e         a   data ,l         * 
+FILE=xputtxt
+                                  ffe00078  ffe0011c        a5
+  _spaces
+                                  ffe00078        21   data ,l         * 
+  _zeroes
+                                  ffe00099        21   data ,l         * 
+  _asterisk
+                                  ffe000ba        21   data ,l         * 
+  _plus
+                                  ffe000db        21   data ,l         * 
+  _minus
+                                  ffe000fc        21   data ,l         * 
+FILE=xlitob
+                                  ffe0011d  ffe0013e        22
+  _ldigs
+                                  ffe0011d        11   data ,l         * 
+  _udigs
+                                  ffe0012e        11   data ,l         * 
+FILE=localeco
+                                  ffe0013f  ffe0013f         1
+  _null
+                                  ffe0013f         1   data ,l         * 
+
+SECTION=C_2
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_cpu.obj
+                                  ffe00140  ffe00145         6
+  _s_prcr_masks
+                                  ffe00140         6   data ,l         * 
+FILE=.\src\smc_gen\r_usb_hcdc\src\r_usb_hcdc_driver.obj
+                                  ffe00146  ffe0014d         8
+  _g_usb_hcdc_device_tpl
+                                  ffe00146         8   data ,g         * 
+FILE=xctype
+                                  ffe0014e  ffe0034f       202
+  _ctyp_tab
+                                  ffe0014e       202   data ,l         * 
+
+SECTION=C
+FILE=.\src\smc_gen\r_bsp\mcu\all\dbsct.obj
+                                  ffe00350  ffe00367        18
+  __CTBL
+                                  ffe00350        18   data ,g         * 
+FILE=_nfiles
+                                  ffe00368  ffe0036b         4
+  __nfiles
+                                  ffe00368         4   data ,g         * 
+FILE=xfoprep
+                                  ffe0036c  ffe003b3        48
+  _init$1
+                                  ffe0036c        48   data ,l         * 
+FILE=xprintf
+                                  ffe003b4  ffe003cb        18
+  _fbit$2
+                                  ffe003b4        18   data ,l         * 
+FILE=xfopen
+                                  ffe003cc  ffe003db        10
+  _rwacc$1
+                                  ffe003cc        10   data ,l         * 
+FILE=xldtob
+                                  ffe003dc  ffe003f3        18
+  _pows
+                                  ffe003dc        18   data ,l         * 
+FILE=_sbrk_si
+                                  ffe003f4  ffe003f7         4
+  __sbrk_size
+                                  ffe003f4         4   data ,g         * 
+
+SECTION=C$DSEC
+FILE=.\src\smc_gen\r_bsp\mcu\all\dbsct.obj
+                                  ffe003f8  ffe0043f        48
+  __DTBL
+                                  ffe003f8        48   data ,g         * 
+
+SECTION=C$BSEC
+FILE=.\src\smc_gen\r_bsp\mcu\all\dbsct.obj
+                                  ffe00440  ffe0046f        30
+  __BTBL
+                                  ffe00440        30   data ,g         * 
+
+SECTION=C$VECT
+FILE=.\src\smc_gen\r_bsp\mcu\all\resetprg.obj
+                                  ffe00470  ffe0086f       400
+
+SECTION=D_1
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  ffe00870  ffe008af        40
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  ffe008b0  ffe008b0         1
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  ffe008b1  ffe008b1         1
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_usbif_api.obj
+                                  ffe008b2  ffe008b2         1
+FILE=.\src\smc_gen\r_usb_hcdc\src\r_usb_hcdc_driver.obj
+                                  ffe008b3  ffe008b4         2
+FILE=xfiles
+                                  ffe008b5  ffe00904        50
+FILE=xstate
+                                  ffe00905  ffe00905         1
+
+SECTION=D
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowsrc.obj
+                                  ffe00908  ffe0091b        14
+FILE=.\src\smc_gen\r_bsp\mcu\all\sbrk.obj
+                                  ffe0091c  ffe0091f         4
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_cdataio.obj
+                                  ffe00920  ffe00997        78
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_clibusbip.obj
+                                  ffe00998  ffe0099b         4
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  ffe0099c  ffe009bb        20
+FILE=xfiles
+                                  ffe009bc  ffe00a93        d8
+FILE=xprintf
+                                  ffe00a94  ffe00a97         4
+FILE=xctype
+                                  ffe00a98  ffe00a9f         8
+FILE=malloc
+                                  ffe00aa0  ffe00aa7         8
+FILE=xstate
+                                  ffe00aa8  ffe00aef        48
+FILE=localeco
+                                  ffe00af0  ffe00b43        54
+FILE=xwcstate
+                                  ffe00b44  ffe00b87        44
+FILE=xfvalues
+                                  ffe00b88  ffe00bff        78
+
+SECTION=D_2
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hstdfunction.obj
+                                  ffe00c00  ffe00c01         2
+
+SECTION=W_1
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_cpu.obj
+                                  ffe00c04  ffe00c13        10
+
+SECTION=W_2
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  ffe00c14  ffe00c41        2e
+
+SECTION=L
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  ffe00c44  ffe00d64       121
+FILE=.\src\smc_gen\r_bsp\mcu\all\dbsct.obj
+                                  ffe00d68  ffe00d6b         4
+  _deadSpace
+                                  ffe00d68         4   data ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowsrc.obj
+                                  ffe00d6c  ffe00dad        42
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\mcu_clocks.obj
+                                  ffe00db0  ffe00dbb         c
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_cdataio.obj
+                                  ffe00dbc  ffe00dd1        16
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_clibusbip.obj
+                                  ffe00dd4  ffe00e8d        ba
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hcontrolrw.obj
+                                  ffe00e90  ffe00ec1        32
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  ffe00ec4  ffe0103a       177
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hintfifo.obj
+                                  ffe0103c  ffe0106e        33
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hlibusbip.obj
+                                  ffe01070  ffe010ab        3c
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  ffe010ac  ffe011f7       14c
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_creg_access.obj
+                                  ffe011f8  ffe01207        10
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_hreg_abs.obj
+                                  ffe01208  ffe01244        3d
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_hreg_access.obj
+                                  ffe01248  ffe01256         f
+FILE=xprintf
+                                  ffe01258  ffe0125e         7
+FILE=xldtob
+                                  ffe01260  ffe01281        22
+FILE=xgenld
+                                  ffe01284  ffe01285         2
+FILE=localeco
+                                  ffe01288  ffe01294         d
+
+SECTION=P
+FILE=.\src\demo_src\main.obj
+                                  ffe01295  ffe01299         5
+  _main
+                                  ffe01295         5   func ,g         * 
+FILE=.\src\demo_src\r_usb_hcdc_apl.obj
+                                  ffe0129a  ffe0151d       284
+  _usb_main
+                                  ffe0129a       19a   func ,g         * 
+  _set_control_line_state
+                                  ffe01434        29   func ,g         * 
+  _set_line_coding
+                                  ffe0145d        54   func ,l         * 
+  _get_line_coding
+                                  ffe014b1        2d   func ,g         * 
+  _cdc_serial_state
+                                  ffe014de        13   func ,l         * 
+  _usb_pin_setting
+                                  ffe014f1         5   func ,l         * 
+  _apl_init
+                                  ffe014f6        28   func ,l         * 
+FILE=.\src\smc_gen\general\r_cg_hardware_setup.obj
+                                  ffe0151e  ffe01565        48
+  _r_undefined_exception
+                                  ffe0151e         1   func ,g         * 
+  _R_Systeminit
+                                  ffe0151f        47   func ,g         * 
+FILE=.\src\smc_gen\general\r_smc_cgc.obj
+                                  ffe01566  ffe0156a         5
+  _R_CGC_Create
+                                  ffe01566         5   func ,g         * 
+FILE=.\src\smc_gen\general\r_smc_cgc_user.obj
+                                  ffe0156b  ffe0156b         1
+  _R_CGC_Create_UserInit
+                                  ffe0156b         1   func ,g         * 
+FILE=.\src\smc_gen\general\r_smc_interrupt.obj
+                                  ffe0156c  ffe0156c         1
+  _R_Interrupt_Create
+                                  ffe0156c         1   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\board\generic_rx65n\hwsetup.obj
+                                  ffe0156d  ffe0163b        cf
+  _hardware_setup
+                                  ffe0156d        14   func ,g         * 
+  _output_ports_configure
+                                  ffe01581         2   func ,l         * 
+  _interrupts_configure
+                                  ffe01583         2   func ,l         * 
+  _peripheral_modules_enable
+                                  ffe01585         5   func ,l         * 
+  _bsp_adc_initial_configure
+                                  ffe0158a        70   func ,l         * 
+  _bsp_bsc_initial_configure
+                                  ffe015fa        42   func ,l         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowlvl.obj
+                                  ffe0163c  ffe01675        3a
+  _charput
+                                  ffe0163c        1d   func ,g         * 
+  _charget
+                                  ffe01659        1d   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\lowsrc.obj
+                                  ffe01676  ffe0195b       2e6
+  _init_iolib
+                                  ffe01676        e8   func ,g         * 
+  _close_all
+                                  ffe0175e        3e   func ,g         * 
+  _open
+                                  ffe0179c        a7   func ,g         * 
+  _close
+                                  ffe01843         b   func ,g         * 
+  _write
+                                  ffe0184e        8c   func ,g         * 
+  _read
+                                  ffe018da        71   func ,g         * 
+  _lseek
+                                  ffe0194b        11   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_common.obj
+                                  ffe0195c  ffe01a89       12e
+  _R_BSP_GetVersion
+                                  ffe0195c         e   func ,g         * 
+  _R_BSP_GetIClkFreqHz
+                                  ffe0196a         a   func ,g         * 
+  _R_BSP_SoftwareDelay
+                                  ffe01974       116   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_cpu.obj
+                                  ffe01a8a  ffe01c9e       215
+  _R_BSP_InterruptsDisable
+                                  ffe01a8a        17   func ,g         * 
+  _R_BSP_InterruptsEnable
+                                  ffe01aa1        17   func ,g         * 
+  _R_BSP_CpuInterruptLevelRead
+                                  ffe01ab8        1d   func ,g         * 
+  _R_BSP_CpuInterruptLevelWrite
+                                  ffe01ad5        84   func ,g         * 
+  _R_BSP_RegisterProtectEnable
+                                  ffe01b59        84   func ,g         * 
+  _R_BSP_RegisterProtectDisable
+                                  ffe01bdd        6c   func ,g         * 
+  _R_BSP_SoftwareReset
+                                  ffe01c49        11   func ,g         * 
+  _bsp_register_protect_open
+                                  ffe01c5a        22   func ,g         * 
+  _bsp_ram_initialize
+                                  ffe01c7c        23   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_interrupts.obj
+                                  ffe01c9f  ffe02575       8d7
+  _R_BSP_InterruptRequestEnable
+                                  ffe01c9f        21   func ,g         * 
+  _R_BSP_InterruptRequestDisable
+                                  ffe01cc0        21   func ,g         * 
+  _bsp_interrupt_open
+                                  ffe01ce1        2b   func ,g         * 
+  _R_BSP_InterruptWrite
+                                  ffe01d0c        77   func ,g         * 
+  _R_BSP_InterruptRead
+                                  ffe01d83        51   func ,g         * 
+  _R_BSP_InterruptControl
+                                  ffe01dd4        ea   func ,g         * 
+  _bsp_fit_interrupts_control
+                                  ffe01ebe        77   func ,l         * 
+  _bsp_gr_int_enable_disable
+                                  ffe01f35       3b7   func ,l         * 
+  _excep_supervisor_inst_isr
+                                  ffe022ec        17   func ,g         * 
+  _excep_access_isr
+                                  ffe02303        17   func ,g         * 
+  _excep_undefined_inst_isr
+                                  ffe0231a        17   func ,g         * 
+  _excep_floating_point_isr
+                                  ffe02331        29   func ,g         * 
+  _non_maskable_isr
+                                  ffe0235a       1e7   func ,g         * 
+  _undefined_interrupt_source_isr
+                                  ffe02541        17   func ,g         * 
+  _bus_error_isr
+                                  ffe02558        1e   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_bsp_locking.obj
+                                  ffe02576  ffe025da        65
+  _R_BSP_SoftwareLock
+                                  ffe02576        27   func ,g         * 
+  _R_BSP_SoftwareUnlock
+                                  ffe0259d         e   func ,g         * 
+  _R_BSP_HardwareLock
+                                  ffe025ab        18   func ,g         * 
+  _R_BSP_HardwareUnlock
+                                  ffe025c3        18   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\r_rx_intrinsic_functions.obj
+                                  ffe025db  ffe02679        9f
+  _R_BSP_ChangeToUserMode
+                                  ffe025db        20   func ,g         * 
+  _R_BSP_SetBPSW
+                                  ffe025fb         4   func ,g         * 
+  _R_BSP_GetBPSW
+                                  ffe025ff        13   func ,g         * 
+  _R_BSP_SetBPC
+                                  ffe02612         4   func ,g         * 
+  _R_BSP_GetBPC
+                                  ffe02616        13   func ,g         * 
+  _R_BSP_SetEXTB
+                                  ffe02629         4   func ,g         * 
+  _R_BSP_GetEXTB
+                                  ffe0262d        13   func ,g         * 
+  _R_BSP_MoveToAccHiLong
+                                  ffe02640         4   func ,g         * 
+  _R_BSP_MoveToAccLoLong
+                                  ffe02644         4   func ,g         * 
+  _R_BSP_MoveFromAccHiLong
+                                  ffe02648        13   func ,g         * 
+  _R_BSP_MoveFromAccMiLong
+                                  ffe0265b        13   func ,g         * 
+  _R_BSP_BitSet
+                                  ffe0266e         4   func ,g         * 
+  _R_BSP_BitClear
+                                  ffe02672         4   func ,g         * 
+  _R_BSP_BitReverse
+                                  ffe02676         4   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\all\sbrk.obj
+                                  ffe0267a  ffe026b5        3c
+  _sbrk
+                                  ffe0267a        3c   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\mcu_clocks.obj
+                                  ffe026b6  ffe029ba       305
+  _get_iclk_freq_hz
+                                  ffe026b6        d4   func ,g         * 
+  _mcu_clock_setup
+                                  ffe0278a         4   func ,g         * 
+  _operating_frequency_set
+                                  ffe0278e        ba   func ,l         * 
+  _clock_source_select
+                                  ffe02848       173   func ,l         * 
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\mcu_init.obj
+                                  ffe029bb  ffe02a5e        a4
+  _bsp_non_existent_port_init
+                                  ffe029bb        a4   func ,g         * 
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\mcu_interrupts.obj
+                                  ffe02a5f  ffe0346b       a0d
+  _bsp_interrupt_enable_disable
+                                  ffe02a5f       143   func ,g         * 
+  _group_bl0_handler_isr
+                                  ffe02ba2       374   func ,l         * 
+  _group_bl1_handler_isr
+                                  ffe02f16       2e0   func ,l         * 
+  _group_bl2_handler_isr
+                                  ffe031f6        2e   func ,l         * 
+  _group_al0_handler_isr
+                                  ffe03224       13c   func ,l         * 
+  _group_al1_handler_isr
+                                  ffe03360        a6   func ,l         * 
+  _group_be0_handler_isr
+                                  ffe03406        66   func ,l         * 
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\mcu_mapped_interrupts.obj
+                                  ffe0346c  ffe038ea       47f
+  _bsp_mapped_interrupt_open
+                                  ffe0346c       47f   func ,g         * 
+FILE=.\src\smc_gen\r_pincfg\Pin.obj
+                                  ffe038eb  ffe0391d        33
+  _R_Pins_Create
+                                  ffe038eb        33   func ,g         * 
+FILE=.\src\smc_gen\r_pincfg\r_usb_basic_pinset.obj
+                                  ffe0391e  ffe03948        2b
+  _R_USB_PinSet_USB0_HOST
+                                  ffe0391e        2b   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_cdataio.obj
+                                  ffe03949  ffe03ce8       3a0
+  _usb_cstd_debug_hook
+                                  ffe03949         6   func ,g         * 
+  _usb_ctrl_read
+                                  ffe0394f        ed   func ,g         * 
+  _usb_ctrl_write
+                                  ffe03a3c        d1   func ,g         * 
+  _usb_ctrl_stop
+                                  ffe03b0d        2b   func ,g         * 
+  _usb_data_read
+                                  ffe03b38        a5   func ,g         * 
+  _usb_data_write
+                                  ffe03bdd        84   func ,g         * 
+  _usb_data_stop
+                                  ffe03c61        4e   func ,g         * 
+  _usb_get_usepipe
+                                  ffe03caf        3a   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_clibusbip.obj
+                                  ffe03ce9  ffe04027       33f
+  _usb_cstd_nrdy_enable
+                                  ffe03ce9        18   func ,g         * 
+  _usb_cstd_get_pid
+                                  ffe03d01        28   func ,g         * 
+  _usb_cstd_get_maxpacket_size
+                                  ffe03d29        43   func ,g         * 
+  _usb_cstd_get_pipe_dir
+                                  ffe03d6c        2f   func ,g         * 
+  _usb_cstd_get_pipe_type
+                                  ffe03d9b        31   func ,g         * 
+  _usb_cstd_do_aclrm
+                                  ffe03dcc        20   func ,g         * 
+  _usb_cstd_set_buf
+                                  ffe03dec        81   func ,g         * 
+  _usb_cstd_clr_stall
+                                  ffe03e6d        22   func ,g         * 
+  _usb_cstd_port_speed
+                                  ffe03e8f        3f   func ,g         * 
+  _usb_set_event
+                                  ffe03ece        52   func ,g         * 
+  _usb_cstd_usb_task
+                                  ffe03f20       101   func ,g         * 
+  _usb_class_task
+                                  ffe04021         7   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hcontrolrw.obj
+                                  ffe04028  ffe04666       63f
+  _usb_hstd_ctrl_write_start
+                                  ffe04028       11f   func ,g         * 
+  _usb_hstd_ctrl_read_start
+                                  ffe04147        ce   func ,g         * 
+  _usb_hstd_status_start
+                                  ffe04215        ee   func ,g         * 
+  _usb_hstd_ctrl_end
+                                  ffe04303       186   func ,g         * 
+  _usb_hstd_setup_start
+                                  ffe04489       1de   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hdriver.obj
+                                  ffe04667  ffe05bda      1574
+  _usb_hstd_dev_descriptor
+                                  ffe04667        15   func ,g         * 
+  _usb_hstd_con_descriptor
+                                  ffe0467c        14   func ,g         * 
+  _usb_hstd_transfer_start_req
+                                  ffe04690        e0   func ,g         * 
+  _usb_hstd_device_resume
+                                  ffe04770        15   func ,g         * 
+  _usb_hstd_hcd_snd_mbx
+                                  ffe04785        73   func ,g         * 
+  _usb_hstd_mgr_snd_mbx
+                                  ffe047f8        66   func ,g         * 
+  _usb_hstd_hcd_rel_mpl
+                                  ffe0485e        12   func ,g         * 
+  _usb_hstd_suspend
+                                  ffe04870        50   func ,g         * 
+  _usb_hstd_set_submitutr
+                                  ffe048c0       193   func ,l         * 
+  _usb_hstd_set_retransfer
+                                  ffe04a53        28   func ,l         * 
+  _usb_hstd_bus_int_disable
+                                  ffe04a7b        16   func ,g         * 
+  _usb_hstd_interrupt
+                                  ffe04a91       29b   func ,l         * 
+  _usb_hstd_clr_feature
+                                  ffe04d2c       14f   func ,g         * 
+  _usb_hstd_clr_stall
+                                  ffe04e7b        40   func ,g         * 
+  _usb_hstd_clr_stall_result
+                                  ffe04ebb        61   func ,l         * 
+  _usb_hstd_hcd_task
+                                  ffe04f1c       464   func ,g         * 
+  _usb_hstd_send_start
+                                  ffe05380        ca   func ,g         * 
+  _usb_hstd_fifo_to_buf
+                                  ffe0544a        88   func ,g         * 
+  _usb_hstd_buf_to_fifo
+                                  ffe054d2        85   func ,g         * 
+  _usb_class_request_complete
+                                  ffe05557        72   func ,g         * 
+  _usb_hstd_transfer_end
+                                  ffe055c9        7e   func ,g         * 
+  _usb_hstd_driver_registration
+                                  ffe05647        ae   func ,g         * 
+  _usb_hstd_driver_release
+                                  ffe056f5        52   func ,g         * 
+  _usb_hstd_set_pipe_info
+                                  ffe05747        6a   func ,g         * 
+  _usb_hstd_return_enu_mgr
+                                  ffe057b1        22   func ,g         * 
+  _usb_hstd_change_device_state
+                                  ffe057d3        c9   func ,g         * 
+  _usb_hstd_hcd_open
+                                  ffe0589c       1b2   func ,g         * 
+  _usb_hstd_dummy_function
+                                  ffe05a4e         a   func ,g         * 
+  _usb_hstd_suspend_complete
+                                  ffe05a58        30   func ,g         * 
+  _usb_hstd_resume_complete
+                                  ffe05a88        30   func ,g         * 
+  _usb_hstd_device_information
+                                  ffe05ab8        be   func ,g         * 
+  _usb_host_registration
+                                  ffe05b76        13   func ,g         * 
+  _usb_hstd_transfer_start
+                                  ffe05b89        31   func ,g         * 
+  _usb_hstd_connect_err_event_set
+                                  ffe05bba        21   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hintfifo.obj
+                                  ffe05bdb  ffe05edb       301
+  _usb_hstd_brdy_pipe
+                                  ffe05bdb       16c   func ,g         * 
+  _usb_hstd_nrdy_pipe
+                                  ffe05d47        74   func ,g         * 
+  _usb_hstd_bemp_pipe
+                                  ffe05dbb       121   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hinthandler_usbip0.obj
+                                  ffe05edc  ffe05f7d        a2
+  _usb_hstd_usb_handler
+                                  ffe05edc        62   func ,g         * 
+  _usb_hstd_init_usb_message
+                                  ffe05f3e        40   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hlibusbip.obj
+                                  ffe05f7e  ffe06cff       d82
+  _usb_hstd_set_dev_addr
+                                  ffe05f7e        22   func ,g         * 
+  _usb_hstd_bchg_enable
+                                  ffe05fa0        10   func ,g         * 
+  _usb_hstd_bchg_disable
+                                  ffe05fb0        10   func ,g         * 
+  _usb_hstd_set_uact
+                                  ffe05fc0        10   func ,g         * 
+  _usb_hstd_ovrcr_enable
+                                  ffe05fd0        10   func ,g         * 
+  _usb_hstd_ovrcr_disable
+                                  ffe05fe0        10   func ,g         * 
+  _usb_hstd_attch_enable
+                                  ffe05ff0        10   func ,g         * 
+  _usb_hstd_attch_disable
+                                  ffe06000        10   func ,g         * 
+  _usb_hstd_dtch_enable
+                                  ffe06010        10   func ,g         * 
+  _usb_hstd_dtch_disable
+                                  ffe06020        10   func ,g         * 
+  _usb_hstd_chk_dev_addr
+                                  ffe06030        29   func ,g         * 
+  _usb_hstd_get_dev_speed
+                                  ffe06059        29   func ,g         * 
+  _usb_hstd_pipe_to_epadr
+                                  ffe06082        40   func ,g         * 
+  _usb_hstd_pipe2fport
+                                  ffe060c2        1d   func ,g         * 
+  _usb_hstd_berne_enable
+                                  ffe060df         e   func ,g         * 
+  _usb_hstd_sw_reset
+                                  ffe060ed        16   func ,g         * 
+  _usb_hstd_do_sqtgl
+                                  ffe06103        29   func ,g         * 
+  _usb_hstd_get_devsel
+                                  ffe0612c        44   func ,g         * 
+  _usb_hstd_get_device_address
+                                  ffe06170        6c   func ,g         * 
+  _usb_hstd_write_data
+                                  ffe061dc       165   func ,g         * 
+  _usb_hstd_receive_start
+                                  ffe06341        fe   func ,g         * 
+  _usb_hstd_read_data
+                                  ffe0643f       150   func ,g         * 
+  _usb_hstd_data_end
+                                  ffe0658f       143   func ,g         * 
+  _usb_hstd_brdy_pipe_process
+                                  ffe066d2        a6   func ,g         * 
+  _usb_hstd_nrdy_pipe_process
+                                  ffe06778        9b   func ,g         * 
+  _usb_hstd_bemp_pipe_process
+                                  ffe06813       136   func ,g         * 
+  _usb_hstd_make_pipe_reg_info
+                                  ffe06949       10e   func ,g         * 
+  _usb_hstd_clr_pipe_table
+                                  ffe06a57        b0   func ,g         * 
+  _usb_hstd_clr_pipe_table_ip
+                                  ffe06b07        88   func ,g         * 
+  _usb_hstd_set_pipe_reg
+                                  ffe06b8f        8d   func ,g         * 
+  _usb_hstd_get_pipe_no
+                                  ffe06c1c        8b   func ,g         * 
+  _usb_hstd_get_pipe_peri_value
+                                  ffe06ca7        59   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hmanager.obj
+                                  ffe06d00  ffe08da2      20a3
+  _usb_hstd_mgr_rel_mpl
+                                  ffe06d00        1d   func ,l         * 
+  _usb_hstd_mgr_chgdevst_cb
+                                  ffe06d1d        40   func ,l         * 
+  _usb_hstd_enumeration
+                                  ffe06d5d       3a8   func ,l         * 
+  _usb_hstd_enumeration_err
+                                  ffe07105         6   func ,l         * 
+  _usb_hstd_chk_device_class
+                                  ffe0710b       2c9   func ,l         * 
+  _usb_hstd_notif_ator_detach
+                                  ffe073d4        16   func ,g         * 
+  _usb_hstd_ovcr_notifiation
+                                  ffe073ea        12   func ,g         * 
+  _usb_hstd_status_result
+                                  ffe073fc        18   func ,g         * 
+  _usb_hstd_submit_result
+                                  ffe07414        18   func ,g         * 
+  _usb_hstd_enum_get_descriptor
+                                  ffe0742c       3a8   func ,g         * 
+  _usb_hstd_enum_set_address
+                                  ffe077d4       14d   func ,g         * 
+  _usb_hstd_enum_set_configuration
+                                  ffe07921       14d   func ,g         * 
+  _usb_hstd_enum_dummy_request
+                                  ffe07a6e         a   func ,g         * 
+  _usb_hstd_mgr_suspend
+                                  ffe07a78        a0   func ,g         * 
+  _usb_hstd_device_state_ctrl
+                                  ffe07b18        2e   func ,g         * 
+  _usb_hstd_device_state_ctrl2
+                                  ffe07b46        38   func ,g         * 
+  _usb_hstd_mgr_reset
+                                  ffe07b7e        2b   func ,g         * 
+  _usb_hstd_mgr_resume
+                                  ffe07ba9        65   func ,g         * 
+  _usb_hstd_susp_cont
+                                  ffe07c0e        ca   func ,l         * 
+  _usb_hstd_resu_cont
+                                  ffe07cd8       1a5   func ,l         * 
+  _usb_hstd_chk_remote
+                                  ffe07e7d        22   func ,l         * 
+  _usb_hstd_cmd_submit
+                                  ffe07e9f        d7   func ,l         * 
+  _usb_hstd_set_feature
+                                  ffe07f76        a3   func ,g         * 
+  _usb_hstd_get_config_desc
+                                  ffe08019        ce   func ,g         * 
+  _usb_hstd_std_req_check
+                                  ffe080e7        2c   func ,g         * 
+  _usb_hstd_get_string_desc
+                                  ffe08113        f8   func ,g         * 
+  _usb_hstd_mgr_task
+                                  ffe0820b       923   func ,g         * 
+  _usb_hstd_mgr_open
+                                  ffe08b2e       275   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hscheduler.obj
+                                  ffe08da3  ffe092c3       521
+  _usb_cstd_rec_msg
+                                  ffe08da3        4b   func ,g         * 
+  _usb_cstd_snd_msg
+                                  ffe08dee        1e   func ,g         * 
+  _usb_cstd_isnd_msg
+                                  ffe08e0c        97   func ,g         * 
+  _usb_cstd_pget_blk
+                                  ffe08ea3        5a   func ,g         * 
+  _usb_cstd_rel_blk
+                                  ffe08efd        4b   func ,g         * 
+  _usb_cstd_wai_msg
+                                  ffe08f48        6a   func ,g         * 
+  _usb_cstd_wait_scheduler
+                                  ffe08fb2        9d   func ,g         * 
+  _usb_cstd_sche_init
+                                  ffe0904f       173   func ,g         * 
+  _usb_cstd_scheduler
+                                  ffe091c2        ac   func ,g         * 
+  _usb_cstd_set_task_pri
+                                  ffe0926e        3a   func ,g         * 
+  _usb_cstd_check_schedule
+                                  ffe092a8        1c   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hsignal.obj
+                                  ffe092c4  ffe09358        95
+  _usb_hstd_vbus_control
+                                  ffe092c4        19   func ,g         * 
+  _usb_hstd_suspend_process
+                                  ffe092dd        44   func ,g         * 
+  _usb_hstd_attach
+                                  ffe09321        1c   func ,g         * 
+  _usb_hstd_detach
+                                  ffe0933d        1c   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_hstdfunction.obj
+                                  ffe09359  ffe094ae       156
+  _usb_hstd_bchg0function
+                                  ffe09359        78   func ,g         * 
+  _usb_hstd_ls_connect_function
+                                  ffe093d1        14   func ,g         * 
+  _usb_hstd_attach_function
+                                  ffe093e5         8   func ,g         * 
+  _usb_hstd_ovrcr0function
+                                  ffe093ed         a   func ,g         * 
+  _usb_hdriver_init
+                                  ffe093f7        a5   func ,g         * 
+  _usb_class_driver_start
+                                  ffe0949c        13   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\driver\r_usb_usbif_api.obj
+                                  ffe094af  ffe0a34e       ea0
+  _R_USB_GetVersion
+                                  ffe094af        10   func ,g         * 
+  _R_USB_GetEvent
+                                  ffe094bf        65   func ,g         * 
+  _R_USB_Open
+                                  ffe09524       2c6   func ,g         * 
+  _R_USB_Close
+                                  ffe097ea        c9   func ,g         * 
+  _R_USB_Read
+                                  ffe098b3       14c   func ,g         * 
+  _R_USB_Write
+                                  ffe099ff       14d   func ,g         * 
+  _R_USB_Stop
+                                  ffe09b4c       174   func ,g         * 
+  _R_USB_Suspend
+                                  ffe09cc0        da   func ,g         * 
+  _R_USB_Resume
+                                  ffe09d9a       10b   func ,g         * 
+  _R_USB_VbusSetting
+                                  ffe09ea5        99   func ,g         * 
+  _R_USB_GetInformation
+                                  ffe09f3e       1ad   func ,g         * 
+  _R_USB_PipeRead
+                                  ffe0a0eb        10   func ,g         * 
+  _R_USB_PipeWrite
+                                  ffe0a0fb        10   func ,g         * 
+  _R_USB_PipeStop
+                                  ffe0a10b         b   func ,g         * 
+  _R_USB_GetUsePipe
+                                  ffe0a116        f9   func ,g         * 
+  _R_USB_GetPipeInfo
+                                  ffe0a20f       135   func ,g         * 
+  _R_USB_PullUp
+                                  ffe0a344         b   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_creg_abs.obj
+                                  ffe0a34f  ffe0a6c3       375
+  _usb_cstd_get_buf_size
+                                  ffe0a34f        55   func ,g         * 
+  _usb_cstd_pipe_init
+                                  ffe0a3a4       15b   func ,g         * 
+  _usb_cstd_clr_pipe_cnfg
+                                  ffe0a4ff        ae   func ,g         * 
+  _usb_cstd_set_nak
+                                  ffe0a5ad        3a   func ,g         * 
+  _usb_cstd_is_set_frdy
+                                  ffe0a5e7        5f   func ,g         * 
+  _usb_cstd_chg_curpipe
+                                  ffe0a646        42   func ,g         * 
+  _usb_cstd_set_transaction_counter
+                                  ffe0a688        24   func ,g         * 
+  _usb_cstd_clr_transaction_counter
+                                  ffe0a6ac        18   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_creg_access.obj
+                                  ffe0a6c4  ffe0b0ca       a07
+  _hw_usb_read_syscfg
+                                  ffe0a6c4        18   func ,g         * 
+  _hw_usb_write_syscfg
+                                  ffe0a6dc         e   func ,g         * 
+  _hw_usb_clear_dcfm
+                                  ffe0a6ea        19   func ,g         * 
+  _hw_usb_clear_drpd
+                                  ffe0a703        11   func ,g         * 
+  _hw_usb_set_usbe
+                                  ffe0a714        16   func ,g         * 
+  _hw_usb_clear_usbe
+                                  ffe0a72a        19   func ,g         * 
+  _hw_usb_read_syssts
+                                  ffe0a743        19   func ,g         * 
+  _hw_usb_read_dvstctr
+                                  ffe0a75c        19   func ,g         * 
+  _hw_usb_write_dvstctr
+                                  ffe0a775         e   func ,g         * 
+  _hw_usb_rmw_dvstctr
+                                  ffe0a783        30   func ,g         * 
+  _hw_usb_clear_dvstctr
+                                  ffe0a7b3        16   func ,g         * 
+  _hw_usb_set_vbout
+                                  ffe0a7c9         e   func ,g         * 
+  _hw_usb_clear_vbout
+                                  ffe0a7d7        11   func ,g         * 
+  _hw_usb_read_fifo16
+                                  ffe0a7e8        45   func ,g         * 
+  _hw_usb_write_fifo16
+                                  ffe0a82d        49   func ,g         * 
+  _hw_usb_write_fifo8
+                                  ffe0a876        49   func ,g         * 
+  _hw_usb_get_fifosel_adr
+                                  ffe0a8bf        3f   func ,l         * 
+  _hw_usb_read_fifosel
+                                  ffe0a8fe        18   func ,g         * 
+  _hw_usb_rmw_fifosel
+                                  ffe0a916        37   func ,g         * 
+  _hw_usb_set_dclrm
+                                  ffe0a94d        19   func ,g         * 
+  _hw_usb_clear_dclrm
+                                  ffe0a966        1c   func ,g         * 
+  _hw_usb_set_dreqe
+                                  ffe0a982        42   func ,g         * 
+  _hw_usb_clear_dreqe
+                                  ffe0a9c4        1c   func ,g         * 
+  _hw_usb_set_mbw
+                                  ffe0a9e0        5f   func ,g         * 
+  _hw_usb_set_curpipe
+                                  ffe0aa3f        67   func ,g         * 
+  _hw_usb_get_fifoctr_adr
+                                  ffe0aaa6        3f   func ,l         * 
+  _hw_usb_read_fifoctr
+                                  ffe0aae5        18   func ,g         * 
+  _hw_usb_set_bval
+                                  ffe0aafd        19   func ,g         * 
+  _hw_usb_set_bclr
+                                  ffe0ab16        17   func ,g         * 
+  _hw_usb_write_intenb
+                                  ffe0ab2d        18   func ,g         * 
+  _hw_usb_set_intenb
+                                  ffe0ab45        1c   func ,g         * 
+  _hw_usb_clear_enb_vbse
+                                  ffe0ab61        10   func ,g         * 
+  _hw_usb_clear_enb_sofe
+                                  ffe0ab71        11   func ,g         * 
+  _hw_usb_write_brdyenb
+                                  ffe0ab82         e   func ,g         * 
+  _hw_usb_set_brdyenb
+                                  ffe0ab90        21   func ,g         * 
+  _hw_usb_clear_brdyenb
+                                  ffe0abb1        22   func ,g         * 
+  _hw_usb_write_nrdyenb
+                                  ffe0abd3         e   func ,g         * 
+  _hw_usb_set_nrdyenb
+                                  ffe0abe1        21   func ,g         * 
+  _hw_usb_clear_nrdyenb
+                                  ffe0ac02        22   func ,g         * 
+  _hw_usb_write_bempenb
+                                  ffe0ac24         e   func ,g         * 
+  _hw_usb_set_bempenb
+                                  ffe0ac32        37   func ,g         * 
+  _hw_usb_clear_bempenb
+                                  ffe0ac69        22   func ,g         * 
+  _hw_usb_set_sofcfg
+                                  ffe0ac8b         8   func ,g         * 
+  _hw_usb_write_intsts
+                                  ffe0ac93        18   func ,g         * 
+  _hw_usb_clear_sts_sofr
+                                  ffe0acab         d   func ,g         * 
+  _hw_usb_read_brdysts
+                                  ffe0acb8         e   func ,g         * 
+  _hw_usb_write_brdysts
+                                  ffe0acc6         f   func ,g         * 
+  _hw_usb_clear_sts_brdy
+                                  ffe0acd5        20   func ,g         * 
+  _hw_usb_write_nrdy_sts
+                                  ffe0acf5         f   func ,g         * 
+  _hw_usb_clear_status_nrdy
+                                  ffe0ad04        20   func ,g         * 
+  _hw_usb_write_bempsts
+                                  ffe0ad24         f   func ,g         * 
+  _hw_usb_clear_status_bemp
+                                  ffe0ad33        20   func ,g         * 
+  _hw_usb_read_frmnum
+                                  ffe0ad53        19   func ,g         * 
+  _hw_usb_read_dcpcfg
+                                  ffe0ad6c        19   func ,g         * 
+  _hw_usb_write_dcpcfg
+                                  ffe0ad85        18   func ,g         * 
+  _hw_usb_read_dcpmaxp
+                                  ffe0ad9d        19   func ,g         * 
+  _hw_usb_write_dcpmxps
+                                  ffe0adb6        18   func ,g         * 
+  _hw_usb_write_pipesel
+                                  ffe0adce        18   func ,g         * 
+  _hw_usb_read_pipecfg
+                                  ffe0ade6        19   func ,g         * 
+  _hw_usb_write_pipecfg
+                                  ffe0adff        18   func ,g         * 
+  _hw_usb_read_pipemaxp
+                                  ffe0ae17        19   func ,g         * 
+  _hw_usb_write_pipemaxp
+                                  ffe0ae30        18   func ,g         * 
+  _hw_usb_write_pipeperi
+                                  ffe0ae48        18   func ,g         * 
+  _hw_usb_read_pipectr
+                                  ffe0ae60        30   func ,g         * 
+  _hw_usb_write_pipectr
+                                  ffe0ae90        2b   func ,g         * 
+  _hw_usb_set_csclr
+                                  ffe0aebb        25   func ,g         * 
+  _hw_usb_set_aclrm
+                                  ffe0aee0        25   func ,g         * 
+  _hw_usb_clear_aclrm
+                                  ffe0af05        28   func ,g         * 
+  _hw_usb_set_sqclr
+                                  ffe0af2d        47   func ,g         * 
+  _hw_usb_set_sqset
+                                  ffe0af74        47   func ,g         * 
+  _hw_usb_set_pid
+                                  ffe0afbb        3f   func ,g         * 
+  _hw_usb_clear_pid
+                                  ffe0affa        36   func ,g         * 
+  _hw_usb_set_trenb
+                                  ffe0b030        26   func ,g         * 
+  _hw_usb_clear_trenb
+                                  ffe0b056        29   func ,g         * 
+  _hw_usb_set_trclr
+                                  ffe0b07f        26   func ,g         * 
+  _hw_usb_write_pipetrn
+                                  ffe0b0a5        26   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_hreg_abs.obj
+                                  ffe0b0cb  ffe0b970       8a6
+  _usb_hstd_set_hub_port
+                                  ffe0b0cb         c   func ,g         * 
+  _usb_hstd_interrupt_handler
+                                  ffe0b0d7       2b2   func ,g         * 
+  _usb_hstd_chk_attach
+                                  ffe0b389        3a   func ,g         * 
+  _usb_hstd_chk_clk
+                                  ffe0b3c3        44   func ,g         * 
+  _usb_hstd_detach_process
+                                  ffe0b407        ea   func ,g         * 
+  _usb_hstd_read_lnst
+                                  ffe0b4f1        5d   func ,g         * 
+  _usb_hstd_attach_process
+                                  ffe0b54e        5a   func ,g         * 
+  _usb_hstd_chk_sof
+                                  ffe0b5a8         c   func ,g         * 
+  _usb_hstd_bus_reset
+                                  ffe0b5b4        83   func ,g         * 
+  _usb_hstd_resume_process
+                                  ffe0b637        3f   func ,g         * 
+  _usb_hstd_support_speed_check
+                                  ffe0b676        3f   func ,g         * 
+  _usb_hstd_write_fifo
+                                  ffe0b6b5        65   func ,g         * 
+  _usb_hstd_read_fifo
+                                  ffe0b71a        56   func ,g         * 
+  _usb_hstd_forced_termination
+                                  ffe0b770       179   func ,g         * 
+  _usb_hstd_get_usb_ip_adr
+                                  ffe0b8e9        14   func ,g         * 
+  _usb_hstd_nrdy_endprocess
+                                  ffe0b8fd        74   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_hreg_access.obj
+                                  ffe0b971  ffe0bd26       3b6
+  _hw_usb_hset_rwupe
+                                  ffe0b971         e   func ,g         * 
+  _hw_usb_hclear_rwupe
+                                  ffe0b97f        11   func ,g         * 
+  _hw_usb_hset_resume
+                                  ffe0b990         e   func ,g         * 
+  _hw_usb_hclear_resume
+                                  ffe0b99e        11   func ,g         * 
+  _hw_usb_hset_uact
+                                  ffe0b9af         e   func ,g         * 
+  _hw_usb_hclear_uact
+                                  ffe0b9bd        11   func ,g         * 
+  _hw_usb_hwrite_intenb
+                                  ffe0b9ce         e   func ,g         * 
+  _hw_usb_hset_enb_ovrcre
+                                  ffe0b9dc         e   func ,g         * 
+  _hw_usb_hclear_enb_ovrcre
+                                  ffe0b9ea        10   func ,g         * 
+  _hw_usb_hset_enb_bchge
+                                  ffe0b9fa         e   func ,g         * 
+  _hw_usb_hclear_enb_bchge
+                                  ffe0ba08        11   func ,g         * 
+  _hw_usb_hset_enb_dtche
+                                  ffe0ba19         e   func ,g         * 
+  _hw_usb_hclear_enb_dtche
+                                  ffe0ba27        11   func ,g         * 
+  _hw_usb_hset_enb_attche
+                                  ffe0ba38         e   func ,g         * 
+  _hw_usb_hclear_enb_attche
+                                  ffe0ba46        11   func ,g         * 
+  _hw_usb_hset_enb_signe
+                                  ffe0ba57         e   func ,g         * 
+  _hw_usb_hset_enb_sacke
+                                  ffe0ba65         e   func ,g         * 
+  _hw_usb_hset_enb_pddetinte
+                                  ffe0ba73         6   func ,g         * 
+  _hw_usb_hwrite_intsts
+                                  ffe0ba79         f   func ,g         * 
+  _hw_usb_hclear_sts_ovrcr
+                                  ffe0ba88         d   func ,g         * 
+  _hw_usb_hclear_sts_bchg
+                                  ffe0ba95         d   func ,g         * 
+  _hw_usb_hclear_sts_dtch
+                                  ffe0baa2         d   func ,g         * 
+  _hw_usb_hclear_sts_attch
+                                  ffe0baaf         d   func ,g         * 
+  _hw_usb_hclear_sts_sign
+                                  ffe0babc         d   func ,g         * 
+  _hw_usb_hclear_sts_sack
+                                  ffe0bac9         d   func ,g         * 
+  _hw_usb_hclear_sts_pddetint
+                                  ffe0bad6         6   func ,g         * 
+  _hw_usb_hwrite_usbreq
+                                  ffe0badc         f   func ,g         * 
+  _hw_usb_hset_usbval
+                                  ffe0baeb         f   func ,g         * 
+  _hw_usb_hset_usbindx
+                                  ffe0bafa         f   func ,g         * 
+  _hw_usb_hset_usbleng
+                                  ffe0bb09         f   func ,g         * 
+  _hw_usb_hwrite_dcpctr
+                                  ffe0bb18         f   func ,g         * 
+  _hw_usb_hset_sureq
+                                  ffe0bb27        2e   func ,g         * 
+  _hw_usb_hread_devadd
+                                  ffe0bb55        3c   func ,g         * 
+  _hw_usb_hrmw_devadd
+                                  ffe0bb91        44   func ,g         * 
+  _hw_usb_hset_usbspd
+                                  ffe0bbd5        35   func ,g         * 
+  _hw_usb_hset_dcpmode
+                                  ffe0bc0a         6   func ,g         * 
+  _hw_usb_hmodule_init
+                                  ffe0bc10       109   func ,g         * 
+  _hw_usb_hset_trnensel
+                                  ffe0bd19         e   func ,g         * 
+FILE=.\src\smc_gen\r_usb_basic\src\hw\r_usb_rx_mcu.obj
+                                  ffe0bd27  ffe0bfe5       2bf
+  _usb_module_start
+                                  ffe0bd27        56   func ,g         * 
+  _usb_module_stop
+                                  ffe0bd7d       176   func ,g         * 
+  _usb_cpu_usbint_init
+                                  ffe0bef3        44   func ,g         * 
+  _usb_cpu_delay_1us
+                                  ffe0bf37        11   func ,g         * 
+  _usb_cpu_delay_xms
+                                  ffe0bf48        10   func ,g         * 
+  _usb_cpu_int_enable
+                                  ffe0bf58         8   func ,g         * 
+  _usb_cpu_int_disable
+                                  ffe0bf60         8   func ,g         * 
+  _usb_chattaring
+                                  ffe0bf68        4f   func ,g         * 
+  _usbfs_usbi_isr
+                                  ffe0bfb7        20   func ,l         * 
+  _usb_check_use_usba_module
+                                  ffe0bfd7         f   func ,g         * 
+FILE=.\src\smc_gen\r_usb_hcdc\src\r_usb_hcdc_driver.obj
+                                  ffe0bfe6  ffe0c697       6b2
+  _usb_hcdc_enumeration
+                                  ffe0bfe6       1d6   func ,g         * 
+  _usb_hcdc_check_result
+                                  ffe0c1bc        5c   func ,l         * 
+  _usb_hcdc_task
+                                  ffe0c218        43   func ,g         * 
+  _usb_hcdc_pipe_info
+                                  ffe0c25b        d8   func ,g         * 
+  _usb_hcdc_configured
+                                  ffe0c333        26   func ,g         * 
+  _usb_hcdc_detach
+                                  ffe0c359        26   func ,g         * 
+  _usb_hcdc_read_complete
+                                  ffe0c37f        72   func ,g         * 
+  _usb_hcdc_write_complete
+                                  ffe0c3f1        3b   func ,g         * 
+  _usb_hcdc_registration
+                                  ffe0c42c        4a   func ,g         * 
+  _usb_hcdc_init
+                                  ffe0c476        8a   func ,l         * 
+  _usb_hcdc_class_check
+                                  ffe0c500        aa   func ,g         * 
+  _usb_hcdc_set_pipe_registration
+                                  ffe0c5aa        71   func ,g         * 
+  _usb_hcdc_driver_start
+                                  ffe0c61b        7d   func ,g         * 
+FILE=freopen
+                                  ffe0c698  ffe0c6c4        2d
+  _freopen
+                                  ffe0c698        2d   func ,g         * 
+FILE=fclose
+                                  ffe0c6c5  ffe0c718        54
+  _fclose
+                                  ffe0c6c5        54   func ,g         * 
+FILE=printf
+                                  ffe0c719  ffe0c752        3a
+  _prout
+                                  ffe0c719        1d   func ,l         * 
+  _printf
+                                  ffe0c736        1d   func ,g         * 
+FILE=__COM_DIV64u
+                                  ffe0c753  ffe0c7eb        99
+  __COM_DIV64u
+                                  ffe0c753         0   none ,g         * 
+  _Loop_Init
+                                  ffe0c75d         0   none ,l         * 
+  _Loop
+                                  ffe0c765         0   none ,l         * 
+  _DivStart
+                                  ffe0c771         0   none ,l         * 
+  _Success
+                                  ffe0c77f         0   none ,l         * 
+  _DivEnd
+                                  ffe0c78b         0   none ,l         * 
+  IXI6DIV
+                                  ffe0c790         0   none ,l         * 
+  IXI4DIV
+                                  ffe0c7a2         0   none ,l         * 
+  IXI2DIV
+                                  ffe0c7b2         0   none ,l         * 
+  I8I2DIV
+                                  ffe0c7ba         0   none ,l         * 
+  I4I2DIV
+                                  ffe0c7e8         0   none ,l         * 
+  _i8divU_End
+                                  ffe0c7eb         0   none ,l         * 
+FILE=__initsct
+                                  ffe0c7ec  ffe0c835        4a
+  __INITSCT
+                                  ffe0c7ec         0   none ,g         * 
+  loop1
+                                  ffe0c7fe         0   none ,l         * 
+  next_loop1
+                                  ffe0c80c         0   none ,l         * 
+  loop3
+                                  ffe0c81e         0   none ,l         * 
+  next_loop3
+                                  ffe0c82f         0   none ,l         * 
+FILE=fwrite
+                                  ffe0c836  ffe0c90b        d6
+  _fwrite
+                                  ffe0c836        d6   func ,g         * 
+FILE=fflush
+                                  ffe0c90c  ffe0c98d        82
+  _fflush
+                                  ffe0c90c        82   func ,g         * 
+FILE=xfoprep
+                                  ffe0c98e  ffe0ca5f        d2
+  __Foprep
+                                  ffe0c98e        d2   func ,g         * 
+FILE=xfofind
+                                  ffe0ca60  ffe0caec        8d
+  __Fofind
+                                  ffe0ca60        44   func ,g         * 
+  __Fofree
+                                  ffe0caa4        49   func ,g         * 
+FILE=xprintf
+                                  ffe0caed  ffe0cd3c       250
+  __Printf
+                                  ffe0caed       250   func ,g         * 
+FILE=free
+                                  ffe0cd3d  ffe0cdbe        82
+  _free
+                                  ffe0cd3d        82   func ,g         * 
+FILE=xfwprep
+                                  ffe0cdbf  ffe0ce56        98
+  __Fwprep
+                                  ffe0cdbf        98   func ,g         * 
+FILE=xputfld
+                                  ffe0ce57  ffe0d2b8       462
+  __Putfld
+                                  ffe0ce57       462   func ,g         * 
+FILE=xfopen
+                                  ffe0d2b9  ffe0d2e8        30
+  __Fopen
+                                  ffe0d2b9        30   func ,g         * 
+FILE=xvacopy
+                                  ffe0d2e9  ffe0d2eb         3
+  __Vacopy
+                                  ffe0d2e9         3   func ,g         * 
+FILE=xputtxt
+                                  ffe0d2ec  ffe0d543       258
+  __Puttxt
+                                  ffe0d2ec       258   func ,g         * 
+FILE=strchr
+                                  ffe0d544  ffe0d556        13
+  _strchr
+                                  ffe0d544        13   func ,g         * 
+FILE=xctype
+                                  ffe0d557  ffe0d56c        16
+  __Getpctype
+                                  ffe0d557        16   func ,g         * 
+FILE=malloc
+                                  ffe0d56d  ffe0d647        db
+  _findmem
+                                  ffe0d56d        79   func ,l         * 
+  _malloc
+                                  ffe0d5e6        62   func ,g         * 
+FILE=xldtob
+                                  ffe0d648  ffe0da1e       3d7
+  __Ldtob
+                                  ffe0d648       3d7   func ,g         * 
+FILE=xputstr
+                                  ffe0da1f  ffe0dafa        dc
+  __Putstr
+                                  ffe0da1f        dc   func ,g         * 
+FILE=xlitob
+                                  ffe0dafb  ffe0dc05       10b
+  __Litob
+                                  ffe0dafb       10b   func ,g         * 
+FILE=xgetmem
+                                  ffe0dc06  ffe0dc20        1b
+  __Getmem
+                                  ffe0dc06        1b   func ,g         * 
+FILE=xgenld
+                                  ffe0dc21  ffe0dea9       289
+  __Genld
+                                  ffe0dc21       289   func ,g         * 
+FILE=xwctomb
+                                  ffe0deaa  ffe0dff0       147
+  __Wctombx
+                                  ffe0deaa       103   func ,g         * 
+  __Wctomb
+                                  ffe0dfad        44   func ,g         * 
+FILE=xstate
+                                  ffe0dff1  ffe0e022        32
+  __Getmbcurmax
+                                  ffe0dff1        16   func ,g         * 
+  __Getpmbstate
+                                  ffe0e007        1c   func ,g         * 
+FILE=xldscale
+                                  ffe0e023  ffe0e026         4
+  __LDscale
+                                  ffe0e023         4   func ,g         * 
+FILE=xldunsca
+                                  ffe0e027  ffe0e02a         4
+  __LDunscale
+                                  ffe0e027         4   func ,g         * 
+FILE=__COM_MOD64u
+                                  ffe0e02b  ffe0e0b1        87
+  __COM_MOD64u
+                                  ffe0e02b         0   none ,g         * 
+  _Loop_Init
+                                  ffe0e035         0   none ,l         * 
+  _Loop
+                                  ffe0e039         0   none ,l         * 
+  _DivStart
+                                  ffe0e045         0   none ,l         * 
+  _Success
+                                  ffe0e053         0   none ,l         * 
+  _DivEnd
+                                  ffe0e05b         0   none ,l         * 
+  IXI6DIV
+                                  ffe0e05c         0   none ,l         * 
+  IXI4DIV
+                                  ffe0e06e         0   none ,l         * 
+  IXI2DIV
+                                  ffe0e07e         0   none ,l         * 
+  I8I2DIV
+                                  ffe0e086         0   none ,l         * 
+  I4I2DIV
+                                  ffe0e0a6         0   none ,l         * 
+FILE=_div
+                                  ffe0e0b2  ffe0e0bd         c
+  _ldiv
+                                  ffe0e0b2         0   none ,g         * 
+  _div
+                                  ffe0e0b2         0   none ,g         * 
+FILE=localeco
+                                  ffe0e0be  ffe0e0c4         7
+  _localeconv
+                                  ffe0e0be         7   func ,g         * 
+FILE=xwcstate
+                                  ffe0e0c5  ffe0e0e0        1c
+  __Getpwcstate
+                                  ffe0e0c5        1c   func ,g         * 
+FILE=xfdscale
+                                  ffe0e0e1  ffe0e1ed       10d
+  __FDscale
+                                  ffe0e0e1       10d   func ,g         * 
+FILE=xfdunsca
+                                  ffe0e1ee  ffe0e242        55
+  __FDunscale
+                                  ffe0e1ee        55   func ,g         * 
+FILE=xfdnorm
+                                  ffe0e243  ffe0e2ab        69
+  __FDnorm
+                                  ffe0e243        69   func ,g         * 
+
+SECTION=EXCEPTVECT
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  ffffff80  fffffffb        7c
+  _Except_Vectors
+                                  ffffff80        7c   data ,g         * 
+
+SECTION=RESETVECT
+FILE=.\src\smc_gen\r_bsp\mcu\rx65n\vecttbl.obj
+                                  fffffffc  ffffffff         4
+  _Reset_Vector
+                                  fffffffc         4   data ,g         * 
+
+*** Unfilled Areas ***
+
+AREA                                START    END
+
+*** Delete Symbols ***
+
+SYMBOL                                SIZE    INFO

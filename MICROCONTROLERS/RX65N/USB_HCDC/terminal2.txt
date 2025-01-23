@@ -1,0 +1,254 @@
+ ========================================= Done configuring  ======================
+< ========== [HCD]
+[HDC] - submit utr
+START
+Trans SetPack
+ =X - sack
+================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 55 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_SACK USB_SETUPWR
+ USB_SETUPWRCNT
+Set sq
+PID buf set - W
+ - DATA1 - 
+ X - nrdy
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 56 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_NRDY
+---NRDY_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 57 <<<<<<<<<<<<< 
+USB_STS_REQUEST_COMPLETE
+    status - SetLineCoding
+< ========== [HCD]
+[HDC] - submit utr
+START
+Trans SetPack
+ ===X - sign
+==============> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 58 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+ USB_INT_SIGN
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 59 <<<<<<<<<<<<< 
+USB_STS_REQUEST_COMPLETE
+    status - SetControlLineState
+ >>>>> usb_ctrl_read
+ >>>>> usb_ctrl_read
+ >>>>> usb_ctrl_read
+< ========== [HCD]
+[HDC] - submit utr
+START
+Trans SetPack
+ =====X - sign
+============> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 60 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - brdy
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 61 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+ USB_INT_SIGN
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 62 <<<<<<<<<<<<< 
+USB_STS_REQUEST_COMPLETE
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BRDY
+---BRDY_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 63 <<<<<<<<<<<<< 
+ 
+ 
+ 
+ 
+ 
+USB_STS_READ_COMPLETE
+    tx_buffer - 17
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - bemp
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 64 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BEMP
+---PIPE_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 65 <<<<<<<<<<<<< 
+USB_STS_WRITE_COMPLETE
+ >>>>> usb_ctrl_read
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - brdy
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 66 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BRDY
+---BRDY_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 67 <<<<<<<<<<<<< 
+ 
+ 
+ 
+ 
+ 
+USB_STS_READ_COMPLETE
+    tx_buffer - 17
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - bemp
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 68 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BEMP
+---PIPE_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 69 <<<<<<<<<<<<< 
+USB_STS_WRITE_COMPLETE
+ >>>>> usb_ctrl_read
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - brdy
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 70 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BRDY
+---BRDY_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 71 <<<<<<<<<<<<< 
+ 
+ 
+ 
+ 
+ 
+USB_STS_READ_COMPLETE
+    tx_buffer - 17
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - bemp
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 72 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BEMP
+---PIPE_process---
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 73 <<<<<<<<<<<<< 
+USB_STS_WRITE_COMPLETE
+ >>>>> usb_ctrl_read
+< ========== [HCD]
+[HDC] - submit utr
+PID buf set - W
+ - DATA0 - 
+ X - brdy
+ ================> 
+< ========== [MGR]
+ ================> 
+< ========== [hhid]
+ ================> 
+ >>>>>>>>>>>>> Done loop 74 <<<<<<<<<<<<< 
+< ========== [HCD]
+[HDC] - INT
+--> USB_INT_BRDY
+---BRDY_process---
+ ================> 
+< ========== [MGR]
