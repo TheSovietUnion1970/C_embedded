@@ -744,6 +744,9 @@ if (caseeeee == track_id){
     }
     else
     {
+if (caseeeee == track_id){
+    printf("RE_TRANS\n");
+}
         usb_hstd_set_retransfer(ptr, pipenum); /* Data Transfer */
     }
 }

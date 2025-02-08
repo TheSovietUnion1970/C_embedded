@@ -287,11 +287,20 @@ void usb_cstd_set_buf (usb_utr_t *ptr, uint16_t pipe)
     reg = (usb_regadr_t) &USB0;
 
 if (caseeeee == track_id){
-    if (reg->DCPCFG.BIT.DIR == 0) printf("PID buf set - R\n");
-    else printf("PID buf set - W\n");
+	if (pipe == 0){
+	    if (reg->DCPCFG.BIT.DIR == 0) printf("0 -> PID buf set - R\n");
+	    else printf("0 -> PID buf set - W\n");
 
-    if (reg->DCPCTR.BIT.SQMON == 0) printf(" - DATA0 - \n");
-    else printf(" - DATA1 - \n");
+	    if (reg->DCPCTR.BIT.SQMON == 0) printf(" - DATA0 - \n");
+	    else printf(" - DATA1 - \n");
+	}
+	else {
+	    if (reg->PIPECFG.BIT.DIR == 0) printf("%d -> PID buf set - R\n", pipe);
+	    else printf("%d -> PID buf set - W\n", pipe);
+
+	    if (reg->PIPE1CTR.BIT.SQMON == 0) printf(" - DATA0 - \n");
+	    else printf(" - DATA1 - \n");
+	}
 }
 
     hw_usb_set_pid(ptr, pipe, USB_PID_BUF);

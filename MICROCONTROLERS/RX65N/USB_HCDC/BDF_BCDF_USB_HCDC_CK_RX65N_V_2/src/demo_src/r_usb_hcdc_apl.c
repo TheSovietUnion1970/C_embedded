@@ -81,6 +81,23 @@ Exported global functions (to be accessed by other files)
 void    R_USB_PinSet_USB0_HOST(void);
 void    R_USB_PinSet_USBA_HOST(void);
 
+void parse_serial_state(uint16_t serial_state)
+{
+    if (serial_state & 0x0001) printf("serial_state -> DCD (Carrier Detect) is ACTIVE\n");
+    if (serial_state & 0x0002) printf("serial_state -> DSR (Data Set Ready) is ACTIVE\n");
+    if (serial_state & 0x0004) printf("serial_state -> Break detected!\n");
+    if (serial_state & 0x0008) printf("serial_state -> Ring signal detected!\n");
+    if (serial_state & 0x0010) printf("serial_state -> Framing error!\n");
+    if (serial_state & 0x0020) printf("serial_state -> Parity error!\n");
+    if (serial_state & 0x0040) printf("serial_state -> Overrun error!\n");
+}
+
+void Reset(uint8_t* var, int size){
+    for (int i = 0; i < size; i++){
+        var[i] = 0;
+    }
+}
+
 /******************************************************************************
  Renesas USB Host CDC Sample Code functions
  ******************************************************************************/
@@ -165,6 +182,7 @@ void usb_main (void)
                         ctrl.type = USB_HCDCC;
                         R_USB_Read(&ctrl, (uint8_t *)&g_serial_state, USB_HCDC_SERIAL_STATE_MSG_LEN);
                     }
+                    parse_serial_state((uint16_t)(g_serial_state.bitmap[0]));
                 break;
 
                 case USB_STS_WRITE_COMPLETE :
@@ -172,6 +190,10 @@ void usb_main (void)
                     ctrl.type = USB_HCDC;
                     /* Report receive start */
                     R_USB_Read(&ctrl, (uint8_t *)g_data, CDC_DATA_LEN);
+
+                    Reset((uint8_t*)g_data, sizeof(g_data));
+
+                    parse_serial_state((uint16_t)(g_serial_state.bitmap[0]));
                 break;
 
                 case USB_STS_REQUEST_COMPLETE :
@@ -187,6 +209,9 @@ void usb_main (void)
                     /* Check Complete request "SetControlLineState" */
                     else if (USB_CDC_SET_CONTROL_LINE_STATE == (ctrl.setup.type & USB_BREQUEST))
                     {
+                        Reset((uint8_t*)&g_com_parm, sizeof(g_com_parm));
+
+                        
                         printf("    status - SetControlLineState\n");
                         ctrl.type = USB_HCDC;
                         get_line_coding(&ctrl); /* CDC Class request "SetLineCoding" */
@@ -198,6 +223,10 @@ void usb_main (void)
                         /* Class notification "SerialState" receive start */
                         ctrl.type = USB_HCDCC;
                         R_USB_Read(&ctrl, (uint8_t *)&g_serial_state, USB_HCDC_SERIAL_STATE_MSG_LEN);
+
+                        parse_serial_state((uint16_t)(g_serial_state.bitmap[0]));
+
+                        Reset((uint8_t*)g_data, sizeof(g_data));
                     }
                     else
                     { /* Not support request */

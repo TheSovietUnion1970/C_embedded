@@ -497,7 +497,7 @@ usb_er_t usb_ctrl_stop (usb_ctrl_t *p_ctrl)
 usb_er_t usb_data_read (usb_ctrl_t *p_ctrl, uint8_t *buf, uint32_t size)
 {
 if (caseeeee == track_id){
-    printf(" >>>>> usb_ctrl_read\n");
+    printf(" >>>>> usb_data_read\n");
 }
     uint8_t pipe;
     usb_er_t err;
