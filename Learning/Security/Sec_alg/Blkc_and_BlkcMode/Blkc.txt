@@ -1,0 +1,74 @@
+STEPS: AES-V1
+=====
+ecy_lib_Blkc_AesV1_SetKeyEncryption(ctx, encryptionKeys) (: Set encryption round keys based on the temporary round keys for encryption)
+ecy_lib_Blkc_AesV1_SetKeyDecryption(ctx, encryptionKeys) (: Set decryption round keys based on the temporary round keys for encryption)
+===== Interface function
+ecy_lib_Blkc_AesV1_Init
+
+ecy_lib_Blkc_AesV1_SetKeyRef (-> ecy_lib_Blkc_AesV1_SetKey) -or- ecy_lib_Blkc_AesV1_SetKey 
+	-> ecy_lib_Blkc_AesV1_SetKeyEncryption
+	   ecy_lib_Blkc_AesV1_SetKeyDecryption
+	   
+ecy_lib_Blkc_AesV1_EncryptBlock
+	-> (t)ecy_lib_Blkc_AesV1_TE1 (first - second - last encryption round)
+
+ecy_lib_Blkc_AesV1_DecryptBlock
+	-> (t)ecy_lib_Blkc_AesV1_TD0 (first - second decryption round)
+	   (f)ecy_lib_Blkc_AesV1_DecryptBlockFinish (last encryption round) -> (t)ecy_lib_Blkc_AesV1_TD0
+	   
+===========================================================================================================
+
+STEPS: AES-V2
+=====
+ecy_lib_Blkc_AesV2_ComputeDecryptionKeys (: Compute decryption round keys from the encryption round keys)
+===== Interface function
+ecy_lib_Blkc_AesV2_Init
+
+ecy_lib_Blkc_AesV2_SetKeyRef (-> ecy_lib_Blkc_AesV2_SetKey) -or- ecy_lib_Blkc_AesV2_SetKey 
+	-> (t)ecy_lib_Blkc_AesSbox_Forward (: for SetKeyEncryption)
+	   (f)ecy_lib_Blkc_AesV2_ComputeDecryptionKeys (: for SetKeyDecryption)
+	   
+ecy_lib_Blkc_AesV2_EncryptBlock
+	-> (t)ecy_lib_Blkc_AesV2_TE0
+	   (t)ecy_lib_Blkc_AesV2_TE1
+	   (t)ecy_lib_Blkc_AesV2_TE2
+	   (t)ecy_lib_Blkc_AesV2_TE3
+	   
+	   (t)ecy_lib_Blkc_AesSbox_Forward (S-Box for encryption)
+
+ecy_lib_Blkc_AesV2_DecryptBlock
+	-> (t)ecy_lib_Blkc_AesV2_TD0
+	   (t)ecy_lib_Blkc_AesV2_TD1
+	   (t)ecy_lib_Blkc_AesV2_TD2
+	   (t)ecy_lib_Blkc_AesV2_TD3
+	   
+	   (t)ecy_lib_Blkc_AesSbox_Inv (Inverse S-Box for decryption)
+	   
+===========================================================================================================
+
+STEPS: AES-V3
+=====
+===== Interface function
+ecy_lib_Blkc_AesV3_Init
+
+ecy_lib_Blkc_AesV3_SetKeyRef (-> ecy_lib_Blkc_AesV3_SetKey) -or- ecy_lib_Blkc_AesV3_SetKey 
+	-> (t)ecy_lib_Blkc_AesSbox_Forward (: for SetKeyEncryption)
+	   (t)ecy_lib_Blkc_AesV3_Rcon
+	   
+ecy_lib_Blkc_AesV3_EncryptBlock	   
+	-> (t)ecy_lib_Blkc_AesSbox_Forward (S-Box for encryption)
+	
+	   (f)ecy_lib_Blkc_AesV3_MixColumns
+	   
+	   (f)ecy_lib_Blkc_AesV3_State2Octets (: Converts a state of the AES into octet string in big endian format.)
+
+ecy_lib_Blkc_AesV3_DecryptBlock   
+	-> (t)ecy_lib_Blkc_AesSbox_Inv (Inverse S-Box for decryption)
+	
+	   (f)ecy_lib_Blkc_AesV3_InvMixColumns
+	   
+	   (f)ecy_lib_Blkc_AesV3_State2Octets
+	   
+===========================================================================================================
+
+STEPS: SM4-V1 - Nothing much special

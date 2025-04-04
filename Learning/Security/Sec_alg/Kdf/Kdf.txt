@@ -1,0 +1,42 @@
+STEPS: HKDF-V1
+=====
+ecy_lib_Kdf_HkdfV1_Init -> ecy_lib_Mac_HmacV1_Init (: Initialize underlying HMAC function with chosen hash algorithm)
+ecy_lib_Kdf_HkdfV1_SetInfo
+ecy_lib_Kdf_HkdfV1_SetSalt
+ecy_lib_Kdf_HkdfV1_DeriveKey -> ecy_lib_Mac_HmacV1_SetKey (: Use salt as MAC key)
+							 -> ecy_lib_Mac_HmacV1_Start
+							    ecy_lib_Mac_HmacV1_Update
+								ecy_lib_Mac_HmacV1_FinishGeneration
+									(: PRK = HMAC-Hash(salt, IKM))
+									
+							 -> ecy_lib_Mac_HmacV1_SetKey (: Expand)
+							 
+							 -> ecy_lib_Mac_HmacV1_Update (: T(i) = HMAC-Hash(PRK, T(i-1) | info | counter))
+							 
+							 -> ecy_lib_Mac_HmacV1_FinishGeneration (: Generate HMAC and copy it to output)
+							 
+================================================================================================================================
+
+STEPS: KDF2-V1
+=====
+ecy_lib_Kdf_KDF2V1_Init -> ecy_lib_Hash_If_Factory (: Initialize underlying hash function)
+ecy_lib_Kdf_KDF2V1_SetInfo
+ecy_lib_Kdf_KDF2V1_DeriveKey -> Convert the counter to big-endian octet string
+							 -> ecy_lib_Hash_If_Update (: hash counter + secrets)
+							 
+							 -> ecy_lib_Hash_If_Update (: Info optional)
+							 
+							 -> ecy_lib_Hash_If_Finish
+							 
+================================================================================================================================
+
+STEPS: KdfNistHash-V1 (similar to KDF2-V1)
+=====
+ecy_lib_Kdf_KdfNistHashV1_Init -> ecy_lib_Hash_If_Factory (: Initialize underlying hash function)
+ecy_lib_Kdf_KdfNistHashV1_SetInfo
+ecy_lib_Kdf_KdfNistHashV1_DeriveKey -> Convert the counter to big-endian octet string
+							 -> ecy_lib_Hash_If_Update (: hash counter + secrets)
+							 
+							 -> ecy_lib_Hash_If_Update (: Info optional)
+							 
+							 -> ecy_lib_Hash_If_Finish

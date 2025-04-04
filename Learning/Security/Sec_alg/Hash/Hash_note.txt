@@ -1,0 +1,99 @@
+STEPS: SHAKE-V1/SHA3-V1 (SHA3-family)
+=====
++ ecy_lib_Prf_KeccakV1_P_ThetaRho // Compute Keccak permutation Theta and Rho steps.
++ ecy_lib_Prf_KeccakV1_P_Pi // Compute Keccak permutation Pi step.
++ ecy_lib_Prf_KeccakV1_P_ChiIota // Compute Keccak permutation Chi and Iota steps.
+=====
++ ecy_lib_Prf_KeccakV1_P ->:
+    for (i = 0U; i < ecy_lib_PRF_KECCAKV1_ROUNDS (=24); i++)
+    {
+        ecy_lib_Prf_KeccakV1_P_ThetaRho(state);
+        ecy_lib_Prf_KeccakV1_P_Pi(state);
+        ecy_lib_Prf_KeccakV1_P_ChiIota(state, i);
+    }
+=====
++ ecy_lib_Prf_KeccakV1_InitSponge -> ecy_lib_Util_U8Op_SetMemory = 0
++ ecy_lib_Prf_KeccakV1_UpdateSponge -> ecy_lib_Prf_KeccakV1_AbsorbSponge(ctx) // absorb the first blocks
++ ecy_lib_Prf_KeccakV1_FinishSponge -> ecy_lib_Prf_KeccakV1_AbsorbSponge(ctx) // Absorb final blocks
+									-> ecy_lib_Prf_KeccakV1_SqueezeSponge(ctx, FALSE) // Squeeze first blocks
++ ecy_lib_Prf_KeccakV1_ExtractSponge -> ecy_lib_Prf_KeccakV1_SqueezeSponge(ctx, TRUE) // Squeeze first blocks
+	All: -> call ecy_lib_Prf_KeccakV1_P
+	
+===== Interface function (SHA3-V1)
++ ecy_lib_Hash_If_Factory(&hashCtx, ecy_lib_ID_SHA256 | ecy_lib_ID_VARIANT1);
++ ecy_lib_Hash_If_Start(&hashCtx);
++ ecy_lib_Hash_If_Update(&hashCtx, &message[offset], blockLength);
++ ecy_lib_Hash_If_Finish(&hashCtx, digest, digestLength);
+===== SHAKE-V1
++ ecy_lib_Prf_ShakeV1_Start -> ecy_lib_Prf_KeccakV1_InitSponge
++ ecy_lib_Prf_ShakeV1_Update -> ecy_lib_Prf_KeccakV1_UpdateSponge(&ctx->sponge, msg, msgLength);
++ ecy_lib_Prf_ShakeV1_Extract -> ecy_lib_Prf_KeccakV1_FinishSponge
+							  -> ecy_lib_Prf_KeccakV1_ExtractSponge(&ctx->sponge, output, outputLength);
+							  
+							  
+============================================================================================
+
+STEPS: SHA512-V1 (SHA2-family)
+=====
+ecy_lib_Hash_Sha512V1_SmallSigma0
+ecy_lib_Hash_Sha512V1_BigSigma1
+ecy_lib_Hash_Sha512V1_BigSigma0
+
+ecy_lib_Hash_Sha512V1_KTab // Constants according to section 4.2.3 of NIST FIPS 180-4
+=====
+ecy_lib_Hash_Sha512V1_UpdateHashBlock // Hash computation for one block
+===== Padding
+ecy_lib_Hash_Sha512V1_Padding -> ecy_lib_Hash_Sha512V1_UpdateHashBlock
+===== SHA-V1
+ecy_lib_Hash_Sha512V1_Start -> ecy_lib_Hash_Sha512V1_Init
+ecy_lib_Hash_Sha512V1_Update -> ecy_lib_Hash_Sha512V1_UpdateHashBlock
+ecy_lib_Hash_Sha512V1_Finish -> ecy_lib_Hash_Sha512V1_UpdateHashBlock(ctx, ctx->block);
+
+============================================================================================
+
+STEPS: SHA256-V1 (SHA2-family)
+=====
+ecy_lib_Hash_Sha256V1_SmallSigma1
+ecy_lib_Hash_Sha256V1_SmallSigma0
+ecy_lib_Hash_Sha256V1_BigSigma1
+ecy_lib_Hash_Sha256V1_BigSigma0
+
+ecy_lib_Hash_Sha256V1_KTab // Constants according to section 4.2.2 of NIST FIPS 180-4
+=====
+ecy_lib_Hash_Sha256V1_UpdateHashBlock // Hash computation for one block
+===== Padding
+ecy_lib_Hash_Sha256V1_Padding -> ecy_lib_Hash_Sha256V1_UpdateHashBlock
+===== SHA-V1
+ecy_lib_Hash_Sha256V1_Start -> ecy_lib_Hash_Sha256V1_Init
+ecy_lib_Hash_Sha256V1_Update -> ecy_lib_Hash_Sha256V1_UpdateHashBlock
+ecy_lib_Hash_Sha256V1_Finish -> ecy_lib_Hash_Sha256V1_UpdateHashBlock(ctx, ctx->block);
+
+============================================================================================
+
+STEPS: SHA1-V1 (SHA1-family)
+=====
+ecy_lib_Hash_Sha1V1_LogicalFunction
+
+ecy_lib_Hash_Sha1V1_KTab // Constants according to section 4.2.1 of NIST FIPS 180-4
+=====
+ecy_lib_Hash_Sha1V1_UpdateHashBlock // Hash computation for one block
+===== Padding
+ecy_lib_Hash_Sha1V1_Padding -> ecy_lib_Hash_Sha1V1_UpdateHashBlock
+===== SHA-V1
+ecy_lib_Hash_Sha1V1_Start -> ecy_lib_Hash_Sha1V1_Init
+ecy_lib_Hash_Sha1V1_Update -> ecy_lib_Hash_Sha1V1_UpdateHashBlock
+ecy_lib_Hash_Sha1V1_Finish -> ecy_lib_Hash_Sha1V1_UpdateHashBlock(ctx, ctx->block);
+
+============================================================================================
+
+STEPS: SM3-V1 (Chinese cryptographic-family)
+=====
+ecy_lib_Hash_Sm3V1_TConst // T-table value according to GB/T 32905-2016, calculate with Tj <<< (j mod 32)
+=====
+ecy_lib_Hash_Sm3V1_UpdateHashBlock // Hash computation for one block
+===== Padding
+ecy_lib_Hash_Sm3V1_Padding -> ecy_lib_Hash_Sm3V1_UpdateHashBlock
+===== SHA-V1
+ecy_lib_Hash_Sm3V1_Start -> ecy_lib_Hash_Sm3V1_Init
+ecy_lib_Hash_Sm3V1_Update -> ecy_lib_Hash_Sm3V1_UpdateHashBlock
+ecy_lib_Hash_Sm3V1_Finish -> ecy_lib_Hash_Sm3V1_UpdateHashBlock(ctx, ctx->block);

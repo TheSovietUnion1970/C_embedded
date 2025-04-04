@@ -1,0 +1,14 @@
+STEPS: ChaCha20-V1 (8, 12, 20 rounds)
+=====
+ecy_lib_Strmc_Chacha20V1_QuarterRound (: Function to calculate a ChaCha20 quarter-round according to RFC 8439, section 2.1)
+=====
+ecy_lib_Strmc_Chacha20V1_Block(
+    uint32  *keyStream,
+    uint32  *state,
+    uint32  rounds2)
+		-> ecy_lib_Strmc_Chacha20V1_QuarterRound
+=====
+ecy_lib_Strmc_Chacha20V1_Init -> ctx->rounds2 = 4U/6U/10U;
+ecy_lib_Strmc_Chacha20V1_SetKey
+ecy_lib_Strmc_Chacha20V1_Start
+ecy_lib_Strmc_Chacha20V1_Update -> ecy_lib_Strmc_Chacha20V1_Block

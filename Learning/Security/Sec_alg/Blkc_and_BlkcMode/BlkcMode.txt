@@ -1,0 +1,32 @@
+STEPS: CBC-V1
+=====
+ecy_lib_BlkcMode_CbcV1_Init -> ecy_lib_Blkc_If_GetBlockLength
+ecy_lib_BlkcMode_CbcV1_SetKey -> ecy_lib_Blkc_If_SetKey
+ecy_lib_BlkcMode_CbcV1_Start
+
+ecy_lib_BlkcMode_CbcV1_UpdateEncryption 
+ecy_lib_BlkcMode_CbcV1_FinishEncryption
+	-> ecy_lib_Blkc_If_EncryptBlock
+
+ecy_lib_BlkcMode_CbcV1_UpdateDecryption -> ecy_lib_Blkc_If_DecryptBlock
+ecy_lib_BlkcMode_CbcV1_FinishDecryption
+
+ecy_lib_BlkcMode_CbcV1_GetBlockLength -> ecy_lib_Blkc_If_GetBlockLength
+
+=============================================================================
+
+STEPS: CBC-V1
+=====
+ecy_lib_BlkcMode_CtrV1_Init -> ecy_lib_Blkc_If_GetBlockLength
+ecy_lib_BlkcMode_CtrV1_SetKey -> ecy_lib_Blkc_If_SetKey
+ecy_lib_BlkcMode_CtrV1_Start -> ecy_lib_Blkc_If_EncryptBlock
+
+ecy_lib_BlkcMode_CtrV1_Update -> ecy_lib_BlkcMode_CtrV1_UpdateLocal
+
+ecy_lib_BlkcMode_CtrV1_Update 
+
+ecy_lib_BlkcMode_CtrV1_GetBlockLength 
+
+================== One note ===================
+ecy_lib_BLKC_AES_BLOCK_LENGTH = 16U ~ each block is encrypted / decrypted 16 bytes (AES, SM4)
+									  BlkcMode encrypts / decrypts multiple blocks (each is 16 bytes (128 bits)) (ECB, CBC, CTR)

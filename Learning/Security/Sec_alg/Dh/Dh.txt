@@ -1,0 +1,48 @@
+MAIN PROCESSES:
++ Generate / Import a private key
++ -> pub key from private one
++ Send pub key to the third party
+
++ Get pubkey from the third party
++ Combine pub + private (own reciever) keys -> shared secrets (main program here)
+
++ KDF -> take shared secrets -> shared private key
+
+=====================================================================================================================
+
+STEP: DH-V1
+=====
+ecy_lib_Dh_DhV1_Init
+ecy_lib_Dh_DhV1_PrepareSharedSecretComputation -> ecy_lib_Bignum_Op_Uint8ToLimb (: Convert the modulus to limbs)
+											   -> ecy_lib_Bignum_Op_Uint8ToLimb (: Convert the public key to limbs)
+											   
+											   -> ecy_lib_Modexp_MLadder_InitCtx (: the Barrett reduction algorithm is used for the underlying modular multiplication)
+											   
+ecy_lib_Dh_DhV1_RunSharedSecretComputation -> ecy_lib_Modexp_MLadder_Init (: Check if the initialization of Modexp is complete)
+										   -> ecy_lib_Modexp_MLadder_Prepare (: Call Modexp prepare function)
+										   -> ecy_lib_Modexp_MLadder_Run (: Run the exponentiation function)
+										   -> ecy_lib_DH_DHV1_FINISH (through algorithms)
+										   
+=====================================================================================================================
+
+STEP: ECDH-V1
+=====
+ecy_lib_Dh_ECDHV1_Init -> ecy_lib_Scalarmul_If_Init
+ecy_lib_Dh_ECDHV1_PrepareSharedSecretComputation -> ecy_lib_Eccarith_Params_GetParams (: Get curve parameters)
+												 -> ecy_lib_Scalarmul_If_PrepareMul
+											   
+ecy_lib_Dh_ECDHV1_RunSharedSecretComputation -> ecy_lib_Scalarmul_If_RunMul
+											 -> ecy_lib_Bignum_Op_LimbToUint8 (: Convert from limbs to uint8 array, only x-coordinate is used as shared secret)
+										   
+=====================================================================================================================
+
+STEP: CURVE448/CURVE25519-V1
+=====
+ecy_lib_Dh_CURVE448/CURVE25519V1_Init -> ecy_lib_Scalarmul_If_Init
+ecy_lib_Dh_CURVE448/CURVE25519V1_PrepareSharedSecretComputation -> ecy_lib_Eccarith_Params_GetParams (: Get curve parameters)
+												     -> ecy_lib_Scalarmul_If_PrepareMul
+											   
+ecy_lib_Dh_CURVE448/CURVE25519V1_RunSharedSecretComputation -> ecy_lib_Scalarmul_If_RunMul
+											     -> ecy_lib_Bignum_Op_LimbsToLeUint8 (: Convert from limbs to uint8 array)
+										   
+=====================================================================================================================

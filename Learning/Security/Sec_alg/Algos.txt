@@ -1,0 +1,60 @@
+hash (SHA256): ecy_lib_ID_SM3 → SM3 (Chinese cryptographic hash function) -> output: 256 bits (32 bytes)
+			   ecy_lib_ID_SHA3_224/256/384/512 → (SHA-3 family) -> 224 bits (28 bytes), 256 bits (32 bytes), 384 bits (48 bytes), 512 bits (512 bytes)
+			   ecy_lib_ID_SHA224/256/384/512 → (SHA-2 family) -> - // -
+			   
+Block cipher :	
+				ecy_lib_ID_AES -> Advanced Encryption Standard (AES)
+				ecy_lib_ID_SM4 → SM4 (Chinese block cipher standard)
+				
+Block Cipher Modes:
+				ecy_lib_ID_ECB → Electronic Codebook (ECB) mode
+				ecy_lib_ID_CBC → Cipher Block Chaining (CBC) mode
+				ecy_lib_ID_CTR → Counter (CTR) mode
+				
+Stream Cipher Identifiers: 
+				ecy_lib_ID_CHACHA20_8 → ChaCha20 with 8 rounds
+				ecy_lib_ID_CHACHA20_12 → ChaCha20 with 12 rounds
+				ecy_lib_ID_CHACHA20 → ChaCha20 with 20 rounds (standard)
+
+Assymetric:
+	curveId (key): 	 ecy_lib_ID_CURVE25519
+					 ecy_lib_ID_NIST_P224
+					 ecy_lib_ID_NIST_P256
+					 ecy_lib_ID_NIST_P384
+					 ecy_lib_ID_NIST_P521
+					 ecy_lib_ID_CURVESM2
+					 ecy_lib_ID_CURVE448
+					 
+	sigAlgoId (sig gen/verify): 
+					 ecy_lib_ID_RSA_PSS 
+					 ecy_lib_ID_RSA_V15
+					 ecy_lib_ID_ECDSA
+					 ecy_lib_ID_DETERMINISTIC_ECDSA
+					 ecy_lib_ID_SM2_SIG
+					 ecy_lib_ID_EDDSA
+					 ecy_lib_ID_EDDSA_PREHASH
+					 
+	Asyn ID (key)(Enc)(Dec): 	
+					ecy_lib_ID_SM2_ENC	
+					ecy_lib_ID_ECIES_DHAES
+					ecy_lib_ID_ECIES
+					ecy_lib_ID_RSA_OAEP
+					ecy_lib_ID_RSAES_V15
+				
+	Diffie-Hellman~DH (key):
+					ecy_lib_ID_DH_CURVE25519
+					ecy_lib_ID_DH_ECDH
+					ecy_lib_ID_DH_DH
+					ecy_lib_ID_DH_CURVE448
+Symetric:
+	MAC Alg: 
+					ecy_lib_ID_HMAC -> hash
+					ecy_lib_ID_CMAC -> block cipher
+					ecy_lib_ID_SIPHASH
+					ecy_lib_ID_POLY1305 -> polynomials
+					
+	AEAD Alg:
+					ecy_lib_ID_GCM
+					ecy_lib_ID_C20P1305
+					ecy_lib_ID_CCM
+					

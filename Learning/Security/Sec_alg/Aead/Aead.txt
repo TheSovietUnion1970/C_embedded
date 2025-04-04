@@ -1,0 +1,105 @@
+STEP: CCM-V1 (CTR + CBC + MAC)
+=====
+ecy_lib_Aead_CcmV1_Init -> ecy_lib_Blkc_If_GetBlockLength
+ecy_lib_Aead_CcmV1_SetKey -> ecy_lib_Blkc_If_SetKey
+ecy_lib_Aead_CcmV1_Start -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt block Y0)
+						 -> ecy_lib_Aead_CcmV1_EncodeAadLength (: Encode AAD length into Yr)
+						 -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt block S0)
+						 
+						 -> ecy_lib_Aead_CcmV1_IncrementCounter (: Increment counter)
+						 -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt counter block)
+
+ecy_lib_Aead_CcmV1_UpdateAad -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt block Yr)
+
+ecy_lib_Aead_CcmV1_UpdateEncryption -> ecy_lib_Aead_CcmV1_Update(plaintext -> ciphertext) -> (: Encrypt block Yr)
+																						  -> ecy_lib_Aead_CcmV1_IncrementCounter
+																						  -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt counter block)
+ecy_lib_Aead_CcmV1_FinishEncryption -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt block Yr -> ciphertext)
+
+ecy_lib_Aead_CcmV1_UpdateDecryption -> ecy_lib_Aead_CcmV1_Update(ciphertext -> plaintext)
+ecy_lib_Aead_CcmV1_FinishDecryption -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt block Yr -> plaintext)
+
+==============================================================================================================================================================
+
+STEP: C20P1305-V1 (ChaCha20 + Poly1305)
+=====
+ecy_lib_Aead_C20P1305V1_Init -> ecy_lib_Strmc_Chacha20V1_Init
+							 -> ecy_lib_Mac_Poly1305V1_Init
+ecy_lib_Aead_C20P1305V1_SetKey -> ecy_lib_Strmc_Chacha20V1_SetKey
+ecy_lib_Aead_C20P1305V1_Start -> ecy_lib_Strmc_Chacha20V1_Start
+							  -> ecy_lib_Strmc_Chacha20V1_Block
+							  
+							  -> ecy_lib_Mac_Poly1305V1_SetKey
+							  -> ecy_lib_Mac_Poly1305V1_Start
+ecy_lib_Aead_C20P1305V1_UpdateAad -> ecy_lib_Mac_Poly1305V1_Update
+ecy_lib_Aead_C20P1305V1_UpdateEncryption -> ecy_lib_Mac_Poly1305V1_Update
+										 -> ecy_lib_Strmc_Chacha20V1_Update
+										 
+										 -> ecy_lib_Mac_Poly1305V1_Update (: Update MAC with ciphertext)
+ecy_lib_Aead_C20P1305V1_FinishEncryption -> ecy_lib_Aead_C20P1305V1_GenerateTag -> ecy_lib_Mac_Poly1305V1_Update
+																				-> ecy_lib_Mac_Poly1305V1_FinishGeneration
+ecy_lib_Aead_C20P1305V1_UpdateDecryption -> ecy_lib_Mac_Poly1305V1_Update
+									     -> ecy_lib_Strmc_Chacha20V1_Update
+										 
+										 -> ecy_lib_Strmc_Chacha20V1_Update (: Decrypt ciphertext using ChaCha20)
+ecy_lib_Aead_C20P1305V1_FinishDecryption -> ecy_lib_Aead_C20P1305V1_GenerateTag 
+												(Compare tag created and reference tag )
+												
+==============================================================================================================================================================
+
+STEP: GCM-V1 (Galois + CTR)
+=====
+ecy_lib_Aead_GCMV1_Init -> ecy_lib_Blkc_If_GetBlockLength
+
+ecy_lib_Aead_GCMV1_SetKey -> ecy_lib_Blkc_If_SetKey
+						  -> ecy_lib_Blkc_If_EncryptBlock
+ecy_lib_Aead_GCMV1_Start -> ecy_lib_Aead_GcmV1_GHash (: calculate GHASH on complete blocks)
+						 -> ecy_lib_Aead_GcmV1_GMul (: compute Galois multiplication.)
+						 -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt the counter0)
+						 
+						 -> ecy_lib_Aead_GcmV1_Incr
+						 -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt the counter)
+							  
+
+ecy_lib_Aead_GCMV1_UpdateAad -> ecy_lib_Aead_GcmV1_GHash
+
+ecy_lib_Aead_GCMV1_UpdateEncryption(plaintext -> ciphertext) -> ecy_lib_Aead_GcmV1_Update -> ecy_lib_Aead_GcmV1_GMul (: Executed only on first update call)
+
+																						  -> ecy_lib_Aead_GcmV1_Incr
+																						  -> ecy_lib_Blkc_If_EncryptBlock
+																						  -> ecy_lib_Aead_GcmV1_GMul
+ecy_lib_Aead_GCMV1_FinishEncryption(tag -> ciphertext) -> ecy_lib_Aead_GcmV1_GenerateTag -> ecy_lib_Aead_GcmV1_GMul
+																				
+ecy_lib_Aead_GCMV1_UpdateDecryption(ciphertext -> plaintext) -> ecy_lib_Aead_GcmV1_Update								
+ecy_lib_Aead_GCMV1_FinishDecryption(refTag -> ciphertext)) -> ecy_lib_Aead_GcmV1_GenerateTag 
+												(Compare tag created and reference tag )
+												
+==============================================================================================================================================================
+
+STEP: GCM-V2 (Galois + CTR)
+=====
+ecy_lib_Aead_GCMV2_Init -> ecy_lib_Blkc_If_GetBlockLength
+
+ecy_lib_Aead_GCMV2_SetKey -> ecy_lib_Blkc_If_SetKey
+						  -> ecy_lib_Blkc_If_EncryptBlock
+						  -> ecy_lib_Aead_GcmV2_ComputeM (: Function to precompute the value of M0 using Algorithm 3 of "The Galois/Counter Mode of Operation (GCM)" by David A. McGrew and John Viega)
+ecy_lib_Aead_GCMV2_Start -> ecy_lib_Aead_GcmV2_GHash (: calculate GHASH on complete blocks)
+						 -> ecy_lib_Aead_GcmV1_GMul (: compute Galois multiplication.)
+						 -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt the counter0)
+						 
+						 -> ecy_lib_Aead_GcmV2_Incr
+						 -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt the counter)
+							  
+
+ecy_lib_Aead_GCMV2_UpdateAad -> ecy_lib_Aead_GcmV2_GHash
+
+ecy_lib_Aead_GCMV2_UpdateEncryption(plaintext -> ciphertext) -> ecy_lib_Aead_GcmV2_Update -> ecy_lib_Aead_GcmV2_GMul (: Executed only on first update call)
+
+																						  -> ecy_lib_Aead_GcmV2_Incr
+																						  -> ecy_lib_Blkc_If_EncryptBlock
+																						  -> ecy_lib_Aead_GcmV2_GMul
+ecy_lib_Aead_GCMV2_FinishEncryption(tag -> ciphertext) -> ecy_lib_Aead_GcmV1_GenerateTag -> ecy_lib_Aead_GcmV2_GMul
+																				
+ecy_lib_Aead_GCMV2_UpdateDecryption(ciphertext -> plaintext) -> ecy_lib_Aead_GcmV2_Update								
+ecy_lib_Aead_GCMV2_FinishDecryption(refTag -> ciphertext)) -> ecy_lib_Aead_GcmV2_GenerateTag 
+												(Compare tag created and reference tag )

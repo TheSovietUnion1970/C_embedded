@@ -1,0 +1,68 @@
+IF: 
+ecy_lib_Mac_If_Init
+ecy_lib_Mac_If_SetKey
+ecy_lib_Mac_If_Start
+ecy_lib_Mac_If_Update
+ecy_lib_Mac_If_FinishGeneration
+ecy_lib_Mac_If_FinishVerification
+
+ecy_lib_Mac_If_GetTagLength
+=====
+
+
+STEP: HMAC-V1 (Hash-based)
+=====
+ecy_lib_Mac_HmacV1_Init -> ecy_lib_Hash_If_GetBlockLength: blockLength + digestLength
+ecy_lib_Mac_HmacV1_SetKey -> ecy_lib_Hash_If_Hash (: Hash the key)
+ecy_lib_Mac_HmacV1_Start -> ecy_lib_Hash_If_Start
+						 -> ecy_lib_Hash_If_Update
+ecy_lib_Mac_HmacV1_Update -> ecy_lib_Hash_If_Update
+ecy_lib_Mac_HmacV1_FinishGeneration -> ecy_lib_Hash_If_Finish
+									-> ecy_lib_Hash_If_Hash
+									(Verification by comparing tag and reference tag)
+========================================================================================
+
+STEP: CMAC-V1 (Cipher-based)
+=====
+ecy_lib_Mac_CmacV1_Init -> ecy_lib_Hash_If_GetBlockLength: blockLength
+ecy_lib_Mac_CmacV1_SetKey -> ecy_lib_Blkc_If_SetKey (: Set the key in block cipher context)
+						  -> ecy_lib_Blkc_If_EncryptBlock (: Encrypt the empty string and use subKey2 to store it)
+						  -> ecy_lib_Mac_CmacV1_ShiftLeftAndXor (: Compute K1)
+						  -> ecy_lib_Mac_CmacV1_ShiftLeftAndXor (: Compute K2)
+						  
+ecy_lib_Mac_CmacV1_Start 
+					 
+ecy_lib_Mac_CmacV1_Update -> ecy_lib_Blkc_If_EncryptBlock
+ecy_lib_Mac_CmacV1_FinishGeneration -> ecy_lib_Blkc_If_EncryptBlock (: Finalize the CMAC calculation)
+									(Verification by comparing tag and reference tag)
+========================================================================================
+									
+STEP: SIPHASH-V1
+=====
+ecy_lib_Mac_SIPHASHV1_Init -> 
+ecy_lib_Mac_SIPHASHV1_SetKey -> (m)ecy_lib_UTIL_U8OP_CONSTRUCT_U64_LE
+
+						  
+ecy_lib_Mac_SIPHASHV1_Start -> 0x736f6d6570736575ULL, ....
+					 
+ecy_lib_Mac_SIPHASHV1_Update -> ecy_lib_Mac_SipHashV1_SipRound (: SipRound algorithm)
+ecy_lib_Mac_SIPHASHV1_FinishGeneration -> ecy_lib_Mac_SipHashV1_SipRound (: SipRound algorithm)
+									(Verification by comparing tag and reference tag)
+========================================================================================
+
+STEP: POLY1305-V1
+=====
+ecy_lib_Mac_POLY1305V1_Init -> 
+ecy_lib_Mac_POLY1305V1_SetKey -> ecy_lib_Mac_Poly1305V1_LeUint8ToLimbs (: Function to convert the little endian byte array to limb array.)
+
+						  
+ecy_lib_Mac_POLY1305V1_Start -> 
+					 
+ecy_lib_Mac_POLY1305V1_Update -> ecy_lib_Mac_Poly1305V1_LeUint8ToLimbs
+						  -> ecy_lib_Mac_Poly1305V1_UpdateBlock
+ecy_lib_Mac_POLY1305V1_FinishGeneration -> ecy_lib_Mac_Poly1305V1_LeUint8ToLimbs
+									   ecy_lib_Mac_Poly1305V1_UpdateBlock
+									   ecy_lib_Mac_Poly1305V1_FinalReduction (: Final reduction to reduce the value to (1 << 130 - 5))
+									   ecy_lib_Mac_Poly1305V1_Add (: Function to add two limb arrays.)
+									(Verification by comparing tag and reference tag)
+========================================================================================

@@ -1,0 +1,5 @@
+KEY GEN: (generation + conversion)
++ RSA-based (Rivest-Shamir-Adleman) - RSA-PSS, RSA-PCKS-V15
++ ECC-based - ECDSA, EDDSA 										==> use prime number: p and q
++ DH (for DH - generating shared secrets)
++ ML (Module-latticed) - DIlithium, Kyber						==> use vector, maxtrix + points from A to B (x-y-z coordinate)

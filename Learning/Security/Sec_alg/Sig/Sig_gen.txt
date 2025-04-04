@@ -1,0 +1,101 @@
+STEP: PSS-V1
+=====
+ecy_lib_Sig_PssGenerateV1_InitCtx -> ecy_lib_Hash_If_Factory
+								  -> ecy_lib_Rsa_Mgf1_Init
+								  -> ecy_lib_Rsa_Priv_Init
+								  
+ecy_lib_Sig_PssGenerateV1_InitKey -> ecy_lib_Rsa_Priv_InitKey
+								  -> ecy_lib_Rsa_Priv_GetModulusLength
+
+ecy_lib_Sig_PssGenerateV1_StartGeneration -> ecy_lib_Hash_If_GetDigestLength
+										  -> ecy_lib_Sig_PssGenerateV1_StartEncode
+ecy_lib_Sig_PssGenerateV1_RunGeneration -> ecy_lib_Sig_PssGenerateV1_RunEncode (: Encode the hash data)
+										-> ecy_lib_Sig_PssGenerateV1_FinishEncode (: Finish encoding the hash data) -> ctx->signature
+										
+										-> ecy_lib_Rsa_Priv_Prepare
+										-> ecy_lib_Rsa_Priv_Run (: Run the private key exponentiation function) -> ctx->signature
+
+ecy_lib_Sig_PssGenerateV1_GetMaxSignatureLength
+
+==============================================================================================================================================
+
+STEP: V15-V1
+=====
+ecy_lib_Sig_V15GenerateV1_InitCtx -> ecy_lib_Hash_If_Factory
+								  -> ecy_lib_Rsa_Priv_Init
+								  
+ecy_lib_Sig_V15GenerateV1_InitKey -> ecy_lib_Rsa_Priv_InitKey
+								  -> ecy_lib_Rsa_Priv_GetModulusLength
+
+ecy_lib_Sig_V15GenerateV1_StartGeneration -> ecy_lib_Hash_If_GetDigestLength
+ecy_lib_Sig_V15GenerateV1_RunGeneration -> ecy_lib_Sig_V15GenerateV1_Encode (: Encode the hash data)
+									    -> ecy_lib_Rsa_Priv_Prepare
+										-> ecy_lib_Rsa_Priv_Run -> ctx->signature
+
+ecy_lib_Sig_V15GenerateV1_GetMaxSignatureLength
+
+==============================================================================================================================================
+
+STEP: ECDSA-V1
+=====
+ecy_lib_Sig_ECDSAGenerateV1_Factory -> ecy_lib_Modmul_If_Factory (: Initialize modular multiplication)
+								    -> ecy_lib_Scalarmul_If_Init (: Initialize the context with the variant Id)
+									-> ecy_lib_Drbg_HmacV1_Init (: Initialize HMAC-DRBG)
+								  
+ecy_lib_Sig_ECDSAGenerateV1_InitKey -> ecy_lib_Eccarith_Params_GetParams
+								  -> ecy_lib_Rsa_Priv_GetModulusLength
+
+ecy_lib_Sig_ECDSAGenerateV1_StartGeneration -> ecy_lib_Drbg_HmacV1_SetReseedInterval (: Set reseed interval to 0 in order to disable reseed interval checking)
+											-> ecy_lib_Drbg_HmacV1_Instantiate (: Instantiate HMAC-DRBG)
+											
+											-> ecy_lib_EccArith_Op_CalculatePerMessageSecret (: Calculate per-message secret k)
+
+ecy_lib_Sig_ECDSAGenerateV1_RunGeneration -> ecy_lib_Drbg_HmacV1_Generate -> ctx->secret
+										  -> ecy_lib_Bignum_Op_Uint8ToLimb (: Convert per-message secret k to limbs) => ctx->k
+										  
+										  -> ecy_lib_Scalarmul_If_PrepareMul
+										  -> ecy_lib_Scalarmul_If_RunBasePointMul (: Calculate curve point (x1,y1) = k * G with k := random and G := base point)
+										  
+										  -> (m)ecy_lib_SIG_ECDSAGENERATEV1_NORMALIZE (: Calculate r = x1 mod n)
+										  
+										  -> ecy_lib_Bignum_Op_InitModInv (: Initialize inversion of k)
+										  -> ecy_lib_Bignum_Op_RunModInv (: Calculate k^-1 in place)
+										  
+										  -> ecy_lib_Modmul_If_Init (: Initialize Barrett reduction)
+										  -> ecy_lib_Modmul_If_RunMul (: Calculate t1 = (r * d) mod n, using z as temporary buffer)
+										  
+										  -> ecy_lib_Bignum_Op_Uint8ToLimb (: Convert digest to limb format (using temporary variable y))
+										  -> ecy_lib_Bignum_Op_SingleReduce (: Digest in limb format may be greater than the order n)
+										  -> ecy_lib_Bignum_Op_ModAdd (: Calculate t1 = (t1 + e) mod n)
+										  
+										  -> ecy_lib_Modmul_If_RunMul (: Calculate s = (k^-1 * t1) mod n) => ctx->z
+										  -> ecy_lib_Bignum_Op_LimbToUint8 (: Convert r and s to signature byte array) => ctx->signature
+
+
+ecy_lib_Sig_ECDSAGenerateV1_GetMaxSignatureLength
+
+==============================================================================================================================================
+
+STEP: EDDSA-V1
+=====
+ecy_lib_Sig_EDDSAGenerateV1_Factory -> ecy_lib_Scalarmul_If_Init (: Initialize the context with the variant Id)
+								  
+ecy_lib_Sig_EDDSAGenerateV1_InitKey -> ecy_lib_Eccarith_Params_GetParams (: Check key type and if curve id is supported)
+								    -> ecy_lib_Scalarmul_If_PrepareMul (: Prepare the scalarmul for public key generation)
+									
+									-> ecy_lib_Scalarmul_If_RunBasePointMul 
+									-> ecy_lib_Bignum_Op_LimbsToLeUint8 (: Compress the public key and store it in context)
+
+ecy_lib_Sig_EDDSAGenerateV1_StartGeneration -> ecy_lib_Sig_EddsaGenerateV1_StartPrf (: Prepare the PRF context)
+
+
+ecy_lib_Sig_EDDSAGenerateV1_RunGeneration -> ecy_lib_Sig_EddsaGenerateV1_UpdatePrf <= ecy_lib_Sig_EddsaDomPrefix_Dom2, ctx->prehashedAndContext, ctx->contextString
+										  -> ...
+										  
+ecy_lib_Sig_EDDSAGenerateV1_GetMaxSignatureLength
+
+==============================================================================================================================================
+
+STEP: SM2-V1
+=====
+...
